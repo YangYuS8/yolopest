@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+    frontend:
+        build: ./frontend
+        ports:
+            - '80:80'
+        depends_on:
+            - backend
+        environment:
+            - NODE_ENV=production
+        networks:
+            - yolopest-network
+
+    backend:
+        build: ./backend
+        ports:
+            - '8080:8080'
+        environment:
+            - PYTHONUNBUFFERED=1
+        volumes:
+            # 如果需要持久化模型文件
+            - ./model_weights:/app/model_weights
+        networks:
+            - yolopest-network
+
+networks:
+    yolopest-network:
+        driver: bridge
