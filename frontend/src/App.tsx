@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Upload, Button, Spin, Card, Row, Col } from 'antd';
+import { Upload, Spin, Card, Row, Col } from 'antd';
 import { InboxOutlined, LoadingOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import type { UploadProps } from 'antd';
@@ -23,7 +23,7 @@ const App: React.FC = () => {
 
     try {
       setLoading(true);
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/upload';
+      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api/upload';
       const response = await axios.post(
         API_URL, // 你的后端API地址
         formData,
