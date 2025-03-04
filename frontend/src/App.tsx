@@ -23,8 +23,9 @@ const App: React.FC = () => {
 
     try {
       setLoading(true);
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/upload';
       const response = await axios.post(
-        'http://localhost:8080/api/upload', // 你的后端API地址
+        API_URL, // 你的后端API地址
         formData,
         { headers: { 'Content-Type': 'multipart/form-data' } },
       );

@@ -1,10 +1,12 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from config import get_settings
 import uvicorn
 from typing import Optional
 import time
 
-app = FastAPI()
+settings = get_settings()   # 调用函数获取配置实例
+app = FastAPI(debug=settings.debug)
 
 # 解决跨域问题（重要！）
 app.add_middleware(
@@ -25,7 +27,7 @@ def mock_predict_pest(image_bytes: bytes) -> dict:
     }
 
 @app.post("/api/upload")
-async def upload_image(file: UploadFile = File(...)):
+async def upload_image(file: UploadFile = File(..., max_length=settings.max_file_size)):
     try:
         # 读取上传的图片
         image_bytes = await file.read()

@@ -7,6 +7,8 @@ services:
             - '80:80'
         depends_on:
             - backend
+        env_file:
+            - ./.env # 指定环境文件
         environment:
             - NODE_ENV=production
         networks:
@@ -16,11 +18,13 @@ services:
         build: ./backend
         ports:
             - '8080:8080'
+        env_file:
+            - ./.env # 指定环境文件
         environment:
             - PYTHONUNBUFFERED=1
         volumes:
             # 如果需要持久化模型文件
-            - ./model_weights:/app/model_weights
+            - ./model_weights:/app/model_weights # 模型文件映射
         networks:
             - yolopest-network
 
