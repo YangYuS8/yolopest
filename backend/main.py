@@ -27,7 +27,7 @@ def mock_predict_pest(image_bytes: bytes) -> dict:
     }
 
 @app.post("/api/upload")
-async def upload_image(file: UploadFile = File(..., max_length=settings.max_file_size)):
+async def upload_image(file: UploadFile = File(...)):
     try:
         # 读取上传的图片
         image_bytes = await file.read()
