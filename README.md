@@ -11,6 +11,7 @@
 -   FastAPI (Python 3.7+)
 -   Uvicorn ASGI 服务器
 -   Pydantic 数据验证
+-   Docker 容器化部署
 
 ### 前端
 
@@ -22,8 +23,9 @@
 
 -   图像文件上传接口
 -   害虫识别模拟功能（1 秒延迟）
+-   Docker 容器化部署
 -   响应式 JSON API
--   前端开发热重载
+-   开发环境热重载
 -   自动代码格式化与语法检查
 
 ## 快速开始
@@ -33,8 +35,11 @@
 -   Python 3.7+
 -   Node.js 16+
 -   npm 9+
+-   Docker 20.10+
 
-### 后端运行
+### 本地开发
+
+#### 后端
 
 ```bash
 cd backend
@@ -44,7 +49,7 @@ uvicorn main:app --reload
 
 访问 API 文档：http://localhost:8000/docs
 
-### 前端运行
+#### 前端
 
 ```bash
 cd frontend
@@ -54,23 +59,39 @@ npm start
 
 访问应用：http://localhost:3000
 
+### Docker 部署
+
+```bash
+docker-compose up --build
+```
+
+访问前端：http://localhost  
+访问后端文档：http://localhost:8000/docs
+
 ## 项目结构
 
 ```
 ├── backend
 │   ├── main.py            # API路由与业务逻辑
-│   └── requirements.txt   # Python依赖
-└── frontend
-    ├── src                # 前端源码
-    ├── public             # 静态资源
-    ├── .eslintrc.js       # ESLint配置
-    └── tsconfig.json      # TypeScript配置
+│   ├── config.py          # 配置管理
+│   ├── requirements.txt   # Python依赖
+│   └── .env.development   # 开发环境配置
+├── frontend
+│   ├── src                # 前端源码
+│   ├── public             # 静态资源
+│   ├── .eslintrc.js       # ESLint配置
+│   ├── tsconfig.json      # TypeScript配置
+│   └── .env.development   # 前端环境变量
+├── docker-compose.yml     # Docker编排配置
+└── .vscode
+    └── settings.json      # 编辑器统一配置
 ```
 
-## API 接口示例
+## API 接口
 
-```python
-# 图片上传接口
+### 图片上传接口
+
+```http
 POST /upload-image
 Content-Type: multipart/form-data
 
@@ -87,25 +108,39 @@ Response:
 
 ## 开发规范
 
-1. **代码格式化**：保存时自动格式化（配置于 `.vscode/settings.json`）
-2. **代码检查**：
-    - Python：通过 FastAPI 内置验证
-    - TypeScript：ESLint + React 规则
-3. **代码风格**：
-    - Python：4 空格缩进
-    - TypeScript：2 空格缩进 + 单引号
+1. **代码格式化**：
+
+    - 保存时自动格式化（配置于 `.vscode/settings.json`）
+    - Python：Black 风格（4 空格缩进）
+    - TypeScript：Prettier 规范（2 空格+单引号）
+
+2. **环境配置**：
+
+    - 后端开发环境使用 `.env.development`
+    - 生产环境通过 Docker 注入环境变量
+
+3. **依赖管理**：
+    - Python：requirements.txt 固定版本
+    - Node.js：package-lock.json 锁定版本
 
 ## 常见问题
 
 Q: 前端无法连接后端
-A: 确保后端运行在 8000 端口，或修改前端`package.json`添加代理配置：
 
 ```json
+// frontend/package.json 添加代理
 "proxy": "http://localhost:8000"
 ```
 
+Q: Docker 部署时模型文件加载失败
+
+```yaml
+# docker-compose.yml 确保卷映射正确
+volumes:
+    - ./model_weights:/app/model_weights
+```
+
 Q: ESLint 错误提示
-A: 运行修复命令：
 
 ```bash
 cd frontend
