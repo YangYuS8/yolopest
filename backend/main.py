@@ -1,5 +1,6 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, HTTPException  # 添加 HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from model_service import detector  # 导入模型服务
 from config import get_settings
 import uvicorn
 from typing import Optional
@@ -16,35 +17,37 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 模拟深度学习模型的预测函数
-def mock_predict_pest(image_bytes: bytes) -> dict:
-    # 此处后期可替换为实际模型调用
-    time.sleep(1)  # 模拟计算耗时
-    return {
-        "pest": "褐飞虱",
-        "confidence": 0.95,
-        "description": "常见水稻害虫，吸食茎秆汁液导致植株枯萎"
-    }
+@app.get("/")
+async def health_check():
+    return {"status": "backend is running"}
 
 @app.post("/api/upload")
 async def upload_image(file: UploadFile = File(...)):
     try:
-        # 读取上传的图片
+        # 读取图片字节流
+        start_time = time.time()
         image_bytes = await file.read()
-        print(f"收到图片：{file.filename}，大小：{len(image_bytes)/1024:.2f}KB")
+        
+        # 执行预测
+        predictions = detector.predict(image_bytes)
 
-        # 调用模型（暂时用模拟函数）
-        result = mock_predict_pest(image_bytes)
+        # 主动抛出 400 错误（使用正确参数名）
+        if not predictions:
+            raise HTTPException(status_code=400, detail="未检测到害虫")
 
+        # 构造返回结果
         return {
             "status": "success",
-            "result": result
+            "time_cost": round(time.time() - start_time, 3),
+            "results": predictions
         }
+    except HTTPException:
+        # 直接传递已抛出的 HTTP 异常
+        raise
     except Exception as e:
-        return {
-            "status": "error",
-            "message": str(e)
-        }
+        # 捕获其他未知异常，返回 500
+        print(f"服务器内部错误: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"内部错误: {str(e)}")
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

@@ -8,9 +8,10 @@ RUN apt-get update && apt-get install -y \
     python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# 安装 Python 依赖
+# 安装 Python 依赖和 OpenCV 依赖
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN apt-get install -y libgl1 \
+    && pip install --no-cache-dir -r requirements.txt
 
 # 复制代码（无需复制 .env 文件）
 COPY . .
