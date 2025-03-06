@@ -42,6 +42,9 @@ async def upload_image(
         if not predictions:
             raise HTTPException(status_code=400, detail="未检测到害虫")
         
+        # 生成标注图像
+        annotated_image = detector.annotate_image(image_bytes, predictions)
+        
         # 保存到数据库
         new_detection = Detection(
             image_path=f"/uploads/{file.filename}",
@@ -56,7 +59,8 @@ async def upload_image(
         return {
             "status": "success",
             "time_cost": round(time.time() - start_time, 3),
-            "results": predictions
+            "results": predictions,
+            "annotated_image": annotated_image  # 返回标注后的图像
         }
     except HTTPException:
         # 直接传递已抛出的 HTTP 异常

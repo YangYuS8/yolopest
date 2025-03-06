@@ -20,6 +20,7 @@ interface DetectionItem {
 interface PestResult {
     time_cost: number
     results: DetectionItem[]
+    annotated_image: string // 添加标注图像字段
 }
 
 const App: React.FC = () => {
@@ -118,6 +119,20 @@ const App: React.FC = () => {
                                 {result && (
                                     <div>
                                         <p>检测耗时: {result.time_cost}s</p>
+
+                                        {/* 显示标注后的图像 */}
+                                        {result.annotated_image && (
+                                            <img
+                                                src={result.annotated_image}
+                                                alt="标注结果"
+                                                style={{
+                                                    maxWidth: '100%',
+                                                    marginBottom: '16px',
+                                                    border: '1px solid #d9d9d9',
+                                                }}
+                                            />
+                                        )}
+
                                         {result.results.map((item, index) => (
                                             <div
                                                 key={index}

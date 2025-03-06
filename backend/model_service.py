@@ -3,6 +3,8 @@ from config import get_settings
 import cv2
 import numpy as np
 from typing import List, Dict
+import io
+import base64
 
 settings = get_settings()
 
@@ -31,6 +33,36 @@ class PestDetector:
             verbose=False  # 关闭冗余日志
         )
         return self.parse_results(results)
+    
+    def annotate_image(self, image_bytes: bytes, predictions: List[Dict]) -> str:
+        """绘制标注框并返回base64编码的图像"""
+        # 解码图像
+        nparr = np.frombuffer(image_bytes, np.uint8)
+        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        
+        # 绘制检测框
+        for pred in predictions:
+            bbox = pred["bbox"]
+            x1, y1, x2, y2 = int(bbox["x1"]), int(bbox["y1"]), int(bbox["x2"]), int(bbox["y2"])
+            
+            # 绘制矩形框
+            cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
+            
+            # 准备标签文本
+            label = f"{pred['class']} {pred['confidence']:.2f}"
+            
+            # 绘制标签背景
+            (text_width, text_height), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 1)
+            cv2.rectangle(img, (x1, y1 - 20), (x1 + text_width, y1), (0, 255, 0), -1)
+            
+            # 添加文本
+            cv2.putText(img, label, (x1, y1 - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 1)
+        
+        # 将图像转换为base64编码
+        _, buffer = cv2.imencode('.jpg', img)
+        base64_image = base64.b64encode(buffer).decode('utf-8')
+        
+        return f"data:image/jpeg;base64,{base64_image}"
 
     @staticmethod
     def parse_results(results) -> List[Dict]:
