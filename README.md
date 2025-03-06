@@ -1,14 +1,16 @@
 # Pest Detection System
 
-全栈病虫害检测系统，包含基于 FastAPI 的后端服务和 React 前端界面，提供图像上传与害虫识别模拟功能。
+全栈病虫害检测系统，基于 YOLOv8 实现害虫检测功能，包含 FastAPI 后端服务和 React 前端界面，提供图像上传与害虫识别功能。
 
-![Tech Stack](https://img.shields.io/badge/stack-FastAPI%20%2B%20React-blue)
+![Tech Stack](https://img.shields.io/badge/stack-FastAPI%20%2B%20React%20%2B%20YOLOv8-blue)
 
 ## 技术栈
 
 ### 后端
 
 -   FastAPI (Python 3.7+)
+-   YOLOv8 目标检测模型
+-   SQLAlchemy ORM + PostgreSQL 异步数据库
 -   Uvicorn ASGI 服务器
 -   Pydantic 数据验证
 -   Docker 容器化部署
@@ -21,10 +23,11 @@
 
 ## 功能特性
 
--   图像文件上传接口
--   害虫识别模拟功能（1 秒延迟）
+-   图像文件上传与害虫识别
+-   YOLOv8 目标检测模型集成
+-   PostgreSQL 数据库存储检测结果
 -   Docker 容器化部署
--   响应式 JSON API
+-   REST API 接口
 -   开发环境热重载
 -   自动代码格式化与语法检查
 
@@ -35,6 +38,7 @@
 -   Python 3.7+
 -   Node.js 16+
 -   npm 9+
+-   PostgreSQL 12+
 -   Docker 20.10+
 
 ### 本地开发
@@ -44,6 +48,11 @@
 ```bash
 cd backend
 pip install -r requirements.txt
+
+# 初始化数据库表结构
+python create_tables.py
+
+# 启动服务
 uvicorn main:app --reload
 ```
 
@@ -75,6 +84,7 @@ docker-compose up --build
 │   ├── main.py            # API路由与业务逻辑
 │   ├── config.py          # 配置管理
 │   ├── requirements.txt   # Python依赖
+│   ├── create_tables.py   # 数据库表结构初始化
 │   └── .env.development   # 开发环境配置
 ├── frontend
 │   ├── src                # 前端源码
