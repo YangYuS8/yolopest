@@ -1,23 +1,28 @@
-version: '3.8'
-
 services:
     frontend:
         build: ./frontend
         ports:
             - '80:80'
         depends_on:
-            - backend
+            backend:
+                condition: service_healthy
         env_file:
             - ./.env # 指定环境文件
         environment:
             - NODE_ENV=production
         networks:
             - yolopest-network
+        restart: unless-stopped
 
     backend:
         build: ./backend
         ports:
             - '8000:8000'
+        depends_on:
+            db:
+                condition: service_healthy
+            redis:
+                condition: service_healthy
         env_file:
             - ./.env # 指定环境文件
         environment:
@@ -27,7 +32,34 @@ services:
             - ./model_weights:/app/model_weights # 模型文件映射
         networks:
             - yolopest-network
+        restart: unless-stopped
+
+    db:
+        image: postgres:17.4-alpine
+        env_file:
+            - ./.env
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        networks:
+            - yolopest-network
+        healthcheck:
+            test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER}']
+            interval: 5s
+            timeout: 5s
+            retries: 5
+        restart: unless-stopped
+
+    redis: # 用于缓存和异步任务
+        image: redis:7.4.2
+        volumes:
+            - redis_data:/data
+        networks:
+            - yolopest-network
+        restart: unless-stopped
 
 networks:
     yolopest-network:
-        driver: bridge
+
+volumes:
+    postgres_data:
+    redis_data:

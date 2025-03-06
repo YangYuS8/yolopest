@@ -1,5 +1,7 @@
+alembic==1.15.1
 annotated-types==0.7.0
 anyio==4.8.0
+asyncpg==0.30.0
 certifi==2025.1.31
 charset-normalizer==3.4.1
 click==8.1.8
@@ -10,10 +12,12 @@ fastapi==0.115.11
 filelock==3.17.0
 fonttools==4.56.0
 fsspec==2025.2.0
+greenlet==3.1.1
 h11==0.14.0
 idna==3.10
 Jinja2==3.1.5
 kiwisolver==1.4.8
+Mako==1.3.9
 MarkupSafe==3.0.2
 matplotlib==3.10.1
 mpmath==1.3.0
@@ -41,6 +45,7 @@ seaborn==0.13.2
 setuptools==75.8.2
 six==1.17.0
 sniffio==1.3.1
+SQLAlchemy==2.0.38
 starlette==0.46.0
 sympy==1.13.1
 torch==2.6.0

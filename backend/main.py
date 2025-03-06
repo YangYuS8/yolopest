@@ -1,10 +1,14 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException  # 添加 HTTPException
+from fastapi import FastAPI, File, UploadFile, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from model_service import detector  # 导入模型服务
 from config import get_settings
 import uvicorn
 from typing import Optional
 import time
+from sqlalchemy.ext.asyncio import AsyncSession
+from database import get_db
+from models import Detection
+from datetime import datetime
 
 settings = get_settings()   # 调用函数获取配置实例
 app = FastAPI(debug=settings.debug)
@@ -22,7 +26,10 @@ async def health_check():
     return {"status": "backend is running"}
 
 @app.post("/api/upload")
-async def upload_image(file: UploadFile = File(...)):
+async def upload_image(
+    file: UploadFile = File(...),
+    db: AsyncSession = Depends(get_db)
+):
     try:
         # 读取图片字节流
         start_time = time.time()
@@ -34,7 +41,17 @@ async def upload_image(file: UploadFile = File(...)):
         # 主动抛出 400 错误（使用正确参数名）
         if not predictions:
             raise HTTPException(status_code=400, detail="未检测到害虫")
-
+        
+        # 保存到数据库
+        new_detection = Detection(
+            image_path=f"/uploads/{file.filename}",
+            annotated_path=f"/annotated/{file.filename}",
+            results=predictions,
+            created_at=datetime.now()
+        )
+        db.add(new_detection)
+        await db.commit()
+        
         # 构造返回结果
         return {
             "status": "success",
