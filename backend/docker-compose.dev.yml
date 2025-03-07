@@ -1,0 +1,47 @@
+services:
+    db:
+        image: postgres:17.4-alpine
+        container_name: yolopest_postgres
+        ports:
+            - '5432:5432'
+        environment:
+            POSTGRES_USER: yolopest
+            POSTGRES_PASSWORD: yolopest
+            POSTGRES_DB: pest_detection
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        healthcheck:
+            test: ['CMD-SHELL', 'pg_isready -U yolopest']
+            interval: 5s
+            timeout: 5s
+            retries: 5
+        restart: unless-stopped
+        networks:
+            - yolopest_dev_network
+
+    redis:
+        image: redis:7.4.2
+        container_name: yolopest_redis
+        ports:
+            - '6379:6379'
+        command: redis-server --appendonly yes
+        volumes:
+            - redis_data:/data
+        healthcheck:
+            test: ['CMD', 'redis-cli', 'ping']
+            interval: 5s
+            timeout: 5s
+            retries: 5
+        restart: unless-stopped
+        networks:
+            - yolopest_dev_network
+
+networks:
+    yolopest_dev_network:
+        name: yolopest_dev_network
+
+volumes:
+    postgres_data:
+        name: yolopest_postgres_data
+    redis_data:
+        name: yolopest_redis_data

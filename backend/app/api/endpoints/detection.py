@@ -1,6 +1,7 @@
 from fastapi import APIRouter, File, UploadFile, HTTPException, Form
 from typing import List
 from app.core.deps import DetectionSvc
+from datetime import datetime
 
 router = APIRouter()
 
@@ -27,7 +28,10 @@ async def upload_image(
     except HTTPException:
         raise
     except Exception as e:
-        print(f"服务器内部错误: {str(e)}")
+        # 增加更详细的错误日志
+        import traceback
+        error_detail = traceback.format_exc()
+        print(f"服务器内部错误: {str(e)}\n{error_detail}")
         raise HTTPException(status_code=500, detail=f"内部错误: {str(e)}")
 
 @router.post("/upload-multiple")

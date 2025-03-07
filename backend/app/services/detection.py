@@ -130,7 +130,8 @@ class DetectionService:
         detection = await self.repository.create_detection(
             image_path=image_filename,
             annotated_path=annotated_filename,
-            results=predictions
+            results=predictions,
+            created_at=datetime.now()  # 添加当前时间作为 created_at 参数
         )
         
         # 计算处理耗时

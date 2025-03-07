@@ -2,7 +2,7 @@ import asyncio
 import os
 from sqlalchemy.ext.asyncio import create_async_engine
 from app.db.database import engine
-from app.models import Base
+from app.db.models import Base  # 修正导入路径
 
 async def create_tables():
     """创建数据库表"""
