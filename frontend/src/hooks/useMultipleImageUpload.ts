@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { uploadMultipleImages } from '../services/api'
 import axios from 'axios'
+import { DetectionItem } from '../types'
 
 export interface BatchResult {
     status: string
@@ -8,7 +9,7 @@ export interface BatchResult {
     processed_count: number
     results: Array<{
         filename: string
-        predictions?: Array<any>
+        predictions?: Array<DetectionItem>
         annotated_image?: string
         error?: string
     }>

@@ -7,7 +7,7 @@ class Detection(Base):
     __tablename__ = "detections"
     
     id = Column(Integer, primary_key=True)
-    image_path = Column(String)      # 原图存储路径
-    annotated_path = Column(String)  # 标注图路径
-    results = Column(JSON)          # 检测结果
-    created_at = Column(DateTime)   # 创建时间
+    image_path = Column(String)
+    annotated_path = Column(String)
+    results = Column(JSON)
+    created_at = Column(DateTime)

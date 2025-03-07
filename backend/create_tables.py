@@ -1,13 +1,14 @@
 import asyncio
+import os
 from sqlalchemy.ext.asyncio import create_async_engine
-from models import Base
-from config import get_settings
+from app.db.database import engine
+from app.models import Base
 
 async def create_tables():
-    settings = get_settings()
-    engine = create_async_engine(settings.database_url)
-    
+    """创建数据库表"""
     async with engine.begin() as conn:
+        # 在开发模式下可以删除现有表（谨慎使用）
+        # await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
     
     await engine.dispose()
