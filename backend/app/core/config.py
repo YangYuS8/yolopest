@@ -5,7 +5,7 @@ class Settings(BaseSettings):
     model_path: str
     img_size: int = 640
     conf_thresh: float = 0.25
-    debug: bool = False
+    debug: bool = True
     postgres_user: str
     postgres_password: str
     postgres_db: str

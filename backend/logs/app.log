@@ -1,0 +1,1460 @@
+2025-03-10 17:22:05 - pest_detection - INFO - 启动应用，环境: 开发模式
+2025-03-10 17:22:05 - pest_detection - DEBUG - 配置CORS: 允许来源 ['http://localhost:3000']
+2025-03-10 17:22:05 - pest_detection - INFO - 应用已启动
+2025-03-10 17:27:26 - pest_detection - INFO - 应用正在关闭
+2025-03-10 17:27:32 - pest_detection - INFO - 启动应用，环境: 开发模式
+2025-03-10 17:27:32 - pest_detection - DEBUG - 配置CORS: 允许来源 ['http://localhost:3000']
+2025-03-10 17:27:32 - pest_detection - INFO - 应用已启动
+2025-03-10 17:29:36 - pest_detection - INFO - 应用正在关闭
+2025-03-10 17:30:05 - pest_detection - INFO - 启动应用，环境: 开发模式
+2025-03-10 17:30:05 - pest_detection - DEBUG - 配置CORS: 允许来源 ['http://localhost:3000']
+2025-03-10 17:30:05 - pest_detection - INFO - 应用已启动
+2025-03-10 17:30:05 - pest_detection - INFO - 应用正在关闭
+2025-03-10 19:53:28 - pest_detection - INFO - 启动应用，环境: 开发模式
+2025-03-10 19:53:28 - pest_detection - DEBUG - 配置CORS: 允许来源 ['http://localhost:3000']
+2025-03-10 19:53:28 - pest_detection - INFO - 应用已启动
+2025-03-10 19:56:00 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload 来自: 127.0.0.1
+2025-03-10 19:56:00 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 19:56:00 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 19:56:00 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:113]
+2025-03-10 19:56:00 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 19:56:00 - python_multipart.multipart - DEBUG - Calling on_header_field with data[115:127]
+2025-03-10 19:56:00 - python_multipart.multipart - DEBUG - Calling on_header_value with data[129:139]
+2025-03-10 19:56:00 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 19:56:00 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 19:56:00 - python_multipart.multipart - DEBUG - Calling on_part_data with data[143:34167]
+2025-03-10 19:56:00 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 19:56:00 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 19:56:00 - app.api.endpoints.detection - INFO - [cc633d4a-e891-4776-964c-234b6832190a] 开始处理单图像上传请求: IP000000378.jpg, 大小: 34024
+2025-03-10 19:56:00 - app.api.endpoints.detection - DEBUG - [cc633d4a-e891-4776-964c-234b6832190a] 客户端信息: 127.0.0.1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0
+2025-03-10 19:56:00 - app.api.endpoints.detection - DEBUG - [cc633d4a-e891-4776-964c-234b6832190a] 成功读取图像数据: 34024 字节
+2025-03-10 19:56:00 - app.api.endpoints.detection - DEBUG - [cc633d4a-e891-4776-964c-234b6832190a] 开始执行图像预测
+2025-03-10 19:56:02 - app.api.endpoints.detection - DEBUG - [cc633d4a-e891-4776-964c-234b6832190a] 预测完成，结果数量: 0
+2025-03-10 19:56:02 - app.api.endpoints.detection - WARNING - [cc633d4a-e891-4776-964c-234b6832190a] 未检测到害虫: IP000000378.jpg
+2025-03-10 19:56:02 - app.api.endpoints.detection - WARNING - [cc633d4a-e891-4776-964c-234b6832190a] HTTP异常: 400 - {'code': 'NO_PEST_DETECTED', 'message': '未检测到害虫，请尝试其他图片', 'status': 'error'}
+2025-03-10 19:56:02 - pest_detection - WARNING - 请求失败: POST /api/detection/upload - 状态码: 400
+2025-03-10 19:56:09 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload 来自: 127.0.0.1
+2025-03-10 19:56:09 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 19:56:09 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 19:56:09 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:113]
+2025-03-10 19:56:09 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 19:56:09 - python_multipart.multipart - DEBUG - Calling on_header_field with data[115:127]
+2025-03-10 19:56:09 - python_multipart.multipart - DEBUG - Calling on_header_value with data[129:139]
+2025-03-10 19:56:09 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 19:56:09 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 19:56:09 - python_multipart.multipart - DEBUG - Calling on_part_data with data[143:32294]
+2025-03-10 19:56:09 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 19:56:09 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 19:56:09 - app.api.endpoints.detection - INFO - [fbff9488-05ce-4e04-9ed4-43c0719c269d] 开始处理单图像上传请求: IP011000197.jpg, 大小: 32151
+2025-03-10 19:56:09 - app.api.endpoints.detection - DEBUG - [fbff9488-05ce-4e04-9ed4-43c0719c269d] 客户端信息: 127.0.0.1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0
+2025-03-10 19:56:09 - app.api.endpoints.detection - DEBUG - [fbff9488-05ce-4e04-9ed4-43c0719c269d] 成功读取图像数据: 32151 字节
+2025-03-10 19:56:09 - app.api.endpoints.detection - DEBUG - [fbff9488-05ce-4e04-9ed4-43c0719c269d] 开始执行图像预测
+2025-03-10 19:56:09 - app.api.endpoints.detection - DEBUG - [fbff9488-05ce-4e04-9ed4-43c0719c269d] 预测完成，结果数量: 2
+2025-03-10 19:56:09 - app.api.endpoints.detection - DEBUG - [fbff9488-05ce-4e04-9ed4-43c0719c269d] 开始处理图像并保存结果
+2025-03-10 19:56:10 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2025-03-10 19:56:10 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-10 19:56:10 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2025-03-10 19:56:10 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-10 19:56:10 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2025-03-10 19:56:10 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-10 19:56:10 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 19:56:10 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-10 19:56:10 - sqlalchemy.engine.Engine - INFO - [generated in 0.00081s] ('20250310_195609_IP011000197.jpg', 'annotated_20250310_195609_IP011000197.jpg', '[{"class": "white backed plant hopper", "confidence": 0.8705894351005554, "bbox": {"x1": 98, "y1": 55, "x2": 273, "y2": 431}}, {"class": "white backed plant hopper", "confidence": 0.833490788936615, "bbox": {"x1": 252, "y1": 271, "x2": 400, "y2": 654}}]', datetime.datetime(2025, 3, 10, 19, 56, 9, 991729))
+2025-03-10 19:56:10 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 19:56:10 - app.api.endpoints.detection - ERROR - [fbff9488-05ce-4e04-9ed4-43c0719c269d] 处理图像时发生错误 (error_id: a861b2cc-cae6-487a-b7cd-7bfdd516541a):
+{
+  "error_id": "a861b2cc-cae6-487a-b7cd-7bfdd516541a",
+  "request_id": "fbff9488-05ce-4e04-9ed4-43c0719c269d",
+  "timestamp": "2025-03-10T19:56:10.163666",
+  "file_name": "IP011000197.jpg",
+  "exception_type": "ProgrammingError",
+  "exception_msg": "(sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation \"detections\" does not exist\n[SQL: INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id]\n[parameters: ('20250310_195609_IP011000197.jpg', 'annotated_20250310_195609_IP011000197.jpg', '[{\"class\": \"white backed plant hopper\", \"confidence\": 0.8705894351005554, \"bbox\": {\"x1\": 98, \"y1\": 55, \"x2\": 273, \"y2\": 431}}, {\"class\": \"white backed plant hopper\", \"confidence\": 0.833490788936615, \"bbox\": {\"x1\": 252, \"y1\": 271, \"x2\": 400, \"y2\": 654}}]', datetime.datetime(2025, 3, 10, 19, 56, 9, 991729))]\n(Background on this error at: https://sqlalche.me/e/20/f405)",
+  "stacktrace": "Traceback (most recent call last):\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 521, in _prepare_and_execute\n    prepared_stmt, attributes = await adapt_connection._prepare(\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 768, in _prepare\n    prepared_stmt = await self._connection.prepare(\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\asyncpg\\connection.py\", line 635, in prepare\n    return await self._prepare(\n           ^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\asyncpg\\connection.py\", line 653, in _prepare\n    stmt = await self._get_statement(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\asyncpg\\connection.py\", line 432, in _get_statement\n    statement = await self._protocol.prepare(\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"asyncpg\\\\protocol\\\\protocol.pyx\", line 165, in prepare\nasyncpg.exceptions.UndefinedTableError: relation \"detections\" does not exist\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\base.py\", line 1964, in _exec_single_context\n    self.dialect.do_execute(\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\default.py\", line 942, in do_execute\n    cursor.execute(statement, parameters)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 580, in execute\n    self._adapt_connection.await_(\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\util\\_concurrency_py3k.py\", line 132, in await_only\n    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\util\\_concurrency_py3k.py\", line 196, in greenlet_spawn\n    value = await result\n            ^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 558, in _prepare_and_execute\n    self._handle_exception(error)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 508, in _handle_exception\n    self._adapt_connection._handle_exception(error)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 792, in _handle_exception\n    raise translated_error from error\nsqlalchemy.dialects.postgresql.asyncpg.AsyncAdapt_asyncpg_dbapi.ProgrammingError: <class 'asyncpg.exceptions.UndefinedTableError'>: relation \"detections\" does not exist\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"D:\\yolopest\\backend\\app\\api\\endpoints\\detection.py\", line 55, in upload_image\n    result = await detection_service.process_image(file.filename, image_bytes)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\app\\services\\detection.py\", line 130, in process_image\n    detection = await self.repository.create_detection(\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\app\\db\\repositories\\detection.py\", line 23, in create_detection\n    return await self.create(detection_data)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\app\\db\\repositories\\base.py\", line 17, in create\n    await self.db.commit()\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\ext\\asyncio\\session.py\", line 1011, in commit\n    await greenlet_spawn(self.sync_session.commit)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\util\\_concurrency_py3k.py\", line 203, in greenlet_spawn\n    result = context.switch(value)\n             ^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\session.py\", line 2032, in commit\n    trans.commit(_to_root=True)\n  File \"<string>\", line 2, in commit\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\state_changes.py\", line 139, in _go\n    ret_value = fn(self, *arg, **kw)\n                ^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\session.py\", line 1313, in commit\n    self._prepare_impl()\n  File \"<string>\", line 2, in _prepare_impl\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\state_changes.py\", line 139, in _go\n    ret_value = fn(self, *arg, **kw)\n                ^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\session.py\", line 1288, in _prepare_impl\n    self.session.flush()\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\session.py\", line 4353, in flush\n    self._flush(objects)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\session.py\", line 4488, in _flush\n    with util.safe_reraise():\n         ^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\util\\langhelpers.py\", line 146, in __exit__\n    raise exc_value.with_traceback(exc_tb)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\session.py\", line 4449, in _flush\n    flush_context.execute()\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\unitofwork.py\", line 466, in execute\n    rec.execute(self)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\unitofwork.py\", line 642, in execute\n    util.preloaded.orm_persistence.save_obj(\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\persistence.py\", line 93, in save_obj\n    _emit_insert_statements(\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\persistence.py\", line 1233, in _emit_insert_statements\n    result = connection.execute(\n             ^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\base.py\", line 1416, in execute\n    return meth(\n           ^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\sql\\elements.py\", line 516, in _execute_on_connection\n    return connection._execute_clauseelement(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\base.py\", line 1638, in _execute_clauseelement\n    ret = self._execute_context(\n          ^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\base.py\", line 1843, in _execute_context\n    return self._exec_single_context(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\base.py\", line 1983, in _exec_single_context\n    self._handle_dbapi_exception(\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\base.py\", line 2352, in _handle_dbapi_exception\n    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\base.py\", line 1964, in _exec_single_context\n    self.dialect.do_execute(\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\default.py\", line 942, in do_execute\n    cursor.execute(statement, parameters)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 580, in execute\n    self._adapt_connection.await_(\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\util\\_concurrency_py3k.py\", line 132, in await_only\n    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\util\\_concurrency_py3k.py\", line 196, in greenlet_spawn\n    value = await result\n            ^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 558, in _prepare_and_execute\n    self._handle_exception(error)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 508, in _handle_exception\n    self._adapt_connection._handle_exception(error)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 792, in _handle_exception\n    raise translated_error from error\nsqlalchemy.exc.ProgrammingError: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation \"detections\" does not exist\n[SQL: INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id]\n[parameters: ('20250310_195609_IP011000197.jpg', 'annotated_20250310_195609_IP011000197.jpg', '[{\"class\": \"white backed plant hopper\", \"confidence\": 0.8705894351005554, \"bbox\": {\"x1\": 98, \"y1\": 55, \"x2\": 273, \"y2\": 431}}, {\"class\": \"white backed plant hopper\", \"confidence\": 0.833490788936615, \"bbox\": {\"x1\": 252, \"y1\": 271, \"x2\": 400, \"y2\": 654}}]', datetime.datetime(2025, 3, 10, 19, 56, 9, 991729))]\n(Background on this error at: https://sqlalche.me/e/20/f405)\n"
+}
+2025-03-10 19:56:10 - pest_detection - WARNING - 请求失败: POST /api/detection/upload - 状态码: 500
+2025-03-10 19:57:44 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload 来自: 127.0.0.1
+2025-03-10 19:57:44 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 19:57:44 - python_multipart.multipart - DEBUG - Calling on_header_field with data[54:73]
+2025-03-10 19:57:44 - python_multipart.multipart - DEBUG - Calling on_header_value with data[75:125]
+2025-03-10 19:57:44 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 19:57:44 - python_multipart.multipart - DEBUG - Calling on_header_field with data[127:139]
+2025-03-10 19:57:44 - python_multipart.multipart - DEBUG - Calling on_header_value with data[141:151]
+2025-03-10 19:57:44 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 19:57:44 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 19:57:44 - python_multipart.multipart - DEBUG - Calling on_part_data with data[155:22303]
+2025-03-10 19:57:44 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 19:57:44 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 19:57:44 - app.api.endpoints.detection - INFO - [1f13b1d3-86d2-409f-958b-6b32e2b9ef7d] 开始处理单图像上传请求: IP014000205.jpg, 大小: 22148
+2025-03-10 19:57:44 - app.api.endpoints.detection - DEBUG - [1f13b1d3-86d2-409f-958b-6b32e2b9ef7d] 客户端信息: 127.0.0.1, User-Agent: Apifox/1.0.0 (https://apifox.com)
+2025-03-10 19:57:44 - app.api.endpoints.detection - DEBUG - [1f13b1d3-86d2-409f-958b-6b32e2b9ef7d] 成功读取图像数据: 22148 字节
+2025-03-10 19:57:44 - app.api.endpoints.detection - DEBUG - [1f13b1d3-86d2-409f-958b-6b32e2b9ef7d] 开始执行图像预测
+2025-03-10 19:57:44 - app.api.endpoints.detection - DEBUG - [1f13b1d3-86d2-409f-958b-6b32e2b9ef7d] 预测完成，结果数量: 1
+2025-03-10 19:57:44 - app.api.endpoints.detection - DEBUG - [1f13b1d3-86d2-409f-958b-6b32e2b9ef7d] 开始处理图像并保存结果
+2025-03-10 19:57:44 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 19:57:44 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-10 19:57:44 - sqlalchemy.engine.Engine - INFO - [cached since 94.73s ago] ('20250310_195744_IP014000205.jpg', 'annotated_20250310_195744_IP014000205.jpg', '[{"class": "rice water weevil", "confidence": 0.8893290758132935, "bbox": {"x1": 59, "y1": 23, "x2": 427, "y2": 259}}]', datetime.datetime(2025, 3, 10, 19, 57, 44, 847955))
+2025-03-10 19:57:44 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 19:57:44 - app.api.endpoints.detection - ERROR - [1f13b1d3-86d2-409f-958b-6b32e2b9ef7d] 处理图像时发生错误 (error_id: 8ea6d957-8dc0-4bc6-a92c-d4c39d413090):
+{
+  "error_id": "8ea6d957-8dc0-4bc6-a92c-d4c39d413090",
+  "request_id": "1f13b1d3-86d2-409f-958b-6b32e2b9ef7d",
+  "timestamp": "2025-03-10T19:57:44.879573",
+  "file_name": "IP014000205.jpg",
+  "exception_type": "ProgrammingError",
+  "exception_msg": "(sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation \"detections\" does not exist\n[SQL: INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id]\n[parameters: ('20250310_195744_IP014000205.jpg', 'annotated_20250310_195744_IP014000205.jpg', '[{\"class\": \"rice water weevil\", \"confidence\": 0.8893290758132935, \"bbox\": {\"x1\": 59, \"y1\": 23, \"x2\": 427, \"y2\": 259}}]', datetime.datetime(2025, 3, 10, 19, 57, 44, 847955))]\n(Background on this error at: https://sqlalche.me/e/20/f405)",
+  "stacktrace": "Traceback (most recent call last):\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 521, in _prepare_and_execute\n    prepared_stmt, attributes = await adapt_connection._prepare(\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 768, in _prepare\n    prepared_stmt = await self._connection.prepare(\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\asyncpg\\connection.py\", line 635, in prepare\n    return await self._prepare(\n           ^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\asyncpg\\connection.py\", line 653, in _prepare\n    stmt = await self._get_statement(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\asyncpg\\connection.py\", line 432, in _get_statement\n    statement = await self._protocol.prepare(\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"asyncpg\\\\protocol\\\\protocol.pyx\", line 165, in prepare\nasyncpg.exceptions.UndefinedTableError: relation \"detections\" does not exist\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\base.py\", line 1964, in _exec_single_context\n    self.dialect.do_execute(\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\default.py\", line 942, in do_execute\n    cursor.execute(statement, parameters)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 580, in execute\n    self._adapt_connection.await_(\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\util\\_concurrency_py3k.py\", line 132, in await_only\n    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\util\\_concurrency_py3k.py\", line 196, in greenlet_spawn\n    value = await result\n            ^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 558, in _prepare_and_execute\n    self._handle_exception(error)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 508, in _handle_exception\n    self._adapt_connection._handle_exception(error)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 792, in _handle_exception\n    raise translated_error from error\nsqlalchemy.dialects.postgresql.asyncpg.AsyncAdapt_asyncpg_dbapi.ProgrammingError: <class 'asyncpg.exceptions.UndefinedTableError'>: relation \"detections\" does not exist\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"D:\\yolopest\\backend\\app\\api\\endpoints\\detection.py\", line 55, in upload_image\n    result = await detection_service.process_image(file.filename, image_bytes)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\app\\services\\detection.py\", line 130, in process_image\n    detection = await self.repository.create_detection(\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\app\\db\\repositories\\detection.py\", line 23, in create_detection\n    return await self.create(detection_data)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\app\\db\\repositories\\base.py\", line 17, in create\n    await self.db.commit()\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\ext\\asyncio\\session.py\", line 1011, in commit\n    await greenlet_spawn(self.sync_session.commit)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\util\\_concurrency_py3k.py\", line 203, in greenlet_spawn\n    result = context.switch(value)\n             ^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\session.py\", line 2032, in commit\n    trans.commit(_to_root=True)\n  File \"<string>\", line 2, in commit\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\state_changes.py\", line 139, in _go\n    ret_value = fn(self, *arg, **kw)\n                ^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\session.py\", line 1313, in commit\n    self._prepare_impl()\n  File \"<string>\", line 2, in _prepare_impl\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\state_changes.py\", line 139, in _go\n    ret_value = fn(self, *arg, **kw)\n                ^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\session.py\", line 1288, in _prepare_impl\n    self.session.flush()\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\session.py\", line 4353, in flush\n    self._flush(objects)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\session.py\", line 4488, in _flush\n    with util.safe_reraise():\n         ^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\util\\langhelpers.py\", line 146, in __exit__\n    raise exc_value.with_traceback(exc_tb)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\session.py\", line 4449, in _flush\n    flush_context.execute()\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\unitofwork.py\", line 466, in execute\n    rec.execute(self)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\unitofwork.py\", line 642, in execute\n    util.preloaded.orm_persistence.save_obj(\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\persistence.py\", line 93, in save_obj\n    _emit_insert_statements(\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\persistence.py\", line 1233, in _emit_insert_statements\n    result = connection.execute(\n             ^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\base.py\", line 1416, in execute\n    return meth(\n           ^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\sql\\elements.py\", line 516, in _execute_on_connection\n    return connection._execute_clauseelement(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\base.py\", line 1638, in _execute_clauseelement\n    ret = self._execute_context(\n          ^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\base.py\", line 1843, in _execute_context\n    return self._exec_single_context(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\base.py\", line 1983, in _exec_single_context\n    self._handle_dbapi_exception(\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\base.py\", line 2352, in _handle_dbapi_exception\n    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\base.py\", line 1964, in _exec_single_context\n    self.dialect.do_execute(\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\engine\\default.py\", line 942, in do_execute\n    cursor.execute(statement, parameters)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 580, in execute\n    self._adapt_connection.await_(\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\util\\_concurrency_py3k.py\", line 132, in await_only\n    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\util\\_concurrency_py3k.py\", line 196, in greenlet_spawn\n    value = await result\n            ^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 558, in _prepare_and_execute\n    self._handle_exception(error)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 508, in _handle_exception\n    self._adapt_connection._handle_exception(error)\n  File \"D:\\yolopest\\backend\\.venv\\Lib\\site-packages\\sqlalchemy\\dialects\\postgresql\\asyncpg.py\", line 792, in _handle_exception\n    raise translated_error from error\nsqlalchemy.exc.ProgrammingError: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation \"detections\" does not exist\n[SQL: INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id]\n[parameters: ('20250310_195744_IP014000205.jpg', 'annotated_20250310_195744_IP014000205.jpg', '[{\"class\": \"rice water weevil\", \"confidence\": 0.8893290758132935, \"bbox\": {\"x1\": 59, \"y1\": 23, \"x2\": 427, \"y2\": 259}}]', datetime.datetime(2025, 3, 10, 19, 57, 44, 847955))]\n(Background on this error at: https://sqlalche.me/e/20/f405)\n"
+}
+2025-03-10 19:57:44 - pest_detection - WARNING - 请求失败: POST /api/detection/upload - 状态码: 500
+2025-03-10 20:01:01 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload 来自: 127.0.0.1
+2025-03-10 20:01:01 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 20:01:01 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 20:01:01 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:113]
+2025-03-10 20:01:01 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:01 - python_multipart.multipart - DEBUG - Calling on_header_field with data[115:127]
+2025-03-10 20:01:01 - python_multipart.multipart - DEBUG - Calling on_header_value with data[129:139]
+2025-03-10 20:01:01 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:01 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 20:01:01 - python_multipart.multipart - DEBUG - Calling on_part_data with data[143:32267]
+2025-03-10 20:01:01 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 20:01:01 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 20:01:01 - app.api.endpoints.detection - INFO - [92762d84-8646-4762-9305-735f677be3fb] 开始处理单图像上传请求: IP014000502.jpg, 大小: 32124
+2025-03-10 20:01:01 - app.api.endpoints.detection - DEBUG - [92762d84-8646-4762-9305-735f677be3fb] 客户端信息: 127.0.0.1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0
+2025-03-10 20:01:01 - app.api.endpoints.detection - DEBUG - [92762d84-8646-4762-9305-735f677be3fb] 成功读取图像数据: 32124 字节
+2025-03-10 20:01:01 - app.api.endpoints.detection - DEBUG - [92762d84-8646-4762-9305-735f677be3fb] 开始执行图像预测
+2025-03-10 20:01:01 - app.api.endpoints.detection - DEBUG - [92762d84-8646-4762-9305-735f677be3fb] 预测完成，结果数量: 1
+2025-03-10 20:01:01 - app.api.endpoints.detection - DEBUG - [92762d84-8646-4762-9305-735f677be3fb] 开始处理图像并保存结果
+2025-03-10 20:01:01 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 20:01:01 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-10 20:01:01 - sqlalchemy.engine.Engine - INFO - [cached since 291.6s ago] ('20250310_200101_IP014000502.jpg', 'annotated_20250310_200101_IP014000502.jpg', '[{"class": "rice water weevil", "confidence": 0.7818135023117065, "bbox": {"x1": 157, "y1": 101, "x2": 353, "y2": 287}}]', datetime.datetime(2025, 3, 10, 20, 1, 1, 707811))
+2025-03-10 20:01:01 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 20:01:01 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 20:01:01 - sqlalchemy.engine.Engine - INFO - SELECT detections.id, detections.image_path, detections.annotated_path, detections.results, detections.created_at 
+FROM detections 
+WHERE detections.id = $1::INTEGER
+2025-03-10 20:01:01 - sqlalchemy.engine.Engine - INFO - [generated in 0.00064s] (1,)
+2025-03-10 20:01:01 - app.api.endpoints.detection - INFO - [92762d84-8646-4762-9305-735f677be3fb] 图像处理成功，ID: 1, 耗时: 0.125秒
+2025-03-10 20:01:01 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 20:01:01 - pest_detection - DEBUG - 请求完成: POST /api/detection/upload - 状态码: 200
+2025-03-10 20:01:25 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload-multiple 来自: 127.0.0.1
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:114]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[116:128]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[130:140]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_data with data[144:30672]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[30716:30735]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[30737:30788]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[30790:30802]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[30804:30814]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_data with data[30818:49152]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:14341]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[14385:14404]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[14406:14457]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[14459:14471]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[14473:14483]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_data with data[14487:53028]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[53072:53091]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[53093:53144]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[53146:53158]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[53160:53170]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_data with data[53174:87198]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[87242:87261]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[87263:87314]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[87316:87328]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[87330:87340]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_data with data[87344:92297]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[92341:92360]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[92362:92413]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[92415:92427]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[92429:92439]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_data with data[92443:147132]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:1845]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[1889:1908]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[1910:1961]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[1963:1975]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[1977:1987]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_data with data[1991:12306]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[12350:12369]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[12371:12422]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[12424:12436]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[12438:12448]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_data with data[12452:23984]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[24028:24047]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[24049:24100]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[24102:24114]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[24116:24126]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_data with data[24130:35877]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[35921:35940]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[35942:35993]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[35995:36007]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[36009:36019]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_data with data[36023:51321]
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 20:01:25 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 20:01:26 - app.api.endpoints.detection - INFO - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 开始批量图像处理请求: 10个文件
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 批量处理客户端: 127.0.0.1, 文件数量: 10
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 读取第1个文件: IP000000253.jpg
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 文件 IP000000253.jpg 读取完成: 30528 字节
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 读取第2个文件: IP000000290.jpg
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 文件 IP000000290.jpg 读取完成: 32675 字节
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 读取第3个文件: IP000000312.jpg
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 文件 IP000000312.jpg 读取完成: 38541 字节
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 读取第4个文件: IP000000378.jpg
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 文件 IP000000378.jpg 读取完成: 34024 字节
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 读取第5个文件: IP000000538.jpg
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 文件 IP000000538.jpg 读取完成: 4953 字节
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 读取第6个文件: IP000000576.jpg
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 文件 IP000000576.jpg 读取完成: 56534 字节
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 读取第7个文件: IP000000647.jpg
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 文件 IP000000647.jpg 读取完成: 10315 字节
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 读取第8个文件: IP000000713.jpg
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 文件 IP000000713.jpg 读取完成: 11532 字节
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 读取第9个文件: IP000000822.jpg
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 文件 IP000000822.jpg 读取完成: 11747 字节
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 读取第10个文件: IP000000884.jpg
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 文件 IP000000884.jpg 读取完成: 15298 字节
+2025-03-10 20:01:26 - app.api.endpoints.detection - DEBUG - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 开始批量处理 10 个图像
+2025-03-10 20:01:26 - app.api.endpoints.detection - ERROR - [26db92ec-d782-4e21-87f4-e0f49e76d8c8] 批量处理图像时发生错误 (error_id: 9a340a58-657f-4f08-a9d9-ad2264f8a559):
+{
+  "error_id": "9a340a58-657f-4f08-a9d9-ad2264f8a559",
+  "batch_id": "26db92ec-d782-4e21-87f4-e0f49e76d8c8",
+  "timestamp": "2025-03-10T20:01:26.017656",
+  "file_count": 10,
+  "filenames": [
+    "IP000000253.jpg",
+    "IP000000290.jpg",
+    "IP000000312.jpg",
+    "IP000000378.jpg",
+    "IP000000538.jpg",
+    "...更多"
+  ],
+  "exception_type": "AttributeError",
+  "exception_msg": "'DetectionService' object has no attribute 'process_multiple_images'",
+  "stacktrace": "Traceback (most recent call last):\n  File \"D:\\yolopest\\backend\\app\\api\\endpoints\\detection.py\", line 136, in upload_multiple_images\n    result = await detection_service.process_multiple_images(files_data)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'DetectionService' object has no attribute 'process_multiple_images'\n"
+}
+2025-03-10 20:01:26 - pest_detection - WARNING - 请求失败: POST /api/detection/upload-multiple - 状态码: 500
+2025-03-10 20:02:40 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload 来自: 127.0.0.1
+2025-03-10 20:02:40 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 20:02:40 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 20:02:40 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:113]
+2025-03-10 20:02:40 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:02:40 - python_multipart.multipart - DEBUG - Calling on_header_field with data[115:127]
+2025-03-10 20:02:40 - python_multipart.multipart - DEBUG - Calling on_header_value with data[129:139]
+2025-03-10 20:02:40 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:02:40 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 20:02:40 - python_multipart.multipart - DEBUG - Calling on_part_data with data[143:27575]
+2025-03-10 20:02:40 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 20:02:40 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 20:02:40 - app.api.endpoints.detection - INFO - [3f04d856-f39a-45b7-b5e1-e08d114f4186] 开始处理单图像上传请求: IP005000050.jpg, 大小: 27432
+2025-03-10 20:02:40 - app.api.endpoints.detection - DEBUG - [3f04d856-f39a-45b7-b5e1-e08d114f4186] 客户端信息: 127.0.0.1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0
+2025-03-10 20:02:40 - app.api.endpoints.detection - DEBUG - [3f04d856-f39a-45b7-b5e1-e08d114f4186] 成功读取图像数据: 27432 字节
+2025-03-10 20:02:40 - app.api.endpoints.detection - DEBUG - [3f04d856-f39a-45b7-b5e1-e08d114f4186] 开始执行图像预测
+2025-03-10 20:02:40 - app.api.endpoints.detection - DEBUG - [3f04d856-f39a-45b7-b5e1-e08d114f4186] 预测完成，结果数量: 1
+2025-03-10 20:02:40 - app.api.endpoints.detection - DEBUG - [3f04d856-f39a-45b7-b5e1-e08d114f4186] 开始处理图像并保存结果
+2025-03-10 20:02:40 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 20:02:40 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-10 20:02:40 - sqlalchemy.engine.Engine - INFO - [cached since 390.8s ago] ('20250310_200240_IP005000050.jpg', 'annotated_20250310_200240_IP005000050.jpg', '[{"class": "asiatic rice borer", "confidence": 0.913837194442749, "bbox": {"x1": 73, "y1": 164, "x2": 337, "y2": 408}}]', datetime.datetime(2025, 3, 10, 20, 2, 40, 940767))
+2025-03-10 20:02:40 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 20:02:40 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 20:02:40 - sqlalchemy.engine.Engine - INFO - SELECT detections.id, detections.image_path, detections.annotated_path, detections.results, detections.created_at 
+FROM detections 
+WHERE detections.id = $1::INTEGER
+2025-03-10 20:02:40 - sqlalchemy.engine.Engine - INFO - [cached since 99.22s ago] (2,)
+2025-03-10 20:02:40 - app.api.endpoints.detection - INFO - [3f04d856-f39a-45b7-b5e1-e08d114f4186] 图像处理成功，ID: 2, 耗时: 0.117秒
+2025-03-10 20:02:40 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 20:02:40 - pest_detection - DEBUG - 请求完成: POST /api/detection/upload - 状态码: 200
+2025-03-10 20:59:12 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload 来自: 127.0.0.1
+2025-03-10 20:59:12 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 20:59:12 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 20:59:12 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:113]
+2025-03-10 20:59:12 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:59:12 - python_multipart.multipart - DEBUG - Calling on_header_field with data[115:127]
+2025-03-10 20:59:12 - python_multipart.multipart - DEBUG - Calling on_header_value with data[129:139]
+2025-03-10 20:59:12 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:59:12 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 20:59:12 - python_multipart.multipart - DEBUG - Calling on_part_data with data[143:21676]
+2025-03-10 20:59:12 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 20:59:12 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 20:59:13 - app.api.endpoints.detection - INFO - [68a98b98-8398-4a38-9cf0-3977a405ecbe] 开始处理单图像上传请求: IP011000227.jpg, 大小: 21533
+2025-03-10 20:59:13 - app.api.endpoints.detection - DEBUG - [68a98b98-8398-4a38-9cf0-3977a405ecbe] 客户端信息: 127.0.0.1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0
+2025-03-10 20:59:13 - app.api.endpoints.detection - DEBUG - [68a98b98-8398-4a38-9cf0-3977a405ecbe] 成功读取图像数据: 21533 字节
+2025-03-10 20:59:13 - app.api.endpoints.detection - DEBUG - [68a98b98-8398-4a38-9cf0-3977a405ecbe] 开始执行图像预测
+2025-03-10 20:59:13 - app.api.endpoints.detection - DEBUG - [68a98b98-8398-4a38-9cf0-3977a405ecbe] 预测完成，结果数量: 0
+2025-03-10 20:59:13 - app.api.endpoints.detection - WARNING - [68a98b98-8398-4a38-9cf0-3977a405ecbe] 未检测到害虫: IP011000227.jpg
+2025-03-10 20:59:13 - app.api.endpoints.detection - WARNING - [68a98b98-8398-4a38-9cf0-3977a405ecbe] HTTP异常: 400 - {'code': 'NO_PEST_DETECTED', 'message': '未检测到害虫，请尝试其他图片', 'status': 'error'}
+2025-03-10 20:59:13 - pest_detection - WARNING - 请求失败: POST /api/detection/upload - 状态码: 400
+2025-03-10 20:59:17 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload 来自: 127.0.0.1
+2025-03-10 20:59:17 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 20:59:17 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 20:59:17 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:113]
+2025-03-10 20:59:17 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:59:17 - python_multipart.multipart - DEBUG - Calling on_header_field with data[115:127]
+2025-03-10 20:59:17 - python_multipart.multipart - DEBUG - Calling on_header_value with data[129:139]
+2025-03-10 20:59:17 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:59:17 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 20:59:17 - python_multipart.multipart - DEBUG - Calling on_part_data with data[143:74240]
+2025-03-10 20:59:17 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 20:59:17 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 20:59:18 - app.api.endpoints.detection - INFO - [f3c38aef-64f4-45da-be2b-5280226e68fb] 开始处理单图像上传请求: IP014000159.jpg, 大小: 74097
+2025-03-10 20:59:18 - app.api.endpoints.detection - DEBUG - [f3c38aef-64f4-45da-be2b-5280226e68fb] 客户端信息: 127.0.0.1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0
+2025-03-10 20:59:18 - app.api.endpoints.detection - DEBUG - [f3c38aef-64f4-45da-be2b-5280226e68fb] 成功读取图像数据: 74097 字节
+2025-03-10 20:59:18 - app.api.endpoints.detection - DEBUG - [f3c38aef-64f4-45da-be2b-5280226e68fb] 开始执行图像预测
+2025-03-10 20:59:18 - app.api.endpoints.detection - DEBUG - [f3c38aef-64f4-45da-be2b-5280226e68fb] 预测完成，结果数量: 1
+2025-03-10 20:59:18 - app.api.endpoints.detection - DEBUG - [f3c38aef-64f4-45da-be2b-5280226e68fb] 开始处理图像并保存结果
+2025-03-10 20:59:18 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 20:59:18 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-10 20:59:18 - sqlalchemy.engine.Engine - INFO - [cached since 3788s ago] ('20250310_205918_IP014000159.jpg', 'annotated_20250310_205918_IP014000159.jpg', '[{"class": "rice water weevil", "confidence": 0.89649897813797, "bbox": {"x1": 53, "y1": 114, "x2": 747, "y2": 456}}]', datetime.datetime(2025, 3, 10, 20, 59, 18, 318939))
+2025-03-10 20:59:18 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 20:59:18 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 20:59:18 - sqlalchemy.engine.Engine - INFO - SELECT detections.id, detections.image_path, detections.annotated_path, detections.results, detections.created_at 
+FROM detections 
+WHERE detections.id = $1::INTEGER
+2025-03-10 20:59:18 - sqlalchemy.engine.Engine - INFO - [cached since 3497s ago] (3,)
+2025-03-10 20:59:18 - app.api.endpoints.detection - INFO - [f3c38aef-64f4-45da-be2b-5280226e68fb] 图像处理成功，ID: 3, 耗时: 0.177秒
+2025-03-10 20:59:18 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 20:59:18 - pest_detection - DEBUG - 请求完成: POST /api/detection/upload - 状态码: 200
+2025-03-10 20:59:29 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload 来自: 127.0.0.1
+2025-03-10 20:59:29 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 20:59:29 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 20:59:29 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:113]
+2025-03-10 20:59:29 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:59:29 - python_multipart.multipart - DEBUG - Calling on_header_field with data[115:127]
+2025-03-10 20:59:29 - python_multipart.multipart - DEBUG - Calling on_header_value with data[129:139]
+2025-03-10 20:59:29 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 20:59:29 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 20:59:29 - python_multipart.multipart - DEBUG - Calling on_part_data with data[143:19802]
+2025-03-10 20:59:29 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 20:59:29 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 20:59:29 - app.api.endpoints.detection - INFO - [25d0cc57-668e-45c9-bc57-44d714c82726] 开始处理单图像上传请求: IP008000104.jpg, 大小: 19659
+2025-03-10 20:59:29 - app.api.endpoints.detection - DEBUG - [25d0cc57-668e-45c9-bc57-44d714c82726] 客户端信息: 127.0.0.1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0
+2025-03-10 20:59:29 - app.api.endpoints.detection - DEBUG - [25d0cc57-668e-45c9-bc57-44d714c82726] 成功读取图像数据: 19659 字节
+2025-03-10 20:59:29 - app.api.endpoints.detection - DEBUG - [25d0cc57-668e-45c9-bc57-44d714c82726] 开始执行图像预测
+2025-03-10 20:59:30 - app.api.endpoints.detection - DEBUG - [25d0cc57-668e-45c9-bc57-44d714c82726] 预测完成，结果数量: 1
+2025-03-10 20:59:30 - app.api.endpoints.detection - DEBUG - [25d0cc57-668e-45c9-bc57-44d714c82726] 开始处理图像并保存结果
+2025-03-10 20:59:30 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 20:59:30 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-10 20:59:30 - sqlalchemy.engine.Engine - INFO - [cached since 3800s ago] ('20250310_205930_IP008000104.jpg', 'annotated_20250310_205930_IP008000104.jpg', '[{"class": "rice gall midge", "confidence": 0.8118194341659546, "bbox": {"x1": 66, "y1": 118, "x2": 227, "y2": 328}}]', datetime.datetime(2025, 3, 10, 20, 59, 30, 340551))
+2025-03-10 20:59:30 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 20:59:30 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 20:59:30 - sqlalchemy.engine.Engine - INFO - SELECT detections.id, detections.image_path, detections.annotated_path, detections.results, detections.created_at 
+FROM detections 
+WHERE detections.id = $1::INTEGER
+2025-03-10 20:59:30 - sqlalchemy.engine.Engine - INFO - [cached since 3509s ago] (4,)
+2025-03-10 20:59:30 - app.api.endpoints.detection - INFO - [25d0cc57-668e-45c9-bc57-44d714c82726] 图像处理成功，ID: 4, 耗时: 0.133秒
+2025-03-10 20:59:30 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 20:59:30 - pest_detection - DEBUG - 请求完成: POST /api/detection/upload - 状态码: 200
+2025-03-10 21:08:40 - pest_detection - DEBUG - 收到请求: GET /favicon.ico 来自: 127.0.0.1
+2025-03-10 21:08:40 - pest_detection - WARNING - 请求失败: GET /favicon.ico - 状态码: 404
+2025-03-10 21:08:40 - pest_detection - DEBUG - 收到请求: GET /null 来自: 127.0.0.1
+2025-03-10 21:08:40 - pest_detection - WARNING - 请求失败: GET /null - 状态码: 404
+2025-03-10 21:09:18 - pest_detection - INFO - 应用正在关闭
+2025-03-10 21:23:10 - pest_detection - INFO - 启动应用，环境: 开发模式
+2025-03-10 21:23:10 - pest_detection - DEBUG - 配置CORS: 允许来源 ['http://localhost:3000']
+2025-03-10 21:23:10 - pest_detection - INFO - 应用已启动
+2025-03-10 21:24:27 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload 来自: 127.0.0.1
+2025-03-10 21:24:27 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:24:27 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 21:24:27 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:113]
+2025-03-10 21:24:27 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:27 - python_multipart.multipart - DEBUG - Calling on_header_field with data[115:127]
+2025-03-10 21:24:27 - python_multipart.multipart - DEBUG - Calling on_header_value with data[129:139]
+2025-03-10 21:24:27 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:27 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:24:27 - python_multipart.multipart - DEBUG - Calling on_part_data with data[143:16334]
+2025-03-10 21:24:27 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:24:27 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 21:24:28 - app.api.endpoints.detection - INFO - [2b40410d-75dd-4ade-9377-cd467f44a242] 开始处理单图像上传请求: IP014000004.jpg, 大小: 16191
+2025-03-10 21:24:28 - app.api.endpoints.detection - DEBUG - [2b40410d-75dd-4ade-9377-cd467f44a242] 客户端信息: 127.0.0.1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0
+2025-03-10 21:24:28 - app.api.endpoints.detection - DEBUG - [2b40410d-75dd-4ade-9377-cd467f44a242] 成功读取图像数据: 16191 字节
+2025-03-10 21:24:28 - app.api.endpoints.detection - DEBUG - [2b40410d-75dd-4ade-9377-cd467f44a242] 开始执行图像预测
+2025-03-10 21:24:30 - app.api.endpoints.detection - DEBUG - [2b40410d-75dd-4ade-9377-cd467f44a242] 预测完成，结果数量: 1
+2025-03-10 21:24:30 - app.api.endpoints.detection - DEBUG - [2b40410d-75dd-4ade-9377-cd467f44a242] 开始处理图像并保存结果
+2025-03-10 21:24:30 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2025-03-10 21:24:30 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-10 21:24:30 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2025-03-10 21:24:30 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-10 21:24:30 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2025-03-10 21:24:30 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-10 21:24:30 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 21:24:30 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-10 21:24:30 - sqlalchemy.engine.Engine - INFO - [generated in 0.00081s] ('20250310_212430_IP014000004.jpg', 'annotated_20250310_212430_IP014000004.jpg', '[{"class": "rice water weevil", "confidence": 0.8856950998306274, "bbox": {"x1": 33, "y1": 19, "x2": 241, "y2": 206}}]', datetime.datetime(2025, 3, 10, 21, 24, 30, 376368))
+2025-03-10 21:24:30 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 21:24:30 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 21:24:30 - sqlalchemy.engine.Engine - INFO - SELECT detections.id, detections.image_path, detections.annotated_path, detections.results, detections.created_at 
+FROM detections 
+WHERE detections.id = $1::INTEGER
+2025-03-10 21:24:30 - sqlalchemy.engine.Engine - INFO - [generated in 0.00083s] (5,)
+2025-03-10 21:24:30 - app.api.endpoints.detection - INFO - [2b40410d-75dd-4ade-9377-cd467f44a242] 图像处理成功，ID: 5, 耗时: 0.263秒
+2025-03-10 21:24:30 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 21:24:30 - pest_detection - DEBUG - 请求完成: POST /api/detection/upload - 状态码: 200
+2025-03-10 21:24:47 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload-multiple 来自: 127.0.0.1
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:114]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_field with data[116:128]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_value with data[130:140]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_data with data[144:48234]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_field with data[48278:48297]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_value with data[48299:48350]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_field with data[48352:48364]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_value with data[48366:48376]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_data with data[48380:65536]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:14995]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_field with data[15039:15058]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_value with data[15060:15111]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_field with data[15113:15125]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_value with data[15127:15137]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_data with data[15141:16384]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:20290]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_field with data[20334:20353]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_value with data[20355:20406]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_field with data[20408:20420]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_value with data[20422:20432]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_data with data[20436:54062]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_field with data[54106:54125]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_value with data[54127:54178]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_field with data[54180:54192]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_value with data[54194:54204]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_data with data[54208:88829]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_field with data[88873:88892]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_value with data[88894:88945]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_field with data[88947:88959]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_value with data[88961:88971]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_data with data[88975:93944]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_field with data[93988:94007]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_value with data[94009:94060]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_field with data[94062:94074]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_value with data[94076:94086]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_data with data[94090:96871]
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:24:47 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 21:24:47 - app.api.endpoints.detection - INFO - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 开始批量图像处理请求: 7个文件
+2025-03-10 21:24:47 - app.api.endpoints.detection - DEBUG - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 批量处理客户端: 127.0.0.1, 文件数量: 7
+2025-03-10 21:24:47 - app.api.endpoints.detection - DEBUG - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 读取第1个文件: IP011000077.jpg
+2025-03-10 21:24:47 - app.api.endpoints.detection - DEBUG - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 文件 IP011000077.jpg 读取完成: 48090 字节
+2025-03-10 21:24:47 - app.api.endpoints.detection - DEBUG - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 读取第2个文件: IP011000197.jpg
+2025-03-10 21:24:47 - app.api.endpoints.detection - DEBUG - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 文件 IP011000197.jpg 读取完成: 32151 字节
+2025-03-10 21:24:47 - app.api.endpoints.detection - DEBUG - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 读取第3个文件: IP011000227.jpg
+2025-03-10 21:24:47 - app.api.endpoints.detection - DEBUG - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 文件 IP011000227.jpg 读取完成: 21533 字节
+2025-03-10 21:24:47 - app.api.endpoints.detection - DEBUG - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 读取第4个文件: IP011000265.jpg
+2025-03-10 21:24:47 - app.api.endpoints.detection - DEBUG - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 文件 IP011000265.jpg 读取完成: 33626 字节
+2025-03-10 21:24:47 - app.api.endpoints.detection - DEBUG - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 读取第5个文件: IP011000312.jpg
+2025-03-10 21:24:47 - app.api.endpoints.detection - DEBUG - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 文件 IP011000312.jpg 读取完成: 34621 字节
+2025-03-10 21:24:47 - app.api.endpoints.detection - DEBUG - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 读取第6个文件: IP011000351.jpg
+2025-03-10 21:24:47 - app.api.endpoints.detection - DEBUG - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 文件 IP011000351.jpg 读取完成: 4969 字节
+2025-03-10 21:24:47 - app.api.endpoints.detection - DEBUG - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 读取第7个文件: IP013000023.jpg
+2025-03-10 21:24:47 - app.api.endpoints.detection - DEBUG - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 文件 IP013000023.jpg 读取完成: 2781 字节
+2025-03-10 21:24:47 - app.api.endpoints.detection - DEBUG - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 开始批量处理 7 个图像
+2025-03-10 21:24:47 - app.api.endpoints.detection - ERROR - [c34658cc-6f77-4a47-9d3c-7609ba7aeac3] 批量处理图像时发生错误 (error_id: d4ab116e-a215-45d6-9204-74a859805c56):
+{
+  "error_id": "d4ab116e-a215-45d6-9204-74a859805c56",
+  "batch_id": "c34658cc-6f77-4a47-9d3c-7609ba7aeac3",
+  "timestamp": "2025-03-10T21:24:47.507634",
+  "file_count": 7,
+  "filenames": [
+    "IP011000077.jpg",
+    "IP011000197.jpg",
+    "IP011000227.jpg",
+    "IP011000265.jpg",
+    "IP011000312.jpg",
+    "...更多"
+  ],
+  "exception_type": "AttributeError",
+  "exception_msg": "'DetectionService' object has no attribute 'process_multiple_images'",
+  "stacktrace": "Traceback (most recent call last):\n  File \"D:\\yolopest\\backend\\app\\api\\endpoints\\detection.py\", line 136, in upload_multiple_images\n    result = await detection_service.process_multiple_images(files_data)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'DetectionService' object has no attribute 'process_multiple_images'\n"
+}
+2025-03-10 21:24:47 - pest_detection - WARNING - 请求失败: POST /api/detection/upload-multiple - 状态码: 500
+2025-03-10 21:24:57 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload-multiple 来自: 127.0.0.1
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:114]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_field with data[116:128]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_value with data[130:140]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_data with data[144:48234]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_field with data[48278:48297]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_value with data[48299:48350]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_field with data[48352:48364]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_value with data[48366:48376]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_data with data[48380:65536]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:14995]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_field with data[15039:15058]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_value with data[15060:15111]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_field with data[15113:15125]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_value with data[15127:15137]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_data with data[15141:36674]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_field with data[36718:36737]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_value with data[36739:36790]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_field with data[36792:36804]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_value with data[36806:36816]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_data with data[36820:70446]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_field with data[70490:70509]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_value with data[70511:70562]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_field with data[70564:70576]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_value with data[70578:70588]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_data with data[70592:81920]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:23293]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_field with data[23337:23356]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_value with data[23358:23409]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_field with data[23411:23423]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_value with data[23425:23435]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_data with data[23439:28408]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_field with data[28452:28471]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_value with data[28473:28524]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_field with data[28526:28538]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_value with data[28540:28550]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_data with data[28554:31335]
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:24:57 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 21:24:57 - app.api.endpoints.detection - INFO - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 开始批量图像处理请求: 7个文件
+2025-03-10 21:24:57 - app.api.endpoints.detection - DEBUG - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 批量处理客户端: 127.0.0.1, 文件数量: 7
+2025-03-10 21:24:57 - app.api.endpoints.detection - DEBUG - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 读取第1个文件: IP011000077.jpg
+2025-03-10 21:24:57 - app.api.endpoints.detection - DEBUG - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 文件 IP011000077.jpg 读取完成: 48090 字节
+2025-03-10 21:24:57 - app.api.endpoints.detection - DEBUG - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 读取第2个文件: IP011000197.jpg
+2025-03-10 21:24:57 - app.api.endpoints.detection - DEBUG - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 文件 IP011000197.jpg 读取完成: 32151 字节
+2025-03-10 21:24:57 - app.api.endpoints.detection - DEBUG - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 读取第3个文件: IP011000227.jpg
+2025-03-10 21:24:57 - app.api.endpoints.detection - DEBUG - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 文件 IP011000227.jpg 读取完成: 21533 字节
+2025-03-10 21:24:57 - app.api.endpoints.detection - DEBUG - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 读取第4个文件: IP011000265.jpg
+2025-03-10 21:24:57 - app.api.endpoints.detection - DEBUG - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 文件 IP011000265.jpg 读取完成: 33626 字节
+2025-03-10 21:24:57 - app.api.endpoints.detection - DEBUG - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 读取第5个文件: IP011000312.jpg
+2025-03-10 21:24:57 - app.api.endpoints.detection - DEBUG - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 文件 IP011000312.jpg 读取完成: 34621 字节
+2025-03-10 21:24:57 - app.api.endpoints.detection - DEBUG - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 读取第6个文件: IP011000351.jpg
+2025-03-10 21:24:57 - app.api.endpoints.detection - DEBUG - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 文件 IP011000351.jpg 读取完成: 4969 字节
+2025-03-10 21:24:57 - app.api.endpoints.detection - DEBUG - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 读取第7个文件: IP013000023.jpg
+2025-03-10 21:24:57 - app.api.endpoints.detection - DEBUG - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 文件 IP013000023.jpg 读取完成: 2781 字节
+2025-03-10 21:24:57 - app.api.endpoints.detection - DEBUG - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 开始批量处理 7 个图像
+2025-03-10 21:24:57 - app.api.endpoints.detection - ERROR - [4e49fda9-43e0-4a64-b032-f4b115a7d25a] 批量处理图像时发生错误 (error_id: 30d9d2b0-ef64-4932-ad32-60b2a7e2e18f):
+{
+  "error_id": "30d9d2b0-ef64-4932-ad32-60b2a7e2e18f",
+  "batch_id": "4e49fda9-43e0-4a64-b032-f4b115a7d25a",
+  "timestamp": "2025-03-10T21:24:57.697512",
+  "file_count": 7,
+  "filenames": [
+    "IP011000077.jpg",
+    "IP011000197.jpg",
+    "IP011000227.jpg",
+    "IP011000265.jpg",
+    "IP011000312.jpg",
+    "...更多"
+  ],
+  "exception_type": "AttributeError",
+  "exception_msg": "'DetectionService' object has no attribute 'process_multiple_images'",
+  "stacktrace": "Traceback (most recent call last):\n  File \"D:\\yolopest\\backend\\app\\api\\endpoints\\detection.py\", line 136, in upload_multiple_images\n    result = await detection_service.process_multiple_images(files_data)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'DetectionService' object has no attribute 'process_multiple_images'\n"
+}
+2025-03-10 21:24:57 - pest_detection - WARNING - 请求失败: POST /api/detection/upload-multiple - 状态码: 500
+2025-03-10 21:25:15 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload-multiple 来自: 127.0.0.1
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:114]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[116:128]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[130:140]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_data with data[144:14600]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:18168]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:1400]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[1444:1463]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[1465:1516]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[1518:1530]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[1532:1542]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_data with data[1546:6499]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[6543:6562]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[6564:6615]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[6617:6629]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[6631:6641]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_data with data[6645:63179]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[63223:63242]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63244:63295]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[63297:63309]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63311:63321]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_data with data[63325:73640]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[73684:73703]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[73705:73756]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[73758:73770]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[73772:73782]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_data with data[73786:81920]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:3398]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[3442:3461]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[3463:3514]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[3516:3528]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[3530:3540]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_data with data[3544:15291]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[15335:15354]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[15356:15407]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[15409:15421]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[15423:15433]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_data with data[15437:16384]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:14351]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[14395:14414]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[14416:14467]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[14469:14481]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[14483:14493]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_data with data[14497:23402]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[23446:23465]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[23467:23518]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[23520:23532]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[23534:23544]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_data with data[23548:50980]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[51024:51043]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[51045:51096]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_field with data[51098:51110]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_value with data[51112:51122]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_data with data[51126:63474]
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:25:15 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 21:25:15 - app.api.endpoints.detection - INFO - [996c50f5-4127-4b59-9fe7-585fb03f7204] 开始批量图像处理请求: 10个文件
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 批量处理客户端: 127.0.0.1, 文件数量: 10
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 读取第1个文件: IP000000378.jpg
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 文件 IP000000378.jpg 读取完成: 34024 字节
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 读取第2个文件: IP000000538.jpg
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 文件 IP000000538.jpg 读取完成: 4953 字节
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 读取第3个文件: IP000000576.jpg
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 文件 IP000000576.jpg 读取完成: 56534 字节
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 读取第4个文件: IP000000647.jpg
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 文件 IP000000647.jpg 读取完成: 10315 字节
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 读取第5个文件: IP000000713.jpg
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 文件 IP000000713.jpg 读取完成: 11532 字节
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 读取第6个文件: IP000000822.jpg
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 文件 IP000000822.jpg 读取完成: 11747 字节
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 读取第7个文件: IP000000884.jpg
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 文件 IP000000884.jpg 读取完成: 15298 字节
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 读取第8个文件: IP000001048.jpg
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 文件 IP000001048.jpg 读取完成: 8905 字节
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 读取第9个文件: IP005000050.jpg
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 文件 IP005000050.jpg 读取完成: 27432 字节
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 读取第10个文件: IP005000093.jpg
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 文件 IP005000093.jpg 读取完成: 12348 字节
+2025-03-10 21:25:15 - app.api.endpoints.detection - DEBUG - [996c50f5-4127-4b59-9fe7-585fb03f7204] 开始批量处理 10 个图像
+2025-03-10 21:25:15 - app.api.endpoints.detection - ERROR - [996c50f5-4127-4b59-9fe7-585fb03f7204] 批量处理图像时发生错误 (error_id: ebbc3925-0aaa-44c9-8820-52736f082262):
+{
+  "error_id": "ebbc3925-0aaa-44c9-8820-52736f082262",
+  "batch_id": "996c50f5-4127-4b59-9fe7-585fb03f7204",
+  "timestamp": "2025-03-10T21:25:15.364457",
+  "file_count": 10,
+  "filenames": [
+    "IP000000378.jpg",
+    "IP000000538.jpg",
+    "IP000000576.jpg",
+    "IP000000647.jpg",
+    "IP000000713.jpg",
+    "...更多"
+  ],
+  "exception_type": "AttributeError",
+  "exception_msg": "'DetectionService' object has no attribute 'process_multiple_images'",
+  "stacktrace": "Traceback (most recent call last):\n  File \"D:\\yolopest\\backend\\app\\api\\endpoints\\detection.py\", line 136, in upload_multiple_images\n    result = await detection_service.process_multiple_images(files_data)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'DetectionService' object has no attribute 'process_multiple_images'\n"
+}
+2025-03-10 21:25:15 - pest_detection - WARNING - 请求失败: POST /api/detection/upload-multiple - 状态码: 500
+2025-03-10 21:25:35 - pest_detection - DEBUG - 收到请求: POST /api/video/process-async 来自: 127.0.0.1
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:121]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_header_field with data[123:135]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_header_value with data[137:146]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_data with data[150:49152]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:32768]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:147132]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:64240]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:18004]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:81920]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:81920]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:98304]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:81920]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:98304]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:65536]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:49152]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:65536]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:65536]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:65536]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:81920]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:104069]
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:25:35 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 21:25:35 - pest_detection - WARNING - 请求失败: POST /api/video/process-async - 状态码: 422
+2025-03-10 21:25:56 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload 来自: 127.0.0.1
+2025-03-10 21:25:56 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:25:56 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 21:25:56 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:113]
+2025-03-10 21:25:56 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:56 - python_multipart.multipart - DEBUG - Calling on_header_field with data[115:127]
+2025-03-10 21:25:56 - python_multipart.multipart - DEBUG - Calling on_header_value with data[129:139]
+2025-03-10 21:25:56 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:25:56 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:25:56 - python_multipart.multipart - DEBUG - Calling on_part_data with data[143:27716]
+2025-03-10 21:25:56 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:25:56 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 21:25:56 - app.api.endpoints.detection - INFO - [5c19a3a3-1620-4ec8-b8fe-beb341a32b2d] 开始处理单图像上传请求: IP015000020.jpg, 大小: 27573
+2025-03-10 21:25:56 - app.api.endpoints.detection - DEBUG - [5c19a3a3-1620-4ec8-b8fe-beb341a32b2d] 客户端信息: 127.0.0.1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0
+2025-03-10 21:25:56 - app.api.endpoints.detection - DEBUG - [5c19a3a3-1620-4ec8-b8fe-beb341a32b2d] 成功读取图像数据: 27573 字节
+2025-03-10 21:25:56 - app.api.endpoints.detection - DEBUG - [5c19a3a3-1620-4ec8-b8fe-beb341a32b2d] 开始执行图像预测
+2025-03-10 21:25:56 - app.api.endpoints.detection - DEBUG - [5c19a3a3-1620-4ec8-b8fe-beb341a32b2d] 预测完成，结果数量: 1
+2025-03-10 21:25:56 - app.api.endpoints.detection - DEBUG - [5c19a3a3-1620-4ec8-b8fe-beb341a32b2d] 开始处理图像并保存结果
+2025-03-10 21:25:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 21:25:56 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-10 21:25:56 - sqlalchemy.engine.Engine - INFO - [cached since 86.33s ago] ('20250310_212556_IP015000020.jpg', 'annotated_20250310_212556_IP015000020.jpg', '[{"class": "rice leafhopper", "confidence": 0.8761664032936096, "bbox": {"x1": 39, "y1": 60, "x2": 472, "y2": 311}}]', datetime.datetime(2025, 3, 10, 21, 25, 56, 836015))
+2025-03-10 21:25:56 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 21:25:56 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 21:25:56 - sqlalchemy.engine.Engine - INFO - SELECT detections.id, detections.image_path, detections.annotated_path, detections.results, detections.created_at 
+FROM detections 
+WHERE detections.id = $1::INTEGER
+2025-03-10 21:25:56 - sqlalchemy.engine.Engine - INFO - [cached since 86.32s ago] (6,)
+2025-03-10 21:25:56 - app.api.endpoints.detection - INFO - [5c19a3a3-1620-4ec8-b8fe-beb341a32b2d] 图像处理成功，ID: 6, 耗时: 0.084秒
+2025-03-10 21:25:56 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 21:25:56 - pest_detection - DEBUG - 请求完成: POST /api/detection/upload - 状态码: 200
+2025-03-10 21:26:13 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload 来自: 127.0.0.1
+2025-03-10 21:26:13 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:26:13 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 21:26:13 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:113]
+2025-03-10 21:26:13 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:26:13 - python_multipart.multipart - DEBUG - Calling on_header_field with data[115:127]
+2025-03-10 21:26:13 - python_multipart.multipart - DEBUG - Calling on_header_value with data[129:139]
+2025-03-10 21:26:13 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:26:13 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:26:13 - python_multipart.multipart - DEBUG - Calling on_part_data with data[143:6879]
+2025-03-10 21:26:13 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:26:13 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 21:26:13 - app.api.endpoints.detection - INFO - [413849b2-e0ae-4410-850f-5f9fdf8e5b90] 开始处理单图像上传请求: IP014000318.jpg, 大小: 6736
+2025-03-10 21:26:13 - app.api.endpoints.detection - DEBUG - [413849b2-e0ae-4410-850f-5f9fdf8e5b90] 客户端信息: 127.0.0.1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0
+2025-03-10 21:26:13 - app.api.endpoints.detection - DEBUG - [413849b2-e0ae-4410-850f-5f9fdf8e5b90] 成功读取图像数据: 6736 字节
+2025-03-10 21:26:13 - app.api.endpoints.detection - DEBUG - [413849b2-e0ae-4410-850f-5f9fdf8e5b90] 开始执行图像预测
+2025-03-10 21:26:13 - app.api.endpoints.detection - DEBUG - [413849b2-e0ae-4410-850f-5f9fdf8e5b90] 预测完成，结果数量: 1
+2025-03-10 21:26:13 - app.api.endpoints.detection - DEBUG - [413849b2-e0ae-4410-850f-5f9fdf8e5b90] 开始处理图像并保存结果
+2025-03-10 21:26:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 21:26:13 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-10 21:26:13 - sqlalchemy.engine.Engine - INFO - [cached since 103.2s ago] ('20250310_212613_IP014000318.jpg', 'annotated_20250310_212613_IP014000318.jpg', '[{"class": "rice water weevil", "confidence": 0.8459808230400085, "bbox": {"x1": 40, "y1": 29, "x2": 157, "y2": 105}}]', datetime.datetime(2025, 3, 10, 21, 26, 13, 655345))
+2025-03-10 21:26:13 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 21:26:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 21:26:13 - sqlalchemy.engine.Engine - INFO - SELECT detections.id, detections.image_path, detections.annotated_path, detections.results, detections.created_at 
+FROM detections 
+WHERE detections.id = $1::INTEGER
+2025-03-10 21:26:13 - sqlalchemy.engine.Engine - INFO - [cached since 103.1s ago] (7,)
+2025-03-10 21:26:13 - app.api.endpoints.detection - INFO - [413849b2-e0ae-4410-850f-5f9fdf8e5b90] 图像处理成功，ID: 7, 耗时: 0.086秒
+2025-03-10 21:26:13 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 21:26:13 - pest_detection - DEBUG - 请求完成: POST /api/detection/upload - 状态码: 200
+2025-03-10 21:31:20 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload 来自: 127.0.0.1
+2025-03-10 21:31:20 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:31:20 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 21:31:20 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:113]
+2025-03-10 21:31:20 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:31:20 - python_multipart.multipart - DEBUG - Calling on_header_field with data[115:127]
+2025-03-10 21:31:20 - python_multipart.multipart - DEBUG - Calling on_header_value with data[129:139]
+2025-03-10 21:31:20 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:31:20 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:31:20 - python_multipart.multipart - DEBUG - Calling on_part_data with data[143:30668]
+2025-03-10 21:31:20 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:31:20 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 21:31:20 - app.api.endpoints.detection - INFO - [a357112d-5497-4fce-823b-8c9ac6300e7d] 开始处理单图像上传请求: IP009000181.jpg, 大小: 30525
+2025-03-10 21:31:20 - app.api.endpoints.detection - DEBUG - [a357112d-5497-4fce-823b-8c9ac6300e7d] 客户端信息: 127.0.0.1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0
+2025-03-10 21:31:20 - app.api.endpoints.detection - DEBUG - [a357112d-5497-4fce-823b-8c9ac6300e7d] 成功读取图像数据: 30525 字节
+2025-03-10 21:31:20 - app.api.endpoints.detection - DEBUG - [a357112d-5497-4fce-823b-8c9ac6300e7d] 开始执行图像预测
+2025-03-10 21:31:20 - app.api.endpoints.detection - DEBUG - [a357112d-5497-4fce-823b-8c9ac6300e7d] 预测完成，结果数量: 1
+2025-03-10 21:31:20 - app.api.endpoints.detection - DEBUG - [a357112d-5497-4fce-823b-8c9ac6300e7d] 开始处理图像并保存结果
+2025-03-10 21:31:20 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 21:31:20 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-10 21:31:20 - sqlalchemy.engine.Engine - INFO - [cached since 410s ago] ('20250310_213120_IP009000181.jpg', 'annotated_20250310_213120_IP009000181.jpg', '[{"class": "Rice Stemfly", "confidence": 0.6671538352966309, "bbox": {"x1": 165, "y1": 87, "x2": 425, "y2": 496}}]', datetime.datetime(2025, 3, 10, 21, 31, 20, 483567))
+2025-03-10 21:31:20 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 21:31:20 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 21:31:20 - sqlalchemy.engine.Engine - INFO - SELECT detections.id, detections.image_path, detections.annotated_path, detections.results, detections.created_at 
+FROM detections 
+WHERE detections.id = $1::INTEGER
+2025-03-10 21:31:20 - sqlalchemy.engine.Engine - INFO - [cached since 410s ago] (8,)
+2025-03-10 21:31:20 - app.api.endpoints.detection - INFO - [a357112d-5497-4fce-823b-8c9ac6300e7d] 图像处理成功，ID: 8, 耗时: 0.118秒
+2025-03-10 21:31:20 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 21:31:20 - pest_detection - DEBUG - 请求完成: POST /api/detection/upload - 状态码: 200
+2025-03-10 21:32:14 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload 来自: 127.0.0.1
+2025-03-10 21:32:14 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:32:14 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 21:32:14 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:113]
+2025-03-10 21:32:14 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:32:14 - python_multipart.multipart - DEBUG - Calling on_header_field with data[115:127]
+2025-03-10 21:32:14 - python_multipart.multipart - DEBUG - Calling on_header_value with data[129:139]
+2025-03-10 21:32:14 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:32:14 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:32:14 - python_multipart.multipart - DEBUG - Calling on_part_data with data[143:48233]
+2025-03-10 21:32:14 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:32:14 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 21:32:14 - app.api.endpoints.detection - INFO - [0916f47e-4645-41c1-b7b8-a35c3fda621d] 开始处理单图像上传请求: IP011000077.jpg, 大小: 48090
+2025-03-10 21:32:14 - app.api.endpoints.detection - DEBUG - [0916f47e-4645-41c1-b7b8-a35c3fda621d] 客户端信息: 127.0.0.1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0
+2025-03-10 21:32:14 - app.api.endpoints.detection - DEBUG - [0916f47e-4645-41c1-b7b8-a35c3fda621d] 成功读取图像数据: 48090 字节
+2025-03-10 21:32:14 - app.api.endpoints.detection - DEBUG - [0916f47e-4645-41c1-b7b8-a35c3fda621d] 开始执行图像预测
+2025-03-10 21:32:15 - app.api.endpoints.detection - DEBUG - [0916f47e-4645-41c1-b7b8-a35c3fda621d] 预测完成，结果数量: 1
+2025-03-10 21:32:15 - app.api.endpoints.detection - DEBUG - [0916f47e-4645-41c1-b7b8-a35c3fda621d] 开始处理图像并保存结果
+2025-03-10 21:32:15 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 21:32:15 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-10 21:32:15 - sqlalchemy.engine.Engine - INFO - [cached since 464.7s ago] ('20250310_213215_IP011000077.jpg', 'annotated_20250310_213215_IP011000077.jpg', '[{"class": "Brevipoalpus lewisi McGregor", "confidence": 0.6708094477653503, "bbox": {"x1": 155, "y1": 81, "x2": 628, "y2": 394}}]', datetime.datetime(2025, 3, 10, 21, 32, 15, 209988))
+2025-03-10 21:32:15 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 21:32:15 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 21:32:15 - sqlalchemy.engine.Engine - INFO - SELECT detections.id, detections.image_path, detections.annotated_path, detections.results, detections.created_at 
+FROM detections 
+WHERE detections.id = $1::INTEGER
+2025-03-10 21:32:15 - sqlalchemy.engine.Engine - INFO - [cached since 464.7s ago] (9,)
+2025-03-10 21:32:15 - app.api.endpoints.detection - INFO - [0916f47e-4645-41c1-b7b8-a35c3fda621d] 图像处理成功，ID: 9, 耗时: 0.109秒
+2025-03-10 21:32:15 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 21:32:15 - pest_detection - DEBUG - 请求完成: POST /api/detection/upload - 状态码: 200
+2025-03-10 21:35:11 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload 来自: 127.0.0.1
+2025-03-10 21:35:11 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:35:11 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 21:35:11 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:113]
+2025-03-10 21:35:11 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:35:11 - python_multipart.multipart - DEBUG - Calling on_header_field with data[115:127]
+2025-03-10 21:35:11 - python_multipart.multipart - DEBUG - Calling on_header_value with data[129:139]
+2025-03-10 21:35:11 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:35:11 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:35:11 - python_multipart.multipart - DEBUG - Calling on_part_data with data[143:16334]
+2025-03-10 21:35:11 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:35:11 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 21:35:11 - app.api.endpoints.detection - INFO - [b553c09a-f926-4cb0-abf4-aa5c6b85077e] 开始处理单图像上传请求: IP014000004.jpg, 大小: 16191
+2025-03-10 21:35:11 - app.api.endpoints.detection - DEBUG - [b553c09a-f926-4cb0-abf4-aa5c6b85077e] 客户端信息: 127.0.0.1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0
+2025-03-10 21:35:11 - app.api.endpoints.detection - DEBUG - [b553c09a-f926-4cb0-abf4-aa5c6b85077e] 成功读取图像数据: 16191 字节
+2025-03-10 21:35:11 - app.api.endpoints.detection - DEBUG - [b553c09a-f926-4cb0-abf4-aa5c6b85077e] 开始执行图像预测
+2025-03-10 21:35:12 - app.api.endpoints.detection - DEBUG - [b553c09a-f926-4cb0-abf4-aa5c6b85077e] 预测完成，结果数量: 1
+2025-03-10 21:35:12 - app.api.endpoints.detection - DEBUG - [b553c09a-f926-4cb0-abf4-aa5c6b85077e] 开始处理图像并保存结果
+2025-03-10 21:35:12 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 21:35:12 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-10 21:35:12 - sqlalchemy.engine.Engine - INFO - [cached since 641.7s ago] ('20250310_213512_IP014000004.jpg', 'annotated_20250310_213512_IP014000004.jpg', '[{"class": "rice water weevil", "confidence": 0.8856950998306274, "bbox": {"x1": 33, "y1": 19, "x2": 241, "y2": 206}}]', datetime.datetime(2025, 3, 10, 21, 35, 12, 209451))
+2025-03-10 21:35:12 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 21:35:12 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 21:35:12 - sqlalchemy.engine.Engine - INFO - SELECT detections.id, detections.image_path, detections.annotated_path, detections.results, detections.created_at 
+FROM detections 
+WHERE detections.id = $1::INTEGER
+2025-03-10 21:35:12 - sqlalchemy.engine.Engine - INFO - [cached since 641.7s ago] (10,)
+2025-03-10 21:35:12 - app.api.endpoints.detection - INFO - [b553c09a-f926-4cb0-abf4-aa5c6b85077e] 图像处理成功，ID: 10, 耗时: 0.125秒
+2025-03-10 21:35:12 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 21:35:12 - pest_detection - DEBUG - 请求完成: POST /api/detection/upload - 状态码: 200
+2025-03-10 21:36:12 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload 来自: 127.0.0.1
+2025-03-10 21:36:12 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:36:12 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 21:36:12 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:113]
+2025-03-10 21:36:12 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:36:12 - python_multipart.multipart - DEBUG - Calling on_header_field with data[115:127]
+2025-03-10 21:36:12 - python_multipart.multipart - DEBUG - Calling on_header_value with data[129:139]
+2025-03-10 21:36:12 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:36:12 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:36:12 - python_multipart.multipart - DEBUG - Calling on_part_data with data[143:5112]
+2025-03-10 21:36:12 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:36:12 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 21:36:12 - app.api.endpoints.detection - INFO - [0eb5bd27-a97b-41e9-a42a-99e4ad81a31e] 开始处理单图像上传请求: IP011000351.jpg, 大小: 4969
+2025-03-10 21:36:12 - app.api.endpoints.detection - DEBUG - [0eb5bd27-a97b-41e9-a42a-99e4ad81a31e] 客户端信息: 127.0.0.1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0
+2025-03-10 21:36:12 - app.api.endpoints.detection - DEBUG - [0eb5bd27-a97b-41e9-a42a-99e4ad81a31e] 成功读取图像数据: 4969 字节
+2025-03-10 21:36:12 - app.api.endpoints.detection - DEBUG - [0eb5bd27-a97b-41e9-a42a-99e4ad81a31e] 开始执行图像预测
+2025-03-10 21:36:13 - app.api.endpoints.detection - DEBUG - [0eb5bd27-a97b-41e9-a42a-99e4ad81a31e] 预测完成，结果数量: 1
+2025-03-10 21:36:13 - app.api.endpoints.detection - DEBUG - [0eb5bd27-a97b-41e9-a42a-99e4ad81a31e] 开始处理图像并保存结果
+2025-03-10 21:36:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 21:36:13 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-10 21:36:13 - sqlalchemy.engine.Engine - INFO - [cached since 702.7s ago] ('20250310_213613_IP011000351.jpg', 'annotated_20250310_213613_IP011000351.jpg', '[{"class": "white backed plant hopper", "confidence": 0.8725051879882812, "bbox": {"x1": 22, "y1": 23, "x2": 156, "y2": 109}}]', datetime.datetime(2025, 3, 10, 21, 36, 13, 210217))
+2025-03-10 21:36:13 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 21:36:13 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 21:36:13 - sqlalchemy.engine.Engine - INFO - SELECT detections.id, detections.image_path, detections.annotated_path, detections.results, detections.created_at 
+FROM detections 
+WHERE detections.id = $1::INTEGER
+2025-03-10 21:36:13 - sqlalchemy.engine.Engine - INFO - [cached since 702.7s ago] (11,)
+2025-03-10 21:36:13 - app.api.endpoints.detection - INFO - [0eb5bd27-a97b-41e9-a42a-99e4ad81a31e] 图像处理成功，ID: 11, 耗时: 0.09秒
+2025-03-10 21:36:13 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 21:36:13 - pest_detection - DEBUG - 请求完成: POST /api/detection/upload - 状态码: 200
+2025-03-10 21:36:25 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload-multiple 来自: 127.0.0.1
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:114]
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[116:128]
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[130:140]
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_part_data with data[144:5097]
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[5141:5160]
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[5162:5213]
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[5215:5227]
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[5229:5239]
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_part_data with data[5243:49152]
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:12625]
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[12669:12688]
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[12690:12741]
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_field with data[12743:12755]
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_value with data[12757:12767]
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_part_data with data[12771:23086]
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:36:25 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 21:36:25 - app.api.endpoints.detection - INFO - [8899ffff-e3a2-4705-a8e6-5d5fd6b80ee3] 开始批量图像处理请求: 3个文件
+2025-03-10 21:36:25 - app.api.endpoints.detection - DEBUG - [8899ffff-e3a2-4705-a8e6-5d5fd6b80ee3] 批量处理客户端: 127.0.0.1, 文件数量: 3
+2025-03-10 21:36:25 - app.api.endpoints.detection - DEBUG - [8899ffff-e3a2-4705-a8e6-5d5fd6b80ee3] 读取第1个文件: IP000000538.jpg
+2025-03-10 21:36:25 - app.api.endpoints.detection - DEBUG - [8899ffff-e3a2-4705-a8e6-5d5fd6b80ee3] 文件 IP000000538.jpg 读取完成: 4953 字节
+2025-03-10 21:36:25 - app.api.endpoints.detection - DEBUG - [8899ffff-e3a2-4705-a8e6-5d5fd6b80ee3] 读取第2个文件: IP000000576.jpg
+2025-03-10 21:36:25 - app.api.endpoints.detection - DEBUG - [8899ffff-e3a2-4705-a8e6-5d5fd6b80ee3] 文件 IP000000576.jpg 读取完成: 56534 字节
+2025-03-10 21:36:25 - app.api.endpoints.detection - DEBUG - [8899ffff-e3a2-4705-a8e6-5d5fd6b80ee3] 读取第3个文件: IP000000647.jpg
+2025-03-10 21:36:25 - app.api.endpoints.detection - DEBUG - [8899ffff-e3a2-4705-a8e6-5d5fd6b80ee3] 文件 IP000000647.jpg 读取完成: 10315 字节
+2025-03-10 21:36:25 - app.api.endpoints.detection - DEBUG - [8899ffff-e3a2-4705-a8e6-5d5fd6b80ee3] 开始批量处理 3 个图像
+2025-03-10 21:36:25 - app.api.endpoints.detection - ERROR - [8899ffff-e3a2-4705-a8e6-5d5fd6b80ee3] 批量处理图像时发生错误 (error_id: 6f6eb9f8-535b-4bf3-bb75-5f07b24e1619):
+{
+  "error_id": "6f6eb9f8-535b-4bf3-bb75-5f07b24e1619",
+  "batch_id": "8899ffff-e3a2-4705-a8e6-5d5fd6b80ee3",
+  "timestamp": "2025-03-10T21:36:25.160016",
+  "file_count": 3,
+  "filenames": [
+    "IP000000538.jpg",
+    "IP000000576.jpg",
+    "IP000000647.jpg"
+  ],
+  "exception_type": "AttributeError",
+  "exception_msg": "'DetectionService' object has no attribute 'process_multiple_images'",
+  "stacktrace": "Traceback (most recent call last):\n  File \"D:\\yolopest\\backend\\app\\api\\endpoints\\detection.py\", line 136, in upload_multiple_images\n    result = await detection_service.process_multiple_images(files_data)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'DetectionService' object has no attribute 'process_multiple_images'\n"
+}
+2025-03-10 21:36:25 - pest_detection - WARNING - 请求失败: POST /api/detection/upload-multiple - 状态码: 500
+2025-03-10 21:39:40 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload-multiple 来自: 127.0.0.1
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:114]
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_field with data[116:128]
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_value with data[130:140]
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_part_data with data[144:5097]
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_field with data[5141:5160]
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_value with data[5162:5213]
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_field with data[5215:5227]
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_value with data[5229:5239]
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_part_data with data[5243:61777]
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_field with data[61821:61840]
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_value with data[61842:61893]
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_field with data[61895:61907]
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_value with data[61909:61919]
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_part_data with data[61923:72238]
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-10 21:39:40 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-10 21:39:40 - app.api.endpoints.detection - INFO - [b64300eb-8499-4baa-a415-6a04faeb0469] 开始批量图像处理请求: 3个文件
+2025-03-10 21:39:40 - app.api.endpoints.detection - DEBUG - [b64300eb-8499-4baa-a415-6a04faeb0469] 批量处理客户端: 127.0.0.1, 文件数量: 3
+2025-03-10 21:39:40 - app.api.endpoints.detection - DEBUG - [b64300eb-8499-4baa-a415-6a04faeb0469] 读取第1个文件: IP000000538.jpg
+2025-03-10 21:39:40 - app.api.endpoints.detection - DEBUG - [b64300eb-8499-4baa-a415-6a04faeb0469] 文件 IP000000538.jpg 读取完成: 4953 字节
+2025-03-10 21:39:40 - app.api.endpoints.detection - DEBUG - [b64300eb-8499-4baa-a415-6a04faeb0469] 读取第2个文件: IP000000576.jpg
+2025-03-10 21:39:40 - app.api.endpoints.detection - DEBUG - [b64300eb-8499-4baa-a415-6a04faeb0469] 文件 IP000000576.jpg 读取完成: 56534 字节
+2025-03-10 21:39:40 - app.api.endpoints.detection - DEBUG - [b64300eb-8499-4baa-a415-6a04faeb0469] 读取第3个文件: IP000000647.jpg
+2025-03-10 21:39:40 - app.api.endpoints.detection - DEBUG - [b64300eb-8499-4baa-a415-6a04faeb0469] 文件 IP000000647.jpg 读取完成: 10315 字节
+2025-03-10 21:39:40 - app.api.endpoints.detection - DEBUG - [b64300eb-8499-4baa-a415-6a04faeb0469] 开始批量处理 3 个图像
+2025-03-10 21:39:40 - app.api.endpoints.detection - ERROR - [b64300eb-8499-4baa-a415-6a04faeb0469] 批量处理图像时发生错误 (error_id: 8cd1be31-fecc-464d-97fc-c4ae16d02930):
+{
+  "error_id": "8cd1be31-fecc-464d-97fc-c4ae16d02930",
+  "batch_id": "b64300eb-8499-4baa-a415-6a04faeb0469",
+  "timestamp": "2025-03-10T21:39:40.945385",
+  "file_count": 3,
+  "filenames": [
+    "IP000000538.jpg",
+    "IP000000576.jpg",
+    "IP000000647.jpg"
+  ],
+  "exception_type": "AttributeError",
+  "exception_msg": "'DetectionService' object has no attribute 'process_multiple_images'",
+  "stacktrace": "Traceback (most recent call last):\n  File \"D:\\yolopest\\backend\\app\\api\\endpoints\\detection.py\", line 136, in upload_multiple_images\n    result = await detection_service.process_multiple_images(files_data)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'DetectionService' object has no attribute 'process_multiple_images'\n"
+}
+2025-03-10 21:39:40 - pest_detection - WARNING - 请求失败: POST /api/detection/upload-multiple - 状态码: 500
+2025-03-10 21:43:16 - pest_detection - INFO - 应用正在关闭
+2025-03-11 08:12:43 - pest_detection - INFO - 启动应用，环境: 开发模式
+2025-03-11 08:12:43 - pest_detection - DEBUG - 配置CORS: 允许来源 ['http://localhost:3000']
+2025-03-11 08:12:43 - pest_detection - INFO - 应用已启动
+2025-03-11 08:13:06 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload 来自: 127.0.0.1
+2025-03-11 08:13:06 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-11 08:13:06 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-11 08:13:06 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:113]
+2025-03-11 08:13:06 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:13:06 - python_multipart.multipart - DEBUG - Calling on_header_field with data[115:127]
+2025-03-11 08:13:06 - python_multipart.multipart - DEBUG - Calling on_header_value with data[129:139]
+2025-03-11 08:13:06 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:13:06 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-11 08:13:06 - python_multipart.multipart - DEBUG - Calling on_part_data with data[143:56677]
+2025-03-11 08:13:06 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-11 08:13:06 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-11 08:13:06 - app.api.endpoints.detection - INFO - [401c4e61-2894-449d-a25f-da23c71b23c4] 开始处理单图像上传请求: IP000000576.jpg, 大小: 56534
+2025-03-11 08:13:06 - app.api.endpoints.detection - DEBUG - [401c4e61-2894-449d-a25f-da23c71b23c4] 客户端信息: 127.0.0.1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0
+2025-03-11 08:13:06 - app.api.endpoints.detection - DEBUG - [401c4e61-2894-449d-a25f-da23c71b23c4] 成功读取图像数据: 56534 字节
+2025-03-11 08:13:06 - app.api.endpoints.detection - DEBUG - [401c4e61-2894-449d-a25f-da23c71b23c4] 开始执行图像预测
+2025-03-11 08:13:08 - app.api.endpoints.detection - DEBUG - [401c4e61-2894-449d-a25f-da23c71b23c4] 预测完成，结果数量: 1
+2025-03-11 08:13:08 - app.api.endpoints.detection - DEBUG - [401c4e61-2894-449d-a25f-da23c71b23c4] 开始处理图像并保存结果
+2025-03-11 08:13:08 - app.api.endpoints.detection - ERROR - [401c4e61-2894-449d-a25f-da23c71b23c4] 处理图像时发生错误 (error_id: 8a649235-ce7a-42ed-8428-6c661ed9bbc5):
+{
+  "error_id": "8a649235-ce7a-42ed-8428-6c661ed9bbc5",
+  "request_id": "401c4e61-2894-449d-a25f-da23c71b23c4",
+  "timestamp": "2025-03-11T08:13:08.716423",
+  "file_name": "IP000000576.jpg",
+  "exception_type": "NameError",
+  "exception_msg": "name 'HTTPException' is not defined",
+  "stacktrace": "Traceback (most recent call last):\n  File \"D:\\yolopest\\backend\\app\\services\\detection.py\", line 134, in process_image\n    return result\n           ^^^^^^\nNameError: name 'result' is not defined\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"D:\\yolopest\\backend\\app\\api\\endpoints\\detection.py\", line 55, in upload_image\n    result = await detection_service.process_image(file.filename, image_bytes)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\yolopest\\backend\\app\\services\\detection.py\", line 136, in process_image\n    except HTTPException:\n           ^^^^^^^^^^^^^\nNameError: name 'HTTPException' is not defined. Did you mean: 'BaseException'?\n"
+}
+2025-03-11 08:13:08 - pest_detection - WARNING - 请求失败: POST /api/detection/upload - 状态码: 500
+2025-03-11 08:14:15 - pest_detection - INFO - 应用正在关闭
+2025-03-11 08:14:21 - pest_detection - INFO - 启动应用，环境: 开发模式
+2025-03-11 08:14:21 - pest_detection - DEBUG - 配置CORS: 允许来源 ['http://localhost:3000']
+2025-03-11 08:14:21 - pest_detection - INFO - 应用已启动
+2025-03-11 08:14:28 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload 来自: 127.0.0.1
+2025-03-11 08:14:28 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-11 08:14:28 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-11 08:14:28 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:113]
+2025-03-11 08:14:28 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:14:28 - python_multipart.multipart - DEBUG - Calling on_header_field with data[115:127]
+2025-03-11 08:14:28 - python_multipart.multipart - DEBUG - Calling on_header_value with data[129:139]
+2025-03-11 08:14:28 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:14:28 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-11 08:14:28 - python_multipart.multipart - DEBUG - Calling on_part_data with data[143:10458]
+2025-03-11 08:14:28 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-11 08:14:28 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-11 08:14:28 - app.api.endpoints.detection - INFO - [1a2e7021-a20d-4e9f-8a1f-1b795a3d44db] 开始处理单图像上传请求: IP000000647.jpg, 大小: 10315
+2025-03-11 08:14:28 - app.api.endpoints.detection - DEBUG - [1a2e7021-a20d-4e9f-8a1f-1b795a3d44db] 客户端信息: 127.0.0.1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0
+2025-03-11 08:14:28 - app.api.endpoints.detection - DEBUG - [1a2e7021-a20d-4e9f-8a1f-1b795a3d44db] 成功读取图像数据: 10315 字节
+2025-03-11 08:14:28 - app.api.endpoints.detection - DEBUG - [1a2e7021-a20d-4e9f-8a1f-1b795a3d44db] 开始执行图像预测
+2025-03-11 08:14:30 - app.api.endpoints.detection - DEBUG - [1a2e7021-a20d-4e9f-8a1f-1b795a3d44db] 预测完成，结果数量: 1
+2025-03-11 08:14:30 - app.api.endpoints.detection - DEBUG - [1a2e7021-a20d-4e9f-8a1f-1b795a3d44db] 开始处理图像并保存结果
+2025-03-11 08:14:30 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2025-03-11 08:14:30 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-11 08:14:30 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2025-03-11 08:14:30 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-11 08:14:30 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2025-03-11 08:14:30 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-11 08:14:30 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-11 08:14:30 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-11 08:14:30 - sqlalchemy.engine.Engine - INFO - [generated in 0.00099s] ('20250311_081430_IP000000647.jpg', 'annotated_20250311_081430_IP000000647.jpg', '[{"class": "rice leaf roller", "confidence": 0.8723745346069336, "bbox": {"x1": 11, "y1": 40, "x2": 275, "y2": 187}}]', datetime.datetime(2025, 3, 11, 8, 14, 30, 749021))
+2025-03-11 08:14:30 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-11 08:14:30 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-11 08:14:30 - sqlalchemy.engine.Engine - INFO - SELECT detections.id, detections.image_path, detections.annotated_path, detections.results, detections.created_at 
+FROM detections 
+WHERE detections.id = $1::INTEGER
+2025-03-11 08:14:30 - sqlalchemy.engine.Engine - INFO - [generated in 0.00077s] (12,)
+2025-03-11 08:14:30 - app.api.endpoints.detection - INFO - [1a2e7021-a20d-4e9f-8a1f-1b795a3d44db] 图像处理成功，ID: 12, 耗时: 0.271秒
+2025-03-11 08:14:30 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-11 08:14:30 - pest_detection - DEBUG - 请求完成: POST /api/detection/upload - 状态码: 200
+2025-03-11 08:14:43 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload-multiple 来自: 127.0.0.1
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:114]
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_field with data[116:128]
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_value with data[130:140]
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_part_data with data[144:10111]
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_field with data[10155:10174]
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_value with data[10176:10227]
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_field with data[10229:10241]
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_value with data[10243:10253]
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_part_data with data[10257:13340]
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_field with data[13384:13403]
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_value with data[13405:13456]
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_field with data[13458:13470]
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_value with data[13472:13482]
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_part_data with data[13486:14600]
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:25213]
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-11 08:14:43 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-11 08:14:43 - app.api.endpoints.detection - INFO - [79ea06ff-f6aa-4c08-9d51-d514a2fe80ce] 开始批量图像处理请求: 3个文件
+2025-03-11 08:14:43 - app.api.endpoints.detection - DEBUG - [79ea06ff-f6aa-4c08-9d51-d514a2fe80ce] 批量处理客户端: 127.0.0.1, 文件数量: 3
+2025-03-11 08:14:43 - app.api.endpoints.detection - DEBUG - [79ea06ff-f6aa-4c08-9d51-d514a2fe80ce] 读取第1个文件: IP005000365.jpg
+2025-03-11 08:14:43 - app.api.endpoints.detection - DEBUG - [79ea06ff-f6aa-4c08-9d51-d514a2fe80ce] 文件 IP005000365.jpg 读取完成: 9967 字节
+2025-03-11 08:14:43 - app.api.endpoints.detection - DEBUG - [79ea06ff-f6aa-4c08-9d51-d514a2fe80ce] 读取第2个文件: IP005000404.jpg
+2025-03-11 08:14:43 - app.api.endpoints.detection - DEBUG - [79ea06ff-f6aa-4c08-9d51-d514a2fe80ce] 文件 IP005000404.jpg 读取完成: 3083 字节
+2025-03-11 08:14:43 - app.api.endpoints.detection - DEBUG - [79ea06ff-f6aa-4c08-9d51-d514a2fe80ce] 读取第3个文件: IP006000039.jpg
+2025-03-11 08:14:43 - app.api.endpoints.detection - DEBUG - [79ea06ff-f6aa-4c08-9d51-d514a2fe80ce] 文件 IP006000039.jpg 读取完成: 26327 字节
+2025-03-11 08:14:43 - app.api.endpoints.detection - DEBUG - [79ea06ff-f6aa-4c08-9d51-d514a2fe80ce] 开始批量处理 3 个图像
+2025-03-11 08:14:43 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-11 08:14:43 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-11 08:14:43 - sqlalchemy.engine.Engine - INFO - [cached since 12.85s ago] ('20250311_081443_IP005000365.jpg', 'annotated_20250311_081443_IP005000365.jpg', '[{"class": "asiatic rice borer", "confidence": 0.8518269658088684, "bbox": {"x1": 52, "y1": 81, "x2": 173, "y2": 252}}]', datetime.datetime(2025, 3, 11, 8, 14, 43, 538987))
+2025-03-11 08:14:43 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) SELECT p0::VARCHAR, p1::VARCHAR, p2::JSON, p3::TIMESTAMP WITHOUT TIME ZONE FROM (VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE, 0), ($5::VARCHAR, $6::VARCHAR, $7::JSON, $8::TIMESTAMP WITHOUT TIME ZONE, 1)) AS imp_sen(p0, p1, p2, p3, sen_counter) ORDER BY sen_counter RETURNING detections.id, detections.id AS id__1
+2025-03-11 08:14:43 - sqlalchemy.engine.Engine - INFO - [generated in 0.00017s (insertmanyvalues) 1/1 (ordered)] ('20250311_081443_IP005000404.jpg', 'annotated_20250311_081443_IP005000404.jpg', '[{"class": "asiatic rice borer", "confidence": 0.7821802496910095, "bbox": {"x1": 21, "y1": 36, "x2": 92, "y2": 128}}]', datetime.datetime(2025, 3, 11, 8, 14, 43, 646940), '20250311_081443_IP006000039.jpg', 'annotated_20250311_081443_IP006000039.jpg', '[{"class": "yellow rice borer", "confidence": 0.7218588590621948, "bbox": {"x1": 12, "y1": 52, "x2": 210, "y2": 318}}]', datetime.datetime(2025, 3, 11, 8, 14, 43, 743918))
+2025-03-11 08:14:43 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-11 08:14:43 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-11 08:14:43 - sqlalchemy.engine.Engine - INFO - SELECT detections.id, detections.image_path, detections.annotated_path, detections.results, detections.created_at 
+FROM detections 
+WHERE detections.id = $1::INTEGER
+2025-03-11 08:14:43 - sqlalchemy.engine.Engine - INFO - [cached since 12.85s ago] (13,)
+2025-03-11 08:14:43 - app.api.endpoints.detection - INFO - [79ea06ff-f6aa-4c08-9d51-d514a2fe80ce] 批量处理完成，处理了 3 个文件，总耗时: 0.46 秒
+2025-03-11 08:14:43 - app.api.endpoints.detection - INFO - [79ea06ff-f6aa-4c08-9d51-d514a2fe80ce] 处理结果统计: 成功 1, 失败 2
+2025-03-11 08:14:43 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-11 08:14:43 - pest_detection - DEBUG - 请求完成: POST /api/detection/upload-multiple - 状态码: 200
+2025-03-11 08:15:34 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload-multiple 来自: 127.0.0.1
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:114]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_field with data[116:128]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_value with data[130:140]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_data with data[144:34480]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_field with data[34524:34543]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_value with data[34545:34596]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_field with data[34598:34610]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_value with data[34612:34622]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_data with data[34626:46182]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_field with data[46226:46245]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_value with data[46247:46298]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_field with data[46300:46312]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_value with data[46314:46324]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_data with data[46328:49152]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:32768]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:13977]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_field with data[14021:14040]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_value with data[14042:14093]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_field with data[14095:14107]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_value with data[14109:14119]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_data with data[14123:36440]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_field with data[36484:36503]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_value with data[36505:36556]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_field with data[36558:36570]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_value with data[36572:36582]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_data with data[36586:84676]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_field with data[84720:84739]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_value with data[84741:84792]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_field with data[84794:84806]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_value with data[84808:84818]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_data with data[84822:116973]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_field with data[117017:117036]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_value with data[117038:117089]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_field with data[117091:117103]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_value with data[117105:117115]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_data with data[117119:138652]
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-11 08:15:34 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-11 08:15:34 - app.api.endpoints.detection - INFO - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 开始批量图像处理请求: 7个文件
+2025-03-11 08:15:34 - app.api.endpoints.detection - DEBUG - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 批量处理客户端: 127.0.0.1, 文件数量: 7
+2025-03-11 08:15:34 - app.api.endpoints.detection - DEBUG - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 读取第1个文件: IP009000428.jpg
+2025-03-11 08:15:34 - app.api.endpoints.detection - DEBUG - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 文件 IP009000428.jpg 读取完成: 34336 字节
+2025-03-11 08:15:34 - app.api.endpoints.detection - DEBUG - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 读取第2个文件: IP011000010.jpg
+2025-03-11 08:15:34 - app.api.endpoints.detection - DEBUG - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 文件 IP011000010.jpg 读取完成: 11556 字节
+2025-03-11 08:15:34 - app.api.endpoints.detection - DEBUG - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 读取第3个文件: IP011000042.jpg
+2025-03-11 08:15:34 - app.api.endpoints.detection - DEBUG - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 文件 IP011000042.jpg 读取完成: 49569 字节
+2025-03-11 08:15:34 - app.api.endpoints.detection - DEBUG - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 读取第4个文件: IP011000054.jpg
+2025-03-11 08:15:34 - app.api.endpoints.detection - DEBUG - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 文件 IP011000054.jpg 读取完成: 22317 字节
+2025-03-11 08:15:34 - app.api.endpoints.detection - DEBUG - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 读取第5个文件: IP011000077.jpg
+2025-03-11 08:15:34 - app.api.endpoints.detection - DEBUG - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 文件 IP011000077.jpg 读取完成: 48090 字节
+2025-03-11 08:15:34 - app.api.endpoints.detection - DEBUG - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 读取第6个文件: IP011000197.jpg
+2025-03-11 08:15:34 - app.api.endpoints.detection - DEBUG - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 文件 IP011000197.jpg 读取完成: 32151 字节
+2025-03-11 08:15:34 - app.api.endpoints.detection - DEBUG - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 读取第7个文件: IP011000227.jpg
+2025-03-11 08:15:34 - app.api.endpoints.detection - DEBUG - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 文件 IP011000227.jpg 读取完成: 21533 字节
+2025-03-11 08:15:34 - app.api.endpoints.detection - DEBUG - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 开始批量处理 7 个图像
+2025-03-11 08:15:35 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-11 08:15:35 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-11 08:15:35 - sqlalchemy.engine.Engine - INFO - [cached since 64.3s ago] ('20250311_081534_IP009000428.jpg', 'annotated_20250311_081534_IP009000428.jpg', '[{"class": "Rice Stemfly", "confidence": 0.74449223279953, "bbox": {"x1": 33, "y1": 21, "x2": 250, "y2": 351}}, {"class": "Rice Stemfly", "confidence": 0.6392471790313721, "bbox": {"x1": 225, "y1": 83, "x2": 452, "y2": 398}}]', datetime.datetime(2025, 3, 11, 8, 15, 34, 613643))
+2025-03-11 08:15:35 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) SELECT p0::VARCHAR, p1::VARCHAR, p2::JSON, p3::TIMESTAMP WITHOUT TIME ZONE FROM (VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE, 0), ($5::VARCHAR, $ ... 378 characters truncated ... en(p0, p1, p2, p3, sen_counter) ORDER BY sen_counter RETURNING detections.id, detections.id AS id__1
+2025-03-11 08:15:35 - sqlalchemy.engine.Engine - INFO - [cached since 51.45s ago (insertmanyvalues) 1/1 (ordered)] ('20250311_081534_IP011000010.jpg', 'annotated_20250311_081534_IP011000010.jpg', '[{"class": "white backed plant hopper", "confidence": 0.889000415802002, "bbox": {"x1": 10, "y1": 49, "x2": 254, "y2": 210}}]', datetime.datetime(2025, 3, 11, 8, 15, 34, 702740), '20250311_081534_IP011000042.jpg', 'annotated_20250311_081534_IP011000042.jpg', '[{"class": "white backed plant hopper", "confidence": 0.8343368768692017, "bbox": {"x1": 154, "y1": 159, "x2": 423, "y2": 613}}]', datetime.datetime(2025, 3, 11, 8, 15, 34, 809242), '20250311_081534_IP011000054.jpg', 'annotated_20250311_081534_IP011000054.jpg', '[{"class": "white backed plant hopper", "confidence": 0.824576199054718, "bbox": {"x1": 65, "y1": 49, "x2": 283, "y2": 242}}]', datetime.datetime(2025, 3, 11, 8, 15, 34, 919505), '20250311_081535_IP011000077.jpg', 'annotated_20250311_081535_IP011000077.jpg', '[{"class": "Brevipoalpus lewisi McGregor", "confidence": 0.6708094477653503, "bbox": {"x1": 155, "y1": 81, "x2": 628, "y2": 394}}]', datetime.datetime(2025, 3, 11, 8, 15, 35, 15121), '20250311_081535_IP011000197.jpg', 'annotated_20250311_081535_IP011000197.jpg', '[{"class": "white backed plant hopper", "confidence": 0.8705894351005554, "bbox": {"x1": 98, "y1": 55, "x2": 273, "y2": 431}}, {"class": "white backed plant hopper", "confidence": 0.833490788936615, "bbox": {"x1": 252, "y1": 271, "x2": 400, "y2": 654}}]', datetime.datetime(2025, 3, 11, 8, 15, 35, 103474), '20250311_081535_IP011000227.jpg', 'annotated_20250311_081535_IP011000227.jpg', '[]', datetime.datetime(2025, 3, 11, 8, 15, 35, 193104))
+2025-03-11 08:15:35 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-11 08:15:35 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-11 08:15:35 - sqlalchemy.engine.Engine - INFO - SELECT detections.id, detections.image_path, detections.annotated_path, detections.results, detections.created_at 
+FROM detections 
+WHERE detections.id = $1::INTEGER
+2025-03-11 08:15:35 - sqlalchemy.engine.Engine - INFO - [cached since 64.29s ago] (16,)
+2025-03-11 08:15:35 - app.api.endpoints.detection - INFO - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 批量处理完成，处理了 7 个文件，总耗时: 0.85 秒
+2025-03-11 08:15:35 - app.api.endpoints.detection - INFO - [d04711be-0a49-4868-b64f-3dc6faf0dbae] 处理结果统计: 成功 1, 失败 6
+2025-03-11 08:15:35 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-11 08:15:35 - pest_detection - DEBUG - 请求完成: POST /api/detection/upload-multiple - 状态码: 200
+2025-03-11 08:16:03 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload-multiple 来自: 127.0.0.1
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:114]
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_header_field with data[116:128]
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_header_value with data[130:140]
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_part_data with data[144:16384]
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:2770]
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_header_field with data[2814:2833]
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_header_value with data[2835:2886]
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_header_field with data[2888:2900]
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_header_value with data[2902:2912]
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_part_data with data[2916:32768]
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_part_data with data[0:673]
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-11 08:16:03 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-11 08:16:04 - app.api.endpoints.detection - INFO - [509b503a-b7ae-4ff0-bec7-f0ef05d7c249] 开始批量图像处理请求: 2个文件
+2025-03-11 08:16:04 - app.api.endpoints.detection - DEBUG - [509b503a-b7ae-4ff0-bec7-f0ef05d7c249] 批量处理客户端: 127.0.0.1, 文件数量: 2
+2025-03-11 08:16:04 - app.api.endpoints.detection - DEBUG - [509b503a-b7ae-4ff0-bec7-f0ef05d7c249] 读取第1个文件: IP009000113.jpg
+2025-03-11 08:16:04 - app.api.endpoints.detection - DEBUG - [509b503a-b7ae-4ff0-bec7-f0ef05d7c249] 文件 IP009000113.jpg 读取完成: 19010 字节
+2025-03-11 08:16:04 - app.api.endpoints.detection - DEBUG - [509b503a-b7ae-4ff0-bec7-f0ef05d7c249] 读取第2个文件: IP009000181.jpg
+2025-03-11 08:16:04 - app.api.endpoints.detection - DEBUG - [509b503a-b7ae-4ff0-bec7-f0ef05d7c249] 文件 IP009000181.jpg 读取完成: 30525 字节
+2025-03-11 08:16:04 - app.api.endpoints.detection - DEBUG - [509b503a-b7ae-4ff0-bec7-f0ef05d7c249] 开始批量处理 2 个图像
+2025-03-11 08:16:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-11 08:16:04 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-11 08:16:04 - sqlalchemy.engine.Engine - INFO - [cached since 93.61s ago] ('20250311_081604_IP009000113.jpg', 'annotated_20250311_081604_IP009000113.jpg', '[{"class": "Rice Stemfly", "confidence": 0.7398766279220581, "bbox": {"x1": 64, "y1": 76, "x2": 306, "y2": 282}}, {"class": "Rice Stemfly", "confidence": 0.7156929969787598, "bbox": {"x1": 247, "y1": 299, "x2": 444, "y2": 468}}]', datetime.datetime(2025, 3, 11, 8, 16, 4, 379192))
+2025-03-11 08:16:04 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-11 08:16:04 - sqlalchemy.engine.Engine - INFO - [cached since 93.61s ago] ('20250311_081604_IP009000181.jpg', 'annotated_20250311_081604_IP009000181.jpg', '[{"class": "Rice Stemfly", "confidence": 0.6671538352966309, "bbox": {"x1": 165, "y1": 87, "x2": 425, "y2": 496}}]', datetime.datetime(2025, 3, 11, 8, 16, 4, 504042))
+2025-03-11 08:16:04 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-11 08:16:04 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-11 08:16:04 - sqlalchemy.engine.Engine - INFO - SELECT detections.id, detections.image_path, detections.annotated_path, detections.results, detections.created_at 
+FROM detections 
+WHERE detections.id = $1::INTEGER
+2025-03-11 08:16:04 - sqlalchemy.engine.Engine - INFO - [cached since 93.6s ago] (23,)
+2025-03-11 08:16:04 - app.api.endpoints.detection - INFO - [509b503a-b7ae-4ff0-bec7-f0ef05d7c249] 批量处理完成，处理了 2 个文件，总耗时: 0.377 秒
+2025-03-11 08:16:04 - app.api.endpoints.detection - INFO - [509b503a-b7ae-4ff0-bec7-f0ef05d7c249] 处理结果统计: 成功 1, 失败 1
+2025-03-11 08:16:04 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-11 08:16:04 - pest_detection - DEBUG - 请求完成: POST /api/detection/upload-multiple - 状态码: 200
+2025-03-11 08:17:16 - pest_detection - DEBUG - 收到请求: POST /api/detection/upload-multiple 来自: 127.0.0.1
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_header_value with data[63:114]
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_header_field with data[116:128]
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_header_value with data[130:140]
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_part_data with data[144:34168]
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_header_field with data[34212:34231]
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_header_value with data[34233:34284]
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_header_field with data[34286:34298]
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_header_value with data[34300:34310]
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_part_data with data[34314:39267]
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-03-11 08:17:16 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-03-11 08:17:17 - app.api.endpoints.detection - INFO - [c9e5003f-cfc0-4ef4-9ff1-2af475e73fab] 开始批量图像处理请求: 2个文件
+2025-03-11 08:17:17 - app.api.endpoints.detection - DEBUG - [c9e5003f-cfc0-4ef4-9ff1-2af475e73fab] 批量处理客户端: 127.0.0.1, 文件数量: 2
+2025-03-11 08:17:17 - app.api.endpoints.detection - DEBUG - [c9e5003f-cfc0-4ef4-9ff1-2af475e73fab] 读取第1个文件: IP000000378.jpg
+2025-03-11 08:17:17 - app.api.endpoints.detection - DEBUG - [c9e5003f-cfc0-4ef4-9ff1-2af475e73fab] 文件 IP000000378.jpg 读取完成: 34024 字节
+2025-03-11 08:17:17 - app.api.endpoints.detection - DEBUG - [c9e5003f-cfc0-4ef4-9ff1-2af475e73fab] 读取第2个文件: IP000000538.jpg
+2025-03-11 08:17:17 - app.api.endpoints.detection - DEBUG - [c9e5003f-cfc0-4ef4-9ff1-2af475e73fab] 文件 IP000000538.jpg 读取完成: 4953 字节
+2025-03-11 08:17:17 - app.api.endpoints.detection - DEBUG - [c9e5003f-cfc0-4ef4-9ff1-2af475e73fab] 开始批量处理 2 个图像
+2025-03-11 08:17:17 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-11 08:17:17 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-11 08:17:17 - sqlalchemy.engine.Engine - INFO - [cached since 166.5s ago] ('20250311_081717_IP000000378.jpg', 'annotated_20250311_081717_IP000000378.jpg', '[]', datetime.datetime(2025, 3, 11, 8, 17, 17, 341034))
+2025-03-11 08:17:17 - sqlalchemy.engine.Engine - INFO - INSERT INTO detections (image_path, annotated_path, results, created_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::JSON, $4::TIMESTAMP WITHOUT TIME ZONE) RETURNING detections.id
+2025-03-11 08:17:17 - sqlalchemy.engine.Engine - INFO - [cached since 166.6s ago] ('20250311_081717_IP000000538.jpg', 'annotated_20250311_081717_IP000000538.jpg', '[{"class": "rice leaf roller", "confidence": 0.827378511428833, "bbox": {"x1": 40, "y1": 11, "x2": 124, "y2": 161}}]', datetime.datetime(2025, 3, 11, 8, 17, 17, 443702))
+2025-03-11 08:17:17 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-11 08:17:17 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-11 08:17:17 - sqlalchemy.engine.Engine - INFO - SELECT detections.id, detections.image_path, detections.annotated_path, detections.results, detections.created_at 
+FROM detections 
+WHERE detections.id = $1::INTEGER
+2025-03-11 08:17:17 - sqlalchemy.engine.Engine - INFO - [cached since 166.5s ago] (25,)
+2025-03-11 08:17:17 - app.api.endpoints.detection - INFO - [c9e5003f-cfc0-4ef4-9ff1-2af475e73fab] 批量处理完成，处理了 2 个文件，总耗时: 0.335 秒
+2025-03-11 08:17:17 - app.api.endpoints.detection - INFO - [c9e5003f-cfc0-4ef4-9ff1-2af475e73fab] 处理结果统计: 成功 1, 失败 1
+2025-03-11 08:17:17 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-11 08:17:17 - pest_detection - DEBUG - 请求完成: POST /api/detection/upload-multiple - 状态码: 200
+2025-03-11 08:24:17 - pest_detection - INFO - 应用正在关闭
+2025-03-11 08:24:22 - pest_detection - INFO - 启动应用，环境: 开发模式
+2025-03-11 08:24:22 - pest_detection - DEBUG - 配置CORS: 允许来源 ['http://localhost:3000']
+2025-03-11 08:24:22 - pest_detection - INFO - 应用已启动
+2025-03-11 08:25:24 - pest_detection - INFO - 应用正在关闭

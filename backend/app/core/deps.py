@@ -34,12 +34,18 @@ def get_detection_repository(db: DbSession) -> DetectionRepository:
 
 DetectionRepo = Annotated[DetectionRepository, Depends(get_detection_repository)]
 
-# 服务依赖
-def get_detection_service(repo: DetectionRepo, settings: AppSettings) -> DetectionService:
-    """获取检测服务实例"""
-    return DetectionService(repo, settings)
+# 全局服务实例
+_detection_service = None
 
-DetectionSvc = Annotated[DetectionService, Depends(get_detection_service)]
+def get_detection_service() -> DetectionService:
+    """获取或创建 DetectionService 实例"""
+    global _detection_service
+    if (_detection_service is None):
+        _detection_service = DetectionService()
+    return _detection_service
+
+# 用于类型注解的别名
+DetectionSvc = DetectionService
 
 # 视频服务依赖
 def get_video_service(detection_svc: DetectionSvc, settings: AppSettings, 

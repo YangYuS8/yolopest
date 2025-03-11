@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Spin } from 'antd'
+import { Card, Spin, Empty } from 'antd'
 import { LoadingOutlined } from '@ant-design/icons'
 import { PestResult } from '../../types'
 
@@ -14,6 +14,9 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
     previewImage,
     result,
 }) => {
+    // 从result中获取检测结果，兼容不同的响应格式
+    const detectionResults = result?.results || result?.predictions || []
+
     return (
         <Card title="识别结果">
             {loading ? (
@@ -51,20 +54,30 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
                                 />
                             )}
 
-                            {result.results.map((item, index) => (
-                                <div key={index} style={{ marginBottom: 8 }}>
-                                    <p>害虫类型: {item.class}</p>
-                                    <p>
-                                        置信度:{' '}
-                                        {(item.confidence * 100).toFixed(1)}%
-                                    </p>
-                                    <p>
-                                        位置: X[{item.bbox.x1}-{item.bbox.x2}]
-                                        Y[
-                                        {item.bbox.y1}-{item.bbox.y2}]
-                                    </p>
-                                </div>
-                            ))}
+                            {/* 兼容性检查，同时检查results和predictions */}
+                            {Array.isArray(detectionResults) &&
+                            detectionResults.length > 0 ? (
+                                detectionResults.map((item, index) => (
+                                    <div
+                                        key={index}
+                                        style={{ marginBottom: 8 }}
+                                    >
+                                        <p>害虫类型: {item.class}</p>
+                                        <p>
+                                            置信度:{' '}
+                                            {(item.confidence * 100).toFixed(1)}
+                                            %
+                                        </p>
+                                        <p>
+                                            位置: X[{item.bbox.x1}-
+                                            {item.bbox.x2}] Y[
+                                            {item.bbox.y1}-{item.bbox.y2}]
+                                        </p>
+                                    </div>
+                                ))
+                            ) : (
+                                <Empty description="未检测到害虫" />
+                            )}
                         </div>
                     )}
                 </>

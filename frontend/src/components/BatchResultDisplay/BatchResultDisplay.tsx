@@ -59,22 +59,16 @@ const BatchResultDisplay: React.FC<BatchResultDisplayProps> = ({
                             label: (
                                 <div>
                                     <Text strong>{item.filename}</Text>
-                                    {item.error ? (
-                                        <Tag
-                                            color="red"
-                                            style={{ marginLeft: 8 }}
-                                        >
-                                            处理失败
+                                    {/* 修复可能为undefined的属性访问 */}
+                                    {item.predictions &&
+                                    item.predictions.length > 0 ? (
+                                        <Tag color="success">
+                                            {item.predictions.length} 个结果
                                         </Tag>
+                                    ) : item.error ? (
+                                        <Tag color="error">处理失败</Tag>
                                     ) : (
-                                        <Tag
-                                            color="green"
-                                            style={{ marginLeft: 8 }}
-                                        >
-                                            检测到{' '}
-                                            {item.predictions?.length || 0}{' '}
-                                            个结果
-                                        </Tag>
+                                        <Tag color="warning">无害虫</Tag>
                                     )}
                                 </div>
                             ),
@@ -92,6 +86,7 @@ const BatchResultDisplay: React.FC<BatchResultDisplayProps> = ({
                                         </div>
                                     )}
 
+                                    {/* 确保predictions存在再访问其长度 */}
                                     {item.predictions &&
                                     item.predictions.length > 0 ? (
                                         item.predictions.map((pred, pidx) => (

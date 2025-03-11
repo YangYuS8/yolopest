@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { uploadVideo, getVideoResult } from '../services/api'
 import axios from 'axios'
+import { message } from 'antd'
 
 export interface VideoResult {
     time_cost: number
@@ -54,6 +55,29 @@ export const useVideoUpload = () => {
 
     // 修改上传部分的代码
     const handleVideoSelect = async (file: File) => {
+        // 文件类型和大小检查
+        const validVideoTypes = [
+            'video/mp4',
+            'video/x-msvideo',
+            'video/quicktime',
+            'video/x-matroska',
+        ]
+        if (!validVideoTypes.includes(file.type)) {
+            const extension = file.name.split('.').pop()?.toLowerCase()
+            if (
+                !(extension && ['mp4', 'avi', 'mov', 'mkv'].includes(extension))
+            ) {
+                message.error('请上传MP4、AVI、MOV或MKV格式的视频')
+                return
+            }
+        }
+
+        // 检查文件大小
+        if (file.size > 100 * 1024 * 1024) {
+            message.error('视频文件大小不能超过100MB')
+            return
+        }
+
         // 设置视频预览
         const videoURL = URL.createObjectURL(file)
         setVideoPreview(videoURL)
@@ -62,9 +86,18 @@ export const useVideoUpload = () => {
         try {
             setLoading(true)
             setProgress(0)
+            message.loading({
+                content: '正在上传视频...',
+                key: 'videoUpload',
+                duration: 0,
+            })
 
             // 上传视频，获取任务ID
             const response = await uploadVideo(file)
+            message.success({
+                content: '视频上传成功，正在处理...',
+                key: 'videoUpload',
+            })
 
             // 检查响应是否符合TaskResponse接口
             if ('status' in response && 'task_id' in response) {
@@ -77,6 +110,7 @@ export const useVideoUpload = () => {
                     taskResponse.task_id
                 ) {
                     setTaskId(taskResponse.task_id)
+                    message.info('视频处理已开始，可能需要一些时间，请耐心等待')
 
                     // 开始轮询结果 - 仅作为WebSocket的备用方案
                     progressTimerRef.current = setInterval(async () => {
@@ -91,6 +125,7 @@ export const useVideoUpload = () => {
                                 setProgress(100)
                                 setVideoResult(result)
                                 setLoading(false)
+                                message.success('视频处理完成！')
                             }
                         } catch (error: unknown) {
                             if (
@@ -105,6 +140,20 @@ export const useVideoUpload = () => {
                                 if (progressTimerRef.current)
                                     clearInterval(progressTimerRef.current)
                                 setLoading(false)
+
+                                // 显示更友好的错误消息
+                                if (axios.isAxiosError(error)) {
+                                    const errorData = error.response?.data
+                                    const errorMsg =
+                                        errorData?.message ||
+                                        errorData?.detail?.message ||
+                                        '获取视频处理结果失败'
+                                    message.error(errorMsg)
+                                } else {
+                                    message.error(
+                                        '视频处理过程中发生错误，请重试'
+                                    )
+                                }
                             }
                         }
                     }, 5000) // 每5秒检查一次
@@ -116,21 +165,27 @@ export const useVideoUpload = () => {
                     setProgress(100)
                     setVideoResult(response as unknown as VideoResult)
                     setLoading(false)
+                    message.success('视频处理完成！')
                 } else {
                     console.error('服务器返回了意外的响应格式:', response)
-                    alert('服务器返回了无效的响应格式')
+                    message.error('服务器返回了无效的响应格式，请联系管理员')
                     setLoading(false)
                 }
             } else {
                 console.error('服务器返回了意外的响应格式:', response)
-                alert('服务器返回了无效的响应格式')
+                message.error('服务器返回了无效的响应格式，请联系管理员')
                 setLoading(false)
             }
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
-                alert(`上传失败: ${error.response?.data?.detail || '未知错误'}`)
+                const errorData = error.response?.data
+                const errorMsg =
+                    errorData?.message ||
+                    errorData?.detail?.message ||
+                    '视频上传失败'
+                message.error(errorMsg)
             } else {
-                alert('发生未知错误')
+                message.error('视频处理过程中发生错误，请重试')
             }
             setLoading(false)
         }

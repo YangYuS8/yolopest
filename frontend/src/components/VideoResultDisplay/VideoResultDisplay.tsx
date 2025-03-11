@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { Card, Empty, List, Button } from 'antd'
+import { Card, Empty, List, Button, message } from 'antd'
 import { VideoResult } from '../../hooks/useVideoUpload'
 import LoadingIndicator from '../common/LoadingIndicator'
 import ProgressIndicator from '../common/ProgressIndicator'
@@ -70,6 +70,11 @@ const VideoResultDisplay: React.FC<VideoResultDisplayProps> = ({
                         setWsProgress(data.progress)
                     }
 
+                    // 处理错误状态
+                    if (data.status === 'error') {
+                        message.error(data.message || '视频处理失败')
+                    }
+
                     // 如果有中间结果，更新显示
                     if (
                         data.interim_results &&
@@ -86,15 +91,18 @@ const VideoResultDisplay: React.FC<VideoResultDisplayProps> = ({
                         // 通知父组件更新结果
                         if (onWebSocketResult) {
                             onWebSocketResult(data.result)
+                            message.success('视频处理完成！')
                         }
                     }
                 } catch (error) {
                     console.error('解析WebSocket消息失败:', error)
+                    message.error('接收视频处理结果时出错')
                 }
             }
 
             ws.onerror = (error) => {
                 console.error('WebSocket错误:', error)
+                message.error('视频处理连接出错，请刷新页面重试')
             }
 
             ws.onclose = () => {

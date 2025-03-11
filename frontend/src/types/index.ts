@@ -11,7 +11,8 @@ export interface DetectionItem {
 
 export interface PestResult {
     time_cost: number
-    results: DetectionItem[]
+    results?: DetectionItem[]
+    predictions?: DetectionItem[]
     annotated_image: string
 }
 

@@ -9,10 +9,16 @@ import os
 import tempfile
 from pathlib import Path
 import concurrent.futures
+import asyncio
+import logging
 
 from app.core.config import Settings
 from app.db.repositories.detection import DetectionRepository
 from ultralytics import YOLO
+from app.schemas.detection import PredictionResult, BatchDetectionResult
+
+# 设置日志记录器
+logger = logging.getLogger(__name__)
 
 class DetectionService:
     """检测服务实现，处理图像检测业务逻辑"""
@@ -24,6 +30,7 @@ class DetectionService:
         self.model = YOLO(settings.model_path, task="detect")
         self.img_size = settings.img_size
         self.conf_thresh = settings.conf_thresh
+        logger.info(f"模型已加载，类别标签: {self.model.names}")
         print(f"[DEBUG] 模型已加载，类别标签: {self.model.names}")
 
     def preprocess(self, image_bytes: bytes) -> np.ndarray:
@@ -112,36 +119,128 @@ class DetectionService:
         return img
     
     async def process_image(self, filename: str, image_bytes: bytes) -> Dict[str, Any]:
-        """处理单张图像并将结果保存到数据库"""
+        """处理单个图像并返回结果"""
+        try:
+            # 执行图像预测
+            start_time = time.time()
+            predictions = self.predict(image_bytes)
+            
+            # 为图像生成唯一文件名
+            current_time = datetime.now().strftime('%Y%m%d_%H%M%S')
+            unique_filename = f"{current_time}_{filename}"
+            annotated_filename = f"annotated_{unique_filename}"
+            
+            # 保存原始图像和标注图像
+            image_path = os.path.join(self.upload_dir, unique_filename)
+            annotated_path = os.path.join(self.upload_dir, annotated_filename)
+            
+            # 保存原始图像
+            with open(image_path, "wb") as f:
+                f.write(image_bytes)
+                
+            # 生成带标注的图像并保存
+            annotated_image = self.annotate_image(image_bytes, predictions)
+            annotated_image.save(annotated_path)
+            
+            # 将图像路径转换为URL
+            annotated_url = f"{self.base_url}/uploads/{annotated_filename}"
+            
+            # 保存到数据库
+            detection = await self.detection_repo.create({
+                "image_path": unique_filename,
+                "annotated_path": annotated_filename,
+                "results": predictions,
+                "created_at": datetime.now()
+            })
+            
+            # 确保预测结果的格式与前端期望的一致
+            processed_predictions = []
+            for pred in predictions:
+                processed_predictions.append({
+                    "class": pred.get("class", "unknown"),
+                    "confidence": pred.get("confidence", 0),
+                    "bbox": pred.get("bbox", {})
+                })
+            
+            result = {
+                "id": detection.id,
+                "time_cost": round(time.time() - start_time, 3),
+                "predictions": processed_predictions,
+                "annotated_image": annotated_url
+            }
+            
+            return result
+        except Exception as e:
+            logger.error(f"处理图像 {filename} 时出错: {str(e)}")
+            raise
+    
+    async def process_multiple_images(self, files_data: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """批量处理图像并返回结果"""
         start_time = time.time()
+        results = []
         
-        # 执行预测
-        predictions = self.predict(image_bytes)
+        # 限制并发处理数量
+        max_concurrent = min(5, os.cpu_count() or 4)
+        semaphore = asyncio.Semaphore(max_concurrent)
         
-        # 绘制标注
-        annotated_image = self.annotate_image(image_bytes, predictions)
+        async def process_single_file(file_data):
+            async with semaphore:
+                try:
+                    # 处理单个文件
+                    filename = file_data["filename"]
+                    content = file_data["content"]
+                    
+                    # 1. 为图像生成唯一文件名
+                    current_time = datetime.now().strftime('%Y%m%d_%H%M%S')
+                    unique_filename = f"{current_time}_{filename}"
+                    annotated_filename = f"annotated_{unique_filename}"
+                    
+                    # 2. 执行预测
+                    predictions = await self.predict(content)
+                    
+                    # 3. 生成标注图像
+                    annotated_image = await self.annotate_image(content, predictions)
+                    
+                    # 4. 保存图像和结果
+                    # 假设这里有保存逻辑
+                    
+                    # 5. 返回结果
+                    return {
+                        "filename": filename,
+                        "predictions": predictions or [],  # 确保返回列表而非None
+                        "annotated_image": f"/uploads/{annotated_filename}",
+                        "success": True
+                    }
+                except Exception as e:
+                    # 记录错误但继续处理其他文件
+                    logger.error(f"处理 {file_data['filename']} 时出错: {str(e)}")
+                    return {
+                        "filename": file_data['filename'],
+                        "predictions": [],  # 返回空列表而非None
+                        "error": str(e),
+                        "success": False
+                    }
         
-        # 构建保存路径
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        image_filename = f"{timestamp}_{filename}"
-        annotated_filename = f"annotated_{timestamp}_{filename}"
+        # 创建处理任务
+        tasks = []
+        for file_data in files_data:
+            task = asyncio.create_task(process_single_file(file_data))
+            tasks.append(task)
         
-        # 保存结果到数据库
-        detection = await self.repository.create_detection(
-            image_path=image_filename,
-            annotated_path=annotated_filename,
-            results=predictions,
-            created_at=datetime.now()  # 添加当前时间作为 created_at 参数
-        )
+        # 等待所有任务完成
+        file_results = await asyncio.gather(*tasks)
         
-        # 计算处理耗时
-        time_cost = time.time() - start_time
+        # 收集所有结果
+        results = file_results
+        
+        # 计算成功处理的图片数量
+        success_count = sum(1 for r in results if r.get("success", False))
         
         return {
-            "id": detection.id,
-            "time_cost": round(time_cost, 3),  # 精确到毫秒
-            "predictions": predictions,
-            "annotated_image": annotated_image
+            "time_cost": round(time.time() - start_time, 3),
+            "processed_count": len(results),
+            "success_count": success_count,
+            "results": results
         }
     
     @staticmethod

@@ -2,6 +2,12 @@ import axios from 'axios'
 import { PestResult, BatchProcessResult } from '../types'
 import { VideoResult } from '../hooks/useVideoUpload'
 
+// API响应接口
+interface ApiResponse<T> {
+    status: string
+    data: T
+}
+
 // 修改API URL，添加正确的路径前缀
 const API_URL =
     import.meta.env.VITE_API_URL || 'http://localhost:8000/api/detection/upload'
@@ -19,9 +25,12 @@ const API_VIDEO_RESULT_URL =
     import.meta.env.VITE_API_VIDEO_RESULT_URL ||
     'http://localhost:8000/api/video/result'
 
-export const uploadImage = async (file: File): Promise<PestResult> => {
+// 修改返回类型
+export const uploadImage = async (
+    file: File
+): Promise<ApiResponse<PestResult>> => {
     const formData = new FormData()
-    formData.append('file', file) // 修改这里: 'files' -> 'file'
+    formData.append('file', file)
 
     const response = await axios.post(API_URL, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -32,10 +41,10 @@ export const uploadImage = async (file: File): Promise<PestResult> => {
 
 export const uploadMultipleImages = async (
     files: File[]
-): Promise<BatchProcessResult> => {
+): Promise<ApiResponse<BatchProcessResult>> => {
     const formData = new FormData()
     files.forEach((file) => {
-        formData.append('files', file) // 这里使用'files'是正确的，因为后端期望是List[UploadFile]
+        formData.append('files', file)
     })
 
     const response = await axios.post(API_MULTIPLE_URL, formData, {
@@ -46,9 +55,13 @@ export const uploadMultipleImages = async (
     return response.data
 }
 
-export const uploadVideo = async (file: File): Promise<VideoResult> => {
+export const uploadVideo = async (
+    file: File
+): Promise<ApiResponse<VideoResult>> => {
     const formData = new FormData()
     formData.append('file', file)
+
+    console.log('正在上传视频，文件大小:', file.size, '类型:', file.type)
 
     const response = await axios.post(API_VIDEO_URL, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -58,8 +71,9 @@ export const uploadVideo = async (file: File): Promise<VideoResult> => {
     return response.data
 }
 
-// 添加获取视频结果的方法
-export const getVideoResult = async (taskId: string): Promise<VideoResult> => {
+export const getVideoResult = async (
+    taskId: string
+): Promise<ApiResponse<VideoResult>> => {
     const response = await axios.get(`${API_VIDEO_RESULT_URL}/${taskId}`, {
         timeout: 10000, // 10秒超时
     })
