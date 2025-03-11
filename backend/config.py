@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     postgres_password: str
     postgres_db: str
     database_url: str
+    redis_url: str = "redis://localhost:6379/0"  # 添加这一行，设置默认值
 
     class Config:
         # env_file = os.getenv("ENV_FILE", ".env")   # TODO:生产环境读取 .env，可通过 ENV_FILE 覆盖
