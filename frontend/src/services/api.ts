@@ -1,21 +1,24 @@
 import axios, { AxiosProgressEvent } from 'axios'
-import { PestResult, BatchProcessResult, VideoResult } from '../types'
+import {
+    PestResult,
+    BatchProcessResult,
+    VideoResult,
+    VideoUploadResponse,
+} from '../types'
 
-// 将路径从 '/api/upload' 改为 '/api/detection/upload'
-const API_URL = import.meta.env.VITE_API_URL || '/api/detection/upload'
-// 批量上传路径也需要修改
-const API_MULTIPLE_URL =
-    import.meta.env.VITE_API_MULTIPLE_URL || '/api/detection/upload-multiple'
-// 视频上传路径也需要修改
+const API_DETECTION_URL =
+    import.meta.env.VITE_API_DETECTION_URL || '/api/detection/upload'
+const API_BATCH_URL =
+    import.meta.env.VITE_API_BATCH_URL || '/api/detection/upload-multiple'
 const API_VIDEO_URL =
-    import.meta.env.VITE_API_VIDEO_URL || '/api/detection/upload-video'
+    import.meta.env.VITE_API_VIDEO_URL || '/api/video/process-async'
 
 // 图片上传
 export const uploadImage = async (file: File): Promise<PestResult> => {
     const formData = new FormData()
     formData.append('file', file)
 
-    const response = await axios.post(API_URL, formData, {
+    const response = await axios.post(API_DETECTION_URL, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
     })
 
@@ -31,7 +34,7 @@ export const uploadMultipleImages = async (
         formData.append('files', file)
     })
 
-    const response = await axios.post(API_MULTIPLE_URL, formData, {
+    const response = await axios.post(API_BATCH_URL, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         timeout: 60000, // 60秒超时
     })
@@ -39,11 +42,11 @@ export const uploadMultipleImages = async (
     return response.data
 }
 
-// 视频上传（新增）
+// 视频上传
 export const uploadVideo = async (
     file: File,
     onProgress?: (progressEvent: AxiosProgressEvent) => void
-): Promise<VideoResult> => {
+): Promise<VideoUploadResponse> => {
     const formData = new FormData()
     formData.append('file', file)
 
@@ -53,5 +56,25 @@ export const uploadVideo = async (
         onUploadProgress: onProgress,
     })
 
+    return response.data
+}
+
+/**
+ * 获取视频处理任务状态
+ * @param taskId 任务ID
+ * @returns 任务状态
+ */
+export const getVideoStatus = async (taskId: string) => {
+    const response = await axios.get(`/api/video/status/${taskId}`)
+    return response.data
+}
+
+/**
+ * 获取视频处理结果
+ * @param taskId 任务ID
+ * @returns 视频处理结果
+ */
+export const getVideoResult = async (taskId: string): Promise<VideoResult> => {
+    const response = await axios.get(`/api/video/result/${taskId}`)
     return response.data
 }

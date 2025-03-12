@@ -39,6 +39,7 @@ python-dotenv==1.0.1
 python-multipart==0.0.20
 pytz==2025.1
 PyYAML==6.0.2
+redis==5.0.1
 requests==2.32.3
 scipy==1.15.2
 seaborn==0.13.2

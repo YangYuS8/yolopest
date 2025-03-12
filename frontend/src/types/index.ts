@@ -37,6 +37,13 @@ export interface VideoDetectionFrame {
     annotated_frame?: string // base64编码的标注帧
 }
 
+// 添加视频上传响应的类型
+export interface VideoUploadResponse {
+    status: string
+    task_id: string
+    message: string
+}
+
 export interface VideoResult {
     status: string
     video_length: number // 视频总长度（秒）

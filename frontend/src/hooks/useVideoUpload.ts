@@ -1,41 +1,66 @@
 import { useState } from 'react'
-import { uploadVideo } from '../services/api'
+import { uploadVideo, getVideoStatus, getVideoResult } from '../services/api'
 import { VideoResult } from '../types'
-import axios from 'axios'
 
 export const useVideoUpload = () => {
     const [videoUrl, setVideoUrl] = useState<string>('')
     const [result, setResult] = useState<VideoResult | null>(null)
     const [loading, setLoading] = useState<boolean>(false)
     const [progress, setProgress] = useState<number>(0)
+    const [taskId, setTaskId] = useState<string | null>(null)
+    const [taskStatus, setTaskStatus] = useState<string>('')
 
     const handleVideoSelect = async (file: File) => {
-        // 设置视频预览
-        const videoObjectUrl = URL.createObjectURL(file)
-        setVideoUrl(videoObjectUrl)
+        if (!file) return
 
-        // 上传处理
         try {
             setLoading(true)
             setProgress(0)
 
-            const data = await uploadVideo(file, (progressEvent) => {
-                const percentage = Math.round(
-                    (progressEvent.loaded * 100) / progressEvent.total!
-                )
-                setProgress(percentage)
-            })
+            // 创建本地URL用于预览
+            const objectUrl = URL.createObjectURL(file)
+            setVideoUrl(objectUrl)
 
-            setResult(data)
-        } catch (error: unknown) {
-            if (axios.isAxiosError(error)) {
-                alert(`上传失败: ${error.response?.data?.detail || '未知错误'}`)
-            } else {
-                alert('发生未知错误')
-            }
-        } finally {
+            // 上传文件到服务器 - 不需要类型断言
+            const uploadResponse = await uploadVideo(file)
+            const id = uploadResponse.task_id
+            setTaskId(id)
+
+            // 开始轮询检查视频处理状态
+            const intervalId = setInterval(async () => {
+                const statusResponse = await getVideoStatus(id)
+                setTaskStatus(statusResponse.status)
+
+                // 更新进度
+                if (statusResponse.progress !== undefined) {
+                    setProgress(statusResponse.progress)
+                }
+
+                // 如果处理完成或失败，获取结果
+                if (statusResponse.status === 'completed') {
+                    clearInterval(intervalId)
+                    const resultResponse = await getVideoResult(id)
+                    setResult(resultResponse)
+                    setLoading(false)
+                } else if (statusResponse.status === 'failed') {
+                    clearInterval(intervalId)
+                    console.error('视频处理失败:', statusResponse.error)
+                    setLoading(false)
+                }
+            }, 2000) // 每2秒检查一次状态
+        } catch (error) {
+            console.error('上传视频出错:', error)
             setLoading(false)
         }
+    }
+
+    // 清除结果的函数
+    const clearResults = () => {
+        setResult(null)
+        setVideoUrl('')
+        setTaskId(null)
+        setTaskStatus('')
+        setProgress(0)
     }
 
     return {
@@ -44,5 +69,8 @@ export const useVideoUpload = () => {
         loading,
         progress,
         handleVideoSelect,
+        taskId,
+        taskStatus,
+        clearResults,
     }
 }

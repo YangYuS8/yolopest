@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Card, Progress, Alert, Divider, Tag, List } from 'antd'
+import {
+    Row,
+    Col,
+    Card,
+    Progress,
+    Alert,
+    Divider,
+    Tag,
+    List,
+    Button,
+} from 'antd'
 import VideoUploader from '../components/VideoUploader/VideoUploader'
 import VideoPlayer from '../components/VideoPlayer/VideoPlayer'
 import { useVideoUpload } from '../hooks/useVideoUpload'
@@ -7,8 +17,14 @@ import { useVideoPlayer } from '../hooks/useVideoPlayer'
 import { getPestStatistics } from '../services/mediaService'
 
 const VideoDetection: React.FC = () => {
-    const { videoUrl, result, loading, progress, handleVideoSelect } =
-        useVideoUpload()
+    const {
+        videoUrl,
+        result,
+        loading,
+        progress,
+        handleVideoSelect,
+        clearResults,
+    } = useVideoUpload()
 
     const { currentFrame, findFrameByTime } = useVideoPlayer()
     const [pestStats, setPestStats] = useState<[string, number][]>([])
@@ -56,10 +72,29 @@ const VideoDetection: React.FC = () => {
 
                     {result && (
                         <Card title="视频分析结果" style={{ marginTop: 16 }}>
-                            <p>分析耗时: {result.time_cost.toFixed(2)}秒</p>
-                            <p>视频长度: {result.video_length.toFixed(2)}秒</p>
-                            <p>处理帧数: {result.processed_frames}帧</p>
-                            <p>检测速率: {result.fps.toFixed(2)}帧/秒</p>
+                            {/* 添加安全检查，避免undefined.toFixed()错误 */}
+                            <p>
+                                分析耗时:{' '}
+                                {result.time_cost !== undefined
+                                    ? result.time_cost.toFixed(2)
+                                    : '计算中...'}
+                                秒
+                            </p>
+                            <p>
+                                视频长度:{' '}
+                                {result.video_length !== undefined
+                                    ? result.video_length.toFixed(2)
+                                    : '未知'}
+                                秒
+                            </p>
+                            <p>处理帧数: {result.processed_frames || 0}帧</p>
+                            <p>
+                                检测速率:{' '}
+                                {result.fps !== undefined
+                                    ? result.fps.toFixed(2)
+                                    : '计算中...'}
+                                帧/秒
+                            </p>
 
                             <Divider>检测统计</Divider>
 
@@ -73,6 +108,17 @@ const VideoDetection: React.FC = () => {
                                     </List.Item>
                                 )}
                             />
+
+                            {/* 添加清除结果按钮 */}
+                            {clearResults && (
+                                <Button
+                                    onClick={clearResults}
+                                    type="primary"
+                                    style={{ marginTop: 16 }}
+                                >
+                                    清除结果
+                                </Button>
+                            )}
                         </Card>
                     )}
                 </Col>
@@ -105,7 +151,8 @@ const VideoDetection: React.FC = () => {
 
                             <Divider>检测到的目标</Divider>
 
-                            {currentFrame.detections.length > 0 ? (
+                            {currentFrame.detections &&
+                            currentFrame.detections.length > 0 ? (
                                 currentFrame.detections.map(
                                     (detection, idx) => (
                                         <div
@@ -117,17 +164,22 @@ const VideoDetection: React.FC = () => {
                                                 <Tag color="blue">
                                                     {detection.class}
                                                 </Tag>
-                                                置信度:{' '}
-                                                {(
-                                                    detection.confidence * 100
-                                                ).toFixed(1)}
+                                                置信度: {/* 添加安全检查 */}
+                                                {detection.confidence !==
+                                                undefined
+                                                    ? (
+                                                          detection.confidence *
+                                                          100
+                                                      ).toFixed(1)
+                                                    : '0'}
                                                 %
                                             </p>
                                             <p>
-                                                位置: X[{detection.bbox.x1}-
-                                                {detection.bbox.x2}] Y[
-                                                {detection.bbox.y1}-
-                                                {detection.bbox.y2}]
+                                                位置: X[
+                                                {detection.bbox?.x1 || 0}-
+                                                {detection.bbox?.x2 || 0}] Y[
+                                                {detection.bbox?.y1 || 0}-
+                                                {detection.bbox?.y2 || 0}]
                                             </p>
                                         </div>
                                     )
