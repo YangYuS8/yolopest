@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
     Card,
     List,
@@ -11,18 +11,16 @@ import {
     Image,
     Typography,
     Tabs,
+    Spin,
 } from 'antd'
 import {
     DeleteOutlined,
     ExclamationCircleOutlined,
     FileImageOutlined,
     VideoCameraOutlined,
+    ReloadOutlined,
 } from '@ant-design/icons'
-import {
-    getHistoryRecords,
-    deleteHistoryRecord,
-    clearHistoryRecords,
-} from '../services/historyService'
+import { useHistory } from '../services/historyService'
 import { HistoryRecord } from '../types/history'
 import { PestResult, VideoResult } from '../types'
 import type { TabsProps } from 'antd'
@@ -31,17 +29,11 @@ const { Title, Text } = Typography
 const { confirm } = Modal
 
 const History: React.FC = () => {
-    const [records, setRecords] = useState<HistoryRecord[]>([])
     const [activeTab, setActiveTab] = useState<string>('all')
-
-    useEffect(() => {
-        loadHistory()
-    }, [])
-
-    const loadHistory = () => {
-        const historyData = getHistoryRecords()
-        setRecords(historyData)
-    }
+    const { records, loading, refreshRecords, deleteRecord, clearRecords } =
+        useHistory(
+            activeTab === 'all' ? undefined : (activeTab as 'image' | 'video')
+        )
 
     const handleDelete = (id: string) => {
         confirm({
@@ -49,8 +41,7 @@ const History: React.FC = () => {
             icon: <ExclamationCircleOutlined />,
             content: '删除后将无法恢复',
             onOk() {
-                deleteHistoryRecord(id)
-                loadHistory()
+                deleteRecord(id)
             },
         })
     }
@@ -61,15 +52,9 @@ const History: React.FC = () => {
             icon: <ExclamationCircleOutlined />,
             content: '清空后将无法恢复',
             onOk() {
-                clearHistoryRecords()
-                setRecords([])
+                clearRecords()
             },
         })
-    }
-
-    const getFilteredRecords = () => {
-        if (activeTab === 'all') return records
-        return records.filter((record) => record.type === activeTab)
     }
 
     const formatDate = (timestamp: number) => {
@@ -138,28 +123,49 @@ const History: React.FC = () => {
 
     return (
         <div style={{ padding: '20px' }}>
-            <Title level={2}>历史记录</Title>
-            <Divider />
-
-            <Space style={{ marginBottom: 16 }}>
-                <Tabs
-                    activeKey={activeTab}
-                    items={tabs}
-                    onChange={setActiveTab}
-                />
-
-                {records.length > 0 && (
+            <Space
+                style={{
+                    marginBottom: 16,
+                    width: '100%',
+                    justifyContent: 'space-between',
+                }}
+            >
+                <Title level={2}>历史记录</Title>
+                <Space>
                     <Button
-                        danger
-                        onClick={handleClearAll}
-                        icon={<DeleteOutlined />}
+                        icon={<ReloadOutlined />}
+                        onClick={() => refreshRecords()}
+                        loading={loading}
                     >
-                        清空历史
+                        刷新
                     </Button>
-                )}
+
+                    {records.length > 0 && (
+                        <Button
+                            danger
+                            onClick={handleClearAll}
+                            icon={<DeleteOutlined />}
+                        >
+                            清空历史
+                        </Button>
+                    )}
+                </Space>
             </Space>
 
-            {records.length === 0 ? (
+            <Divider />
+
+            <Tabs
+                activeKey={activeTab}
+                items={tabs}
+                onChange={setActiveTab}
+                style={{ marginBottom: 16 }}
+            />
+
+            {loading ? (
+                <div style={{ textAlign: 'center', padding: '40px' }}>
+                    <Spin size="large" />
+                </div>
+            ) : records.length === 0 ? (
                 <Empty description="暂无历史记录" />
             ) : (
                 <List
@@ -172,7 +178,7 @@ const History: React.FC = () => {
                         xl: 3,
                         xxl: 4,
                     }}
-                    dataSource={getFilteredRecords()}
+                    dataSource={records}
                     renderItem={(record) => (
                         <List.Item>
                             <Card

@@ -5,6 +5,7 @@ import {
     VideoResult,
     VideoUploadResponse,
 } from '../types'
+import { HistoryRecord } from '../types/history' // 添加这一行
 
 const API_DETECTION_URL =
     import.meta.env.VITE_API_DETECTION_URL || '/api/detection/upload'
@@ -77,4 +78,52 @@ export const getVideoStatus = async (taskId: string) => {
 export const getVideoResult = async (taskId: string): Promise<VideoResult> => {
     const response = await axios.get(`/api/video/result/${taskId}`)
     return response.data
+}
+
+// 添加以下历史记录相关 API
+
+/**
+ * 获取历史记录列表
+ */
+export const getHistoryRecords = async (params?: {
+    skip?: number
+    limit?: number
+    type?: 'image' | 'video'
+}) => {
+    const { data } = await axios.get<HistoryRecord[]>('/api/history', {
+        params,
+    })
+    return data
+}
+
+/**
+ * 获取单个历史记录
+ */
+export const getHistoryRecord = async (id: string) => {
+    const { data } = await axios.get<HistoryRecord>(`/api/history/${id}`)
+    return data
+}
+
+/**
+ * 创建历史记录
+ */
+export const createHistoryRecord = async (
+    record: Omit<HistoryRecord, 'id'>
+) => {
+    const { data } = await axios.post<HistoryRecord>('/api/history', record)
+    return data
+}
+
+/**
+ * 删除历史记录
+ */
+export const deleteHistoryRecord = async (id: string) => {
+    await axios.delete(`/api/history/${id}`)
+}
+
+/**
+ * 清空所有历史记录
+ */
+export const clearHistoryRecords = async () => {
+    await axios.delete('/api/history')
 }

@@ -24,14 +24,28 @@ export const useImageUpload = () => {
             const data = await uploadImage(file)
             setResult(data)
 
-            // 添加到历史记录
-            addHistoryRecord({
+            // 添加到历史记录，注意不包含时区信息的时间戳
+            // 修改这部分代码以符合类型定义
+            await addHistoryRecord({
                 id: uuidv4(),
-                timestamp: Date.now(),
+                timestamp: Date.now(), // 使用数字时间戳
                 type: 'image',
                 filename: file.name,
                 thumbnail: data.annotated_image || previewImage,
-                result: data,
+                // 精简结果，确保与类型定义匹配 - 避免使用 PestResult 中不存在的属性
+                result: {
+                    time_cost: data.time_cost,
+                    // 移除不存在的 message 属性，根据类型定义重构
+                    status: 'success', // 假设这是需要的属性
+                    results: data.results.map((item) => ({
+                        class: item.class,
+                        confidence: item.confidence,
+                        // 确保 bbox 属性存在且格式正确
+                        bbox: item.bbox || [0, 0, 0, 0],
+                    })),
+                    // 我们可以添加一个合法的属性来存储消息
+                    annotated_image: data.annotated_image,
+                },
             })
         } catch (error: unknown) {
             // 使用 unknown 替代 any，然后进行类型守卫

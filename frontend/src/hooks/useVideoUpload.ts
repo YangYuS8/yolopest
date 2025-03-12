@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { v4 as uuidv4 } from 'uuid' // 添加 uuid 导入
+import { v4 as uuidv4 } from 'uuid'
 import { uploadVideo, getVideoStatus, getVideoResult } from '../services/api'
 import { VideoResult } from '../types'
-import { addHistoryRecord } from '../services/historyService' // 添加缺少的导入
+import { addHistoryRecord } from '../services/historyService'
 
 export const useVideoUpload = () => {
     const [videoUrl, setVideoUrl] = useState<string>('')
@@ -52,8 +52,20 @@ export const useVideoUpload = () => {
                         type: 'video',
                         filename: file.name,
                         thumbnail:
-                            resultResponse.results[0]?.annotated_frame || '',
-                        result: resultResponse,
+                            resultResponse.results && resultResponse.results[0]
+                                ? resultResponse.results[0].annotated_frame ||
+                                  ''
+                                : '',
+                        result: {
+                            // 直接使用整个结果对象，确保与VideoResult类型一致
+                            status: 'success',
+                            time_cost: resultResponse.time_cost || 0,
+                            video_length: resultResponse.video_length,
+                            processed_frames: resultResponse.processed_frames,
+                            fps: resultResponse.fps,
+                            // 使用直接结果赋值，避免类型不匹配问题
+                            results: resultResponse.results,
+                        },
                     })
                 } else if (statusResponse.status === 'failed') {
                     clearInterval(intervalId)

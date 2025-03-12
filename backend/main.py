@@ -2,7 +2,15 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import get_settings
 from app.api.router import router
+from app.routers import history
 import uvicorn
+import logging
+
+# 配置日志
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+)
 
 settings = get_settings()
 app = FastAPI(debug=settings.debug)
@@ -15,8 +23,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 路由挂载在 /api 前缀下
+# 挂载路由
 app.include_router(router, prefix="/api")
+# 注意这里的路由前缀配置
+app.include_router(history.router, prefix="/api")
 
 @app.get("/")
 async def health_check():

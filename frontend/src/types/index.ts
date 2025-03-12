@@ -29,10 +29,10 @@ export interface BatchProcessResult {
     results: BatchFileResult[]
 }
 
-// 视频检测结果（新增）
+// 视频检测结果帧（正确定义）
 export interface VideoDetectionFrame {
     timestamp: number // 视频时间戳（毫秒）
-    frame_index: number // 帧索引
+    frame_index: number // 帧索引（不是frame_number）
     detections: DetectionItem[]
     annotated_frame?: string // base64编码的标注帧
 }
@@ -44,13 +44,14 @@ export interface VideoUploadResponse {
     message: string
 }
 
+// 视频检测完整结果
 export interface VideoResult {
     status: string
-    video_length: number // 视频总长度（秒）
-    processed_frames: number // 处理的帧数
-    time_cost: number // 处理耗时（秒）
-    fps: number // 每秒帧数
-    results: VideoDetectionFrame[]
+    time_cost: number
+    video_length?: number
+    processed_frames?: number
+    fps?: number
+    results: VideoDetectionFrame[] // 注意这里是results不是frames
     preview_url?: string // 可选的预览URL（标注后的视频）
 }
 
