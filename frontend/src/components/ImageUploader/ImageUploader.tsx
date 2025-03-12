@@ -6,7 +6,7 @@ import type { UploadProps } from 'antd'
 const { Dragger } = Upload
 
 interface ImageUploaderProps {
-    onFileSelect: (file: File) => void
+    onFileSelect?: (file: File) => void
     multiple?: boolean
     onFilesSelect?: (files: File[]) => void
 }
@@ -22,7 +22,9 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
         multiple: false,
         accept: '.png,.jpg,.jpeg',
         beforeUpload: (file) => {
-            onFileSelect(file)
+            if (onFileSelect) {
+                onFileSelect(file)
+            }
             return false // 阻止自动上传
         },
     }
