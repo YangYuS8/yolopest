@@ -1,28 +1,31 @@
-import { message, notification } from 'antd'
+import { notification } from 'antd'
 
-export const showSuccess = (msg: string) => {
-    message.success(msg)
-}
+type NotificationType = 'success' | 'info' | 'warning' | 'error'
 
-export const showError = (msg: string) => {
-    message.error(msg)
-}
-
-export const showWarning = (msg: string) => {
-    message.warning(msg)
-}
-
-export const showInfo = (msg: string) => {
-    message.info(msg)
-}
-
-export const showNotification = (
-    title: string,
-    description: string,
-    type: 'success' | 'info' | 'warning' | 'error' = 'info'
+const showNotification = (
+    type: NotificationType,
+    message: string,
+    description?: string
 ) => {
     notification[type]({
-        message: title,
+        message,
         description,
+        placement: 'topRight',
     })
+}
+
+export const showSuccess = (message: string, description?: string) => {
+    showNotification('success', message, description)
+}
+
+export const showInfo = (message: string, description?: string) => {
+    showNotification('info', message, description)
+}
+
+export const showWarning = (message: string, description?: string) => {
+    showNotification('warning', message, description)
+}
+
+export const showError = (message: string, description?: string) => {
+    showNotification('error', message, description)
 }

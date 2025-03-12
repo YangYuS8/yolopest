@@ -11,11 +11,13 @@
     },
     "dependencies": {
         "@ant-design/icons": "^5.6.1",
+        "@types/uuid": "^10.0.0",
         "antd": "^5.24.3",
         "axios": "^1.8.2",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "react-router-dom": "^7.3.0"
+        "react-router-dom": "^7.3.0",
+        "uuid": "^11.1.0"
     },
     "devDependencies": {
         "@eslint/js": "^9.21.0",

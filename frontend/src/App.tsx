@@ -5,10 +5,12 @@ import {
     HomeOutlined,
     FileImageOutlined,
     VideoCameraOutlined,
+    HistoryOutlined, // 添加历史图标
 } from '@ant-design/icons'
 import Home from './pages/Home'
 import ImageDetection from './pages/ImageDetection'
 import VideoDetection from './pages/VideoDetection'
+import History from './pages/History' // 导入历史记录页面
 import './App.css'
 
 const { Header, Content, Footer } = Layout
@@ -54,6 +56,12 @@ const App: React.FC = () => {
                                 label: '视频识别',
                                 path: '/video-detection',
                             },
+                            {
+                                key: 'history',
+                                icon: <HistoryOutlined />,
+                                label: '历史记录',
+                                path: '/history',
+                            },
                         ].map((item) => ({
                             key: item.key,
                             icon: item.icon,
@@ -74,6 +82,7 @@ const App: React.FC = () => {
                                 path="/video-detection"
                                 element={<VideoDetection />}
                             />
+                            <Route path="/history" element={<History />} />
                         </Routes>
                     </div>
                 </Content>

@@ -1,8 +1,10 @@
 import { useState } from 'react'
-import axios from 'axios' // 添加这一行
+import { v4 as uuidv4 } from 'uuid'
+import axios, { AxiosError } from 'axios' // 导入 AxiosError 类型
 import { uploadImage } from '../services/api'
 import { PestResult } from '../types'
 import { handleApiError } from '../services/errorHandler'
+import { addHistoryRecord } from '../services/historyService'
 import { showWarning } from '../services/notificationService'
 
 export const useImageUpload = () => {
@@ -21,16 +23,34 @@ export const useImageUpload = () => {
             setLoading(true)
             const data = await uploadImage(file)
             setResult(data)
+
+            // 添加到历史记录
+            addHistoryRecord({
+                id: uuidv4(),
+                timestamp: Date.now(),
+                type: 'image',
+                filename: file.name,
+                thumbnail: data.annotated_image || previewImage,
+                result: data,
+            })
         } catch (error: unknown) {
-            // 更优雅的错误处理
+            // 使用 unknown 替代 any，然后进行类型守卫
             handleApiError(error, '图像处理失败')
-            if (axios.isAxiosError(error) && error.response?.status === 400) {
-                showWarning('未检测到害虫，请更换图片')
+            if (axios.isAxiosError(error)) {
+                const axiosError = error as AxiosError
+                if (axiosError.response?.status === 400) {
+                    showWarning('未检测到害虫，请更换图片')
+                }
             }
         } finally {
             setLoading(false)
         }
     }
 
-    return { previewImage, result, loading, handleFileSelect }
+    return {
+        previewImage,
+        result,
+        loading,
+        handleFileSelect,
+    }
 }

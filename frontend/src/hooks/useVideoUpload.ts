@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid' // 添加 uuid 导入
 import { uploadVideo, getVideoStatus, getVideoResult } from '../services/api'
 import { VideoResult } from '../types'
+import { addHistoryRecord } from '../services/historyService' // 添加缺少的导入
 
 export const useVideoUpload = () => {
     const [videoUrl, setVideoUrl] = useState<string>('')
@@ -21,7 +23,7 @@ export const useVideoUpload = () => {
             const objectUrl = URL.createObjectURL(file)
             setVideoUrl(objectUrl)
 
-            // 上传文件到服务器 - 不需要类型断言
+            // 上传文件到服务器
             const uploadResponse = await uploadVideo(file)
             const id = uploadResponse.task_id
             setTaskId(id)
@@ -42,6 +44,17 @@ export const useVideoUpload = () => {
                     const resultResponse = await getVideoResult(id)
                     setResult(resultResponse)
                     setLoading(false)
+
+                    // 添加到历史记录
+                    addHistoryRecord({
+                        id: uuidv4(),
+                        timestamp: Date.now(),
+                        type: 'video',
+                        filename: file.name,
+                        thumbnail:
+                            resultResponse.results[0]?.annotated_frame || '',
+                        result: resultResponse,
+                    })
                 } else if (statusResponse.status === 'failed') {
                     clearInterval(intervalId)
                     console.error('视频处理失败:', statusResponse.error)

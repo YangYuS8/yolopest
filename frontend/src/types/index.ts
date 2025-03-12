@@ -53,3 +53,6 @@ export interface VideoResult {
     results: VideoDetectionFrame[]
     preview_url?: string // 可选的预览URL（标注后的视频）
 }
+
+// 添加以下导出
+export * from './history'
