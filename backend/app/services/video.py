@@ -4,17 +4,14 @@ import tempfile
 import os
 from typing import List, Dict, Any, Optional
 import asyncio
-from config import get_settings
-from model_service import detector
+from app.core.config import get_settings
+from app.services.detector import detector
 import base64
 import time
 import uuid
+from redis.asyncio import Redis
 
 settings = get_settings()
-
-# 使用Redis作为任务队列和存储结果的地方
-# 替换 aioredis 为 redis.asyncio
-from redis.asyncio import Redis
 
 # 视频处理任务状态
 class VideoTaskStatus:
@@ -30,7 +27,6 @@ class VideoProcessor:
     async def get_redis(self) -> Redis:
         """获取Redis连接"""
         if self.redis is None:
-            # 使用 redis.asyncio 中的 from_url 方法
             self.redis = Redis.from_url(settings.redis_url)
         return self.redis
     

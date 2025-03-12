@@ -1,9 +1,8 @@
 from ultralytics import YOLO
-from config import get_settings
+from app.core.config import get_settings
 import cv2
 import numpy as np
 from typing import List, Dict
-import io
 import base64
 
 settings = get_settings()

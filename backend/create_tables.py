@@ -1,7 +1,7 @@
 import asyncio
 from sqlalchemy.ext.asyncio import create_async_engine
-from models import Base
-from config import get_settings
+from app.models.detection import Base
+from app.core.config import get_settings
 
 async def create_tables():
     settings = get_settings()
