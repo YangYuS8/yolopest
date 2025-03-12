@@ -26,7 +26,7 @@ app.add_middleware(
 async def health_check():
     return {"status": "backend is running"}
 
-@app.post("/api/upload")
+@app.post("/api/detection/upload")
 async def upload_image(
     file: UploadFile = File(...),
     db: AsyncSession = Depends(get_db)
@@ -71,7 +71,7 @@ async def upload_image(
         print(f"服务器内部错误: {str(e)}")
         raise HTTPException(status_code=500, detail=f"内部错误: {str(e)}")
 
-@app.post("/api/upload-multiple")
+@app.post("/api/detection/upload-multiple")
 async def upload_multiple_images(
     files: List[UploadFile] = File(...),
     db: AsyncSession = Depends(get_db)

@@ -1,38 +1,44 @@
-.App {
-  text-align: center;
+#root {
+    /* 移除最大宽度限制 */
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.logo {
+    float: left;
+    margin-right: 24px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 64px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.site-layout-content {
+    min-height: calc(100vh - 134px);
+    padding: 24px;
+    background: #fff;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@media (max-width: 768px) {
+    .site-layout-content {
+        padding: 12px;
+    }
+
+    .logo {
+        margin-right: 12px;
+    }
 }
 
-.App-link {
-  color: #61dafb;
+/* 移除所有 Vite 自动生成的不必要样式 */
+.card,
+.read-the-docs,
+.logo:hover,
+a:nth-of-type(2) .logo {
+    all: unset;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes logo-spin {
+    /* Empty keyframes */
 }

@@ -1,0 +1,39 @@
+.video-player-card {
+    margin-bottom: 20px;
+}
+
+.video-container {
+    width: 100%;
+    position: relative;
+    background: #000;
+    margin-bottom: 16px;
+}
+
+.video-element {
+    width: 100%;
+    max-height: 500px;
+    display: block;
+    margin: 0 auto;
+}
+
+.video-controls {
+    padding: 8px 0;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.time-display {
+    margin-left: 16px;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.detection-stats {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #eee;
+    font-size: 13px;
+}

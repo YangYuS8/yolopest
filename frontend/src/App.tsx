@@ -1,90 +1,82 @@
-import React, { useState } from 'react'
-import { Row, Col, Tabs, Button } from 'antd'
-import type { TabsProps } from 'antd'
-import ImageUploader from './components/ImageUploader/ImageUploader'
-import ResultDisplay from './components/ResultDisplay/ResultDisplay'
-import BatchResultDisplay from './components/BatchResultDisplay/BatchResultDisplay'
-import { useImageUpload } from './hooks/useImageUpload'
-import { useMultipleImageUpload } from './hooks/useMultipleImageUpload'
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Layout, Menu } from 'antd'
+import {
+    HomeOutlined,
+    FileImageOutlined,
+    VideoCameraOutlined,
+} from '@ant-design/icons'
+import Home from './pages/Home'
+import ImageDetection from './pages/ImageDetection'
+import VideoDetection from './pages/VideoDetection'
+import './App.css'
+
+const { Header, Content, Footer } = Layout
 
 const App: React.FC = () => {
-    const [activeTab, setActiveTab] = useState<string>('single')
-    const { previewImage, result, loading, handleFileSelect } = useImageUpload()
-    const {
-        batchResult,
-        loading: batchLoading,
-        selectedFiles,
-        handleFilesSelect,
-        uploadFiles,
-        clearResults,
-    } = useMultipleImageUpload()
-
-    const tabItems: TabsProps['items'] = [
-        {
-            key: 'single',
-            label: '单张识别',
-            children: (
-                <Row gutter={[16, 16]}>
-                    <Col span={24}>
-                        <ImageUploader onFileSelect={handleFileSelect} />
-                    </Col>
-                    <Col span={24}>
-                        <ResultDisplay
-                            loading={loading}
-                            previewImage={previewImage}
-                            result={result}
-                        />
-                    </Col>
-                </Row>
-            ),
-        },
-        {
-            key: 'batch',
-            label: '批量识别',
-            children: (
-                <Row gutter={[16, 16]}>
-                    <Col span={24}>
-                        <ImageUploader
-                            multiple={true}
-                            onFilesSelect={handleFilesSelect}
-                            onFileSelect={() => {}} // 添加空函数以满足类型要求
-                        />
-                    </Col>
-                    <Col
-                        span={24}
-                        style={{ textAlign: 'center', marginBottom: 16 }}
-                    >
-                        <Button
-                            type="primary"
-                            onClick={uploadFiles}
-                            loading={batchLoading}
-                            disabled={selectedFiles.length === 0}
-                        >
-                            开始批量识别 ({selectedFiles.length}个文件)
-                        </Button>
-                    </Col>
-                    <Col span={24}>
-                        <BatchResultDisplay
-                            loading={batchLoading}
-                            selectedFiles={selectedFiles}
-                            batchResult={batchResult}
-                            onClear={clearResults}
-                        />
-                    </Col>
-                </Row>
-            ),
-        },
-    ]
-
     return (
-        <div style={{ padding: '24px', maxWidth: '1000px', margin: '0 auto' }}>
-            <Tabs
-                activeKey={activeTab}
-                onChange={setActiveTab}
-                items={tabItems}
-                style={{ marginBottom: 16 }}
-            />
-        </div>
+        <BrowserRouter>
+            <Layout className="layout" style={{ minHeight: '100vh' }}>
+                <Header
+                    style={{
+                        position: 'sticky',
+                        top: 0,
+                        zIndex: 1,
+                        width: '100%',
+                    }}
+                >
+                    <div className="logo">YoloPest</div>
+                    <Menu
+                        theme="dark"
+                        mode="horizontal"
+                        items={[
+                            {
+                                key: 'home',
+                                icon: <HomeOutlined />,
+                                label: '首页',
+                                path: '/',
+                            },
+                            {
+                                key: 'image',
+                                icon: <FileImageOutlined />,
+                                label: '图像识别',
+                                path: '/image-detection',
+                            },
+                            {
+                                key: 'video',
+                                icon: <VideoCameraOutlined />,
+                                label: '视频识别',
+                                path: '/video-detection',
+                            },
+                        ].map((item) => ({
+                            key: item.key,
+                            icon: item.icon,
+                            label: <a href={item.path}>{item.label}</a>,
+                        }))}
+                    />
+                </Header>
+
+                <Content style={{ padding: '0 20px' }}>
+                    <div className="site-layout-content">
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route
+                                path="/image-detection"
+                                element={<ImageDetection />}
+                            />
+                            <Route
+                                path="/video-detection"
+                                element={<VideoDetection />}
+                            />
+                        </Routes>
+                    </div>
+                </Content>
+
+                <Footer style={{ textAlign: 'center' }}>
+                    YoloPest ©{new Date().getFullYear()} - 智能害虫检测系统
+                </Footer>
+            </Layout>
+        </BrowserRouter>
     )
 }
 
