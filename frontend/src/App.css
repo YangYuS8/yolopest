@@ -8,11 +8,33 @@
 
 .logo {
     float: left;
-    margin-right: 24px;
+    margin-right: 20px;
     color: white;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     line-height: 64px;
+    /* 禁用所有转换和动画效果 */
+    transition: none;
+    transform: none;
+}
+
+/* 固定logo容器尺寸，防止抖动 */
+.logo-link {
+    display: inline-block;
+    height: 64px;
+    /* 固定宽度，根据实际文本进行调整 */
+    min-width: 100px;
+}
+
+.logo-link:hover {
+    text-decoration: none;
+}
+
+.logo-link:hover .logo {
+    transform: none;
+    /* 确保悬停时大小不变 */
+    font-size: 20px;
+    color: white;
 }
 
 .site-layout-content {
@@ -31,10 +53,14 @@
     }
 }
 
-/* 移除所有 Vite 自动生成的不必要样式 */
+/* 修改这一行，不要完全移除所有样式 */
 .card,
-.read-the-docs,
-.logo:hover,
+.read-the-docs {
+    all: unset;
+}
+
+/* 移除这一行，它会导致logo悬停样式被取消 */
+/* .logo:hover, */
 a:nth-of-type(2) .logo {
     all: unset;
 }

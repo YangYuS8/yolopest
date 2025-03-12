@@ -36,9 +36,7 @@ export const getCurrentAnnotatedFrame = (
 }
 
 /**
- * 从视频结果中提取所有检测到的害虫类型及数量
- * @param frames 视频检测帧数组
- * @returns 害虫类型及数量的映射
+ * 从视频检测结果中统计各类害虫出现的次数
  */
 export const getPestStatistics = (
     frames: VideoDetectionFrame[]
@@ -46,10 +44,12 @@ export const getPestStatistics = (
     const pestCounts = new Map<string, number>()
 
     frames.forEach((frame) => {
-        frame.detections.forEach((detection) => {
-            const count = pestCounts.get(detection.class) || 0
-            pestCounts.set(detection.class, count + 1)
-        })
+        if (frame.detections && frame.detections.length > 0) {
+            frame.detections.forEach((detection) => {
+                const currentCount = pestCounts.get(detection.class) || 0
+                pestCounts.set(detection.class, currentCount + 1)
+            })
+        }
     })
 
     return pestCounts

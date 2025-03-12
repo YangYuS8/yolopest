@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { Row, Col, Tabs, Button, Divider } from 'antd'
+import { Row, Col, Tabs, Button } from 'antd' // 移除 Divider
 import type { TabsProps } from 'antd'
 import ImageUploader from '../components/ImageUploader/ImageUploader'
 import ResultDisplay from '../components/ResultDisplay/ResultDisplay'
 import BatchResultDisplay from '../components/BatchResultDisplay/BatchResultDisplay'
 import { useImageUpload } from '../hooks/useImageUpload'
 import { useMultipleImageUpload } from '../hooks/useMultipleImageUpload'
+import PageLayout from '../components/PageLayout/PageLayout'
 
 const ImageDetection: React.FC = () => {
     const [activeTab, setActiveTab] = useState<string>('single')
@@ -76,17 +77,14 @@ const ImageDetection: React.FC = () => {
     ]
 
     return (
-        <div style={{ padding: '20px', width: '100%' }}>
-            <h1>图像害虫检测</h1>
-            <Divider />
-
+        <PageLayout title="图像害虫检测">
             <Tabs
                 activeKey={activeTab}
                 onChange={setActiveTab}
                 items={tabItems}
                 style={{ marginBottom: 16 }}
             />
-        </div>
+        </PageLayout>
     )
 }
 

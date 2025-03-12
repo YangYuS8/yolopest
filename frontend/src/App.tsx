@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 import {
     HomeOutlined,
@@ -23,12 +23,18 @@ const App: React.FC = () => {
                         top: 0,
                         zIndex: 1,
                         width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
                     }}
                 >
-                    <div className="logo">YoloPest</div>
+                    {/* 将Link替换为普通div，防止链接导致的样式问题 */}
+                    <div className="logo-link">
+                        <div className="logo">YoloPest</div>
+                    </div>
                     <Menu
                         theme="dark"
                         mode="horizontal"
+                        style={{ flex: 1 }}
                         items={[
                             {
                                 key: 'home',
@@ -51,7 +57,7 @@ const App: React.FC = () => {
                         ].map((item) => ({
                             key: item.key,
                             icon: item.icon,
-                            label: <a href={item.path}>{item.label}</a>,
+                            label: <Link to={item.path}>{item.label}</Link>,
                         }))}
                     />
                 </Header>
