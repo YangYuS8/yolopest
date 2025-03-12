@@ -10,8 +10,7 @@ import {
     List,
     Button,
 } from 'antd'
-import VideoUploader from '../components/VideoUploader/VideoUploader'
-import VideoPlayer from '../components/VideoPlayer/VideoPlayer'
+import { VideoUploader, VideoPlayer } from '../components/media'
 import { useVideoUpload } from '../hooks/useVideoUpload'
 import { useVideoPlayer } from '../hooks/useVideoPlayer'
 import { getPestStatistics } from '../services/mediaService'
