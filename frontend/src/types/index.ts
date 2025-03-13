@@ -1,7 +1,7 @@
 export interface DetectionItem {
     class: string
     confidence: number
-    bbox: {
+    box: {
         x1: number
         y1: number
         x2: number

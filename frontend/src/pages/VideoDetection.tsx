@@ -175,10 +175,10 @@ const VideoDetection: React.FC = () => {
                                             </p>
                                             <p>
                                                 位置: X[
-                                                {detection.bbox?.x1 || 0}-
-                                                {detection.bbox?.x2 || 0}] Y[
-                                                {detection.bbox?.y1 || 0}-
-                                                {detection.bbox?.y2 || 0}]
+                                                {detection.box?.x1 || 0}-
+                                                {detection.box?.x2 || 0}] Y[
+                                                {detection.box?.y1 || 0}-
+                                                {detection.box?.y2 || 0}]
                                             </p>
                                         </div>
                                     )

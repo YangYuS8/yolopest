@@ -1,24 +1,35 @@
 import React from 'react'
 import { Tag } from 'antd'
-import { DetectionItem } from '../../types'
+import { DetectionItem } from '../../../types'
 
 interface DetectionItemDisplayProps {
-    detection: DetectionItem
+    prediction: DetectionItem
+    index: number
 }
 
 const DetectionItemDisplay: React.FC<DetectionItemDisplayProps> = ({
-    detection,
+    prediction,
+    index,
 }) => {
     return (
-        <div style={{ marginBottom: 8 }}>
+        <div key={index} style={{ marginBottom: 8 }}>
             <p>
-                害虫类型: <Tag color="blue">{detection.class}</Tag>
+                害虫类型: <Tag color="blue">{prediction.class}</Tag>
             </p>
-            <p>置信度: {(detection.confidence * 100).toFixed(1)}%</p>
             <p>
-                位置: X[{detection.bbox.x1}-{detection.bbox.x2}] Y[
-                {detection.bbox.y1}-{detection.bbox.y2}]
+                置信度:{' '}
+                <Tag color="green">
+                    {(prediction.confidence * 100).toFixed(1)}%
+                </Tag>
             </p>
+            {prediction.box && (
+                <p>
+                    位置: X[{Math.round(prediction.box.x1)}-
+                    {Math.round(prediction.box.x2)}] Y[
+                    {Math.round(prediction.box.y1)}-
+                    {Math.round(prediction.box.y2)}]
+                </p>
+            )}
         </div>
     )
 }
