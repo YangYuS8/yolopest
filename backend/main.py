@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles  # 新增导入
 from app.core.config import get_settings
 from app.api.router import router
 from app.routers import history
 import uvicorn
 import logging
+import os  # 新增导入
 
 # 配置日志
 logging.basicConfig(
@@ -21,7 +23,16 @@ app.add_middleware(
     allow_origins=["*"],  # 允许所有来源，正式环境应限制为前端地址
     allow_methods=["*"],
     allow_headers=["*"],
+    allow_credentials=True,
+    expose_headers=["Content-Disposition"],  # 添加这一行
 )
+
+# 确保静态文件目录存在
+os.makedirs(os.path.join("app", "static"), exist_ok=True)
+os.makedirs(os.path.join("app", "static", "videos"), exist_ok=True)
+
+# 挂载静态文件服务
+app.mount("/api/static", StaticFiles(directory=os.path.join("app", "static")), name="static")
 
 # 挂载路由
 app.include_router(router, prefix="/api")

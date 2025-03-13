@@ -53,6 +53,7 @@ export interface VideoResult {
     fps?: number
     results: VideoDetectionFrame[] // 注意这里是results不是frames
     preview_url?: string // 可选的预览URL（标注后的视频）
+    annotated_video_url?: string // 添加标注视频URL
 }
 
 // 添加以下导出

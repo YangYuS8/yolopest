@@ -10,6 +10,7 @@ import base64
 import time
 import uuid
 from redis.asyncio import Redis
+import shutil
 
 settings = get_settings()
 
@@ -119,10 +120,18 @@ class VideoProcessor:
             fps = cap.get(cv2.CAP_PROP_FPS)
             frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
             video_length = frame_count / fps if fps > 0 else 0
+            width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+            height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+            
+            # 创建临时输出视频文件
+            output_path = f"{tempfile.gettempdir()}/{task_id}_annotated.webm"
+            fourcc = cv2.VideoWriter_fourcc(*'VP80')  # WebM格式
+            out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
             
             # 初始化结果
             results = []
             processed_frames = 0
+            
             start_time = time.time()
             
             # 每隔几帧处理一次（根据视频长度调整）
@@ -134,6 +143,9 @@ class VideoProcessor:
                 if not ret:
                     break
                     
+                # 创建原始帧的副本用于写入输出视频
+                output_frame = frame.copy()
+                
                 # 按照间隔处理帧
                 if frame_idx % frame_interval == 0:
                     # 转换颜色空间
@@ -149,12 +161,12 @@ class VideoProcessor:
                         for pred in predictions:
                             bbox = pred["bbox"]
                             x1, y1, x2, y2 = int(bbox["x1"]), int(bbox["y1"]), int(bbox["x2"]), int(bbox["y2"])
-                            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                            cv2.rectangle(output_frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
                             label = f"{pred['class']} {pred['confidence']:.2f}"
-                            cv2.putText(frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+                            cv2.putText(output_frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
                             
                         # 编码为base64
-                        _, buffer = cv2.imencode('.jpg', frame)
+                        _, buffer = cv2.imencode('.jpg', output_frame)
                         annotated_frame = "data:image/jpeg;base64," + base64.b64encode(buffer).decode('utf-8')
                     
                     # 添加到结果
@@ -167,6 +179,9 @@ class VideoProcessor:
                     
                     processed_frames += 1
                 
+                # 所有帧都写入输出视频（无论是否处理过）
+                out.write(output_frame)
+                
                 # 更新进度
                 progress = int((frame_idx / frame_count) * 100) if frame_count > 0 else 0
                 task_info["progress"] = progress
@@ -176,10 +191,30 @@ class VideoProcessor:
             
             # 释放资源
             cap.release()
+            out.release()
             
             # 处理完成，保存结果
             end_time = time.time()
             processing_time = end_time - start_time
+            
+            # 确保静态目录存在
+            static_dir = os.path.join(settings.static_dir, "videos")
+            os.makedirs(static_dir, exist_ok=True)
+            
+            # 创建静态文件URL
+            annotated_video_url = f"/api/static/videos/{task_id}_annotated.webm" 
+            
+            # 将处理后的视频移动到静态文件目录
+            final_path = os.path.join(static_dir, f"{task_id}_annotated.webm")
+            
+            # 在_process_video方法中替换os.rename
+            try:
+                shutil.move(output_path, final_path)
+            except Exception as e:
+                # 如果移动失败，可能是权限问题，尝试复制然后删除
+                print(f"移动文件失败，尝试复制: {str(e)}")
+                shutil.copy(output_path, final_path)
+                os.remove(output_path)
             
             result = {
                 "status": "success",
@@ -187,13 +222,15 @@ class VideoProcessor:
                 "processed_frames": processed_frames,
                 "time_cost": processing_time,
                 "fps": processed_frames / processing_time if processing_time > 0 else 0,
-                "results": results
+                "results": results,
+                "annotated_video_url": annotated_video_url
             }
             
             # 更新任务状态为完成
             task_info["status"] = VideoTaskStatus.COMPLETED
             task_info["progress"] = 100
             task_info["completed_at"] = time.time()
+            task_info["annotated_video_path"] = final_path
             
             await redis.set(f"video_task:{task_id}", repr(task_info))
             # 保存结果（7天过期）
@@ -201,6 +238,7 @@ class VideoProcessor:
             
         except Exception as e:
             # 处理失败
+            print(f"视频处理失败: {str(e)}")
             task_info["status"] = VideoTaskStatus.FAILED
             task_info["error"] = str(e)
             await redis.set(f"video_task:{task_id}", repr(task_info))

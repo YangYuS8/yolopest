@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react'
-import { Card, Slider, Button, Space } from 'antd'
+import { Card, Slider, Button, Space, Tabs } from 'antd'
 import { PlayCircleOutlined, PauseCircleOutlined } from '@ant-design/icons'
-import { VideoResult } from '../../types'
+import { VideoResult } from '../../../types'
 import './VideoPlayer.css'
 
 interface VideoPlayerProps {
     videoUrl: string
-    result?: VideoResult | null
-    onTimeUpdate?: (currentTime: number) => void
+    result: VideoResult | null
+    onTimeUpdate: (time: number) => void
 }
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({
@@ -15,49 +15,107 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     result,
     onTimeUpdate,
 }) => {
-    const videoRef = useRef<HTMLVideoElement>(null)
+    const originalVideoRef = useRef<HTMLVideoElement>(null)
+    const annotatedVideoRef = useRef<HTMLVideoElement>(null)
     const [isPlaying, setIsPlaying] = useState(false)
     const [currentTime, setCurrentTime] = useState(0)
     const [duration, setDuration] = useState(0)
+    const [activeKey, setActiveKey] = useState('original')
 
     // 视频元数据加载完成后设置持续时间
     const handleLoadedMetadata = () => {
-        if (videoRef.current) {
-            setDuration(videoRef.current.duration)
+        if (originalVideoRef.current) {
+            setDuration(originalVideoRef.current.duration)
         }
     }
 
     // 更新当前播放时间
     const handleTimeUpdate = () => {
+        const videoRef =
+            activeKey === 'original' ? originalVideoRef : annotatedVideoRef
         if (videoRef.current) {
             const time = videoRef.current.currentTime
             setCurrentTime(time)
-            if (onTimeUpdate) {
-                onTimeUpdate(time)
+            onTimeUpdate(time * 1000) // 转换为毫秒
+        }
+    }
+
+    // 同步两个视频的播放状态
+    const syncVideos = (isPlaying: boolean) => {
+        if (isPlaying) {
+            if (activeKey === 'original') {
+                originalVideoRef.current?.play()
+                if (annotatedVideoRef.current) {
+                    annotatedVideoRef.current.currentTime =
+                        originalVideoRef.current?.currentTime || 0
+                }
+            } else {
+                annotatedVideoRef.current?.play()
+                if (originalVideoRef.current) {
+                    originalVideoRef.current.currentTime =
+                        annotatedVideoRef.current?.currentTime || 0
+                }
             }
+        } else {
+            originalVideoRef.current?.pause()
+            annotatedVideoRef.current?.pause()
         }
     }
 
     // 控制播放/暂停
     const togglePlay = () => {
-        if (!videoRef.current) return
-
-        if (isPlaying) {
-            videoRef.current.pause()
-        } else {
-            videoRef.current.play()
-        }
-        setIsPlaying(!isPlaying)
+        const newPlayState = !isPlaying
+        setIsPlaying(newPlayState)
+        syncVideos(newPlayState)
     }
 
     // 设置播放进度
     const handleSliderChange = (value: number) => {
-        if (videoRef.current) {
-            videoRef.current.currentTime = value
-            setCurrentTime(value)
-            if (onTimeUpdate) {
-                onTimeUpdate(value)
-            }
+        setCurrentTime(value)
+
+        if (originalVideoRef.current) {
+            originalVideoRef.current.currentTime = value
+        }
+        if (annotatedVideoRef.current) {
+            annotatedVideoRef.current.currentTime = value
+        }
+
+        onTimeUpdate(value * 1000) // 转换为毫秒
+    }
+
+    // 切换标签时处理
+    const handleTabChange = (key: string) => {
+        setActiveKey(key)
+        const wasPlaying = isPlaying
+
+        // 暂停当前播放
+        setIsPlaying(false)
+        originalVideoRef.current?.pause()
+        annotatedVideoRef.current?.pause()
+
+        // 同步进度
+        if (
+            key === 'original' &&
+            annotatedVideoRef.current &&
+            originalVideoRef.current
+        ) {
+            annotatedVideoRef.current.currentTime =
+                originalVideoRef.current.currentTime
+        } else if (
+            key === 'annotated' &&
+            originalVideoRef.current &&
+            annotatedVideoRef.current
+        ) {
+            originalVideoRef.current.currentTime =
+                annotatedVideoRef.current.currentTime
+        }
+
+        // 如果之前在播放，则继续播放
+        if (wasPlaying) {
+            setTimeout(() => {
+                setIsPlaying(true)
+                syncVideos(true)
+            }, 100)
         }
     }
 
@@ -68,23 +126,70 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
     }
 
-    // 监听视频播放结束事件
-    const handleEnded = () => {
-        setIsPlaying(false)
-    }
-
     return (
-        <Card title="视频播放器" className="video-player-card">
-            <div className="video-container">
-                <video
-                    ref={videoRef}
-                    src={videoUrl}
-                    onLoadedMetadata={handleLoadedMetadata}
-                    onTimeUpdate={handleTimeUpdate}
-                    onEnded={handleEnded}
-                    className="video-element"
-                />
-            </div>
+        <Card title="视频播放" className="video-player-card">
+            <Tabs
+                activeKey={activeKey}
+                onChange={handleTabChange}
+                items={[
+                    {
+                        key: 'original',
+                        label: '原始视频',
+                        children: (
+                            <div className="video-container">
+                                <video
+                                    ref={originalVideoRef}
+                                    src={videoUrl}
+                                    style={{ width: '100%' }}
+                                    onLoadedMetadata={handleLoadedMetadata}
+                                    onTimeUpdate={() =>
+                                        activeKey === 'original' &&
+                                        handleTimeUpdate()
+                                    }
+                                    onPlay={() => setIsPlaying(true)}
+                                    onPause={() => setIsPlaying(false)}
+                                />
+                            </div>
+                        ),
+                    },
+                    {
+                        key: 'annotated',
+                        label: '标注视频',
+                        children: (
+                            <div className="video-container">
+                                {result?.annotated_video_url ? (
+                                    <video
+                                        ref={annotatedVideoRef}
+                                        src={result.annotated_video_url}
+                                        style={{ width: '100%' }}
+                                        onTimeUpdate={() =>
+                                            activeKey === 'annotated' &&
+                                            handleTimeUpdate()
+                                        }
+                                        onPlay={() => setIsPlaying(true)}
+                                        onPause={() => setIsPlaying(false)}
+                                    />
+                                ) : (
+                                    <div
+                                        style={{
+                                            padding: '20px',
+                                            textAlign: 'center',
+                                            backgroundColor: '#f5f5f5',
+                                            height: '240px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                        }}
+                                    >
+                                        标注视频未生成或处理中...
+                                    </div>
+                                )}
+                            </div>
+                        ),
+                        disabled: !result?.annotated_video_url,
+                    },
+                ]}
+            />
 
             <div className="video-controls">
                 <Space
