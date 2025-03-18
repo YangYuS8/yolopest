@@ -1,4 +1,4 @@
-# Pest Detection System
+# YoloPest 智能害虫检测系统
 
 全栈病虫害检测系统，基于 YOLOv8 实现害虫检测功能，包含 FastAPI 后端服务和 React 前端界面，提供图像上传与害虫识别功能。
 
@@ -8,38 +8,43 @@
 
 ### 后端
 
--   FastAPI (Python 3.7+)
--   YOLOv8 目标检测模型
--   SQLAlchemy ORM + PostgreSQL 异步数据库
--   Uvicorn ASGI 服务器
--   Pydantic 数据验证
--   Docker 容器化部署
+-   **FastAPI** - Python 高性能 API 框架
+-   **YOLOv8** - 目标检测模型（本地定制版）
+-   **SQLAlchemy** - ORM 数据库映射
+-   **Redis** - 缓存与会话管理
+-   **Uvicorn** - ASGI 服务器
+-   **Pydantic** - 数据验证
+-   **OpenCV** - 图像处理
+-   **Docker** - 容器化部署
 
 ### 前端
 
--   React 18 (TypeScript)
--   Create React App
--   ESLint + Prettier 代码规范
+-   **React 18** - 组件化 UI 框架
+-   **TypeScript** - 类型安全
+-   **Vite** - 现代前端构建工具
+-   **Ant Design** - UI 组件库
+-   **React Router** - 客户端路由
+-   **Axios** - API 请求库
 
 ## 功能特性
 
--   图像文件上传与害虫识别
--   YOLOv8 目标检测模型集成
--   PostgreSQL 数据库存储检测结果
--   Docker 容器化部署
--   REST API 接口
--   开发环境热重载
--   自动代码格式化与语法检查
+-   ✅ 用户认证 (登录/注册)
+-   ✅ 图像害虫识别上传与结果展示
+-   ✅ 视频害虫识别分析
+-   ✅ 历史记录管理
+-   ✅ 个人信息管理
+-   ✅ 自定义 YOLOv8 模型集成
+-   ✅ 实时检测结果可视化
 
 ## 快速开始
 
 ### 环境要求
 
--   Python 3.7+
--   Node.js 16+
+-   Python 3.8+
+-   Node.js 18+
 -   npm 9+
--   PostgreSQL 12+
--   Docker 20.10+
+-   Redis 7+
+-   Docker 20.10+ (可选)
 
 ### 本地开发
 
@@ -47,7 +52,17 @@
 
 ```bash
 cd backend
+
+# 创建并激活虚拟环境
+python -m venv .venv
+source .venv/bin/activate  # Linux/Mac
+# 或 .venv\Scripts\activate  # Windows
+
+# 安装依赖
 pip install -r requirements.txt
+
+# 安装本地修改的YOLOv8
+pip install -e ./ultralytics
 
 # 初始化数据库表结构
 python create_tables.py
@@ -63,10 +78,10 @@ uvicorn main:app --reload
 ```bash
 cd frontend
 npm install
-npm start
+npm run dev
 ```
 
-访问应用：http://localhost:3000
+访问应用：http://localhost:5173
 
 ### Docker 部署
 
@@ -81,38 +96,68 @@ docker-compose up --build
 
 ```
 ├── backend
-│   ├── main.py            # API路由与业务逻辑
-│   ├── config.py          # 配置管理
-│   ├── requirements.txt   # Python依赖
-│   ├── create_tables.py   # 数据库表结构初始化
-│   └── .env.development   # 开发环境配置
+│   ├── app/                # 应用核心代码
+│   │   ├── api/            # API路由和处理函数
+│   │   ├── core/           # 配置和基础设施
+│   │   ├── models/         # 数据库模型
+│   │   ├── schemas/        # Pydantic模型
+│   │   ├── services/       # 业务逻辑
+│   │   └── static/         # 静态资源
+│   ├── ultralytics/        # 自定义修改的YOLOv8代码
+│   ├── main.py             # 应用入口
+│   ├── requirements.txt    # 依赖库
+│   └── create_tables.py    # 数据库初始化
 ├── frontend
-│   ├── src                # 前端源码
-│   ├── public             # 静态资源
-│   ├── .eslintrc.js       # ESLint配置
-│   ├── tsconfig.json      # TypeScript配置
-│   └── .env.development   # 前端环境变量
-├── docker-compose.yml     # Docker编排配置
-└── .vscode
-    └── settings.json      # 编辑器统一配置
+│   ├── src/                # 前端源码
+│   │   ├── components/     # React组件
+│   │   ├── pages/          # 页面组件
+│   │   ├── services/       # API服务
+│   │   └── utils/          # 工具函数
+│   ├── public/             # 静态资源
+│   ├── index.html          # HTML入口
+│   ├── package.json        # Node.js配置
+│   └── vite.config.ts      # Vite配置
+└── docker-compose.yml      # Docker编排配置
 ```
 
 ## API 接口
 
-### 图片上传接口
+### 图片检测接口
 
 ```http
-POST /upload-image
+POST /api/detection/image
 Content-Type: multipart/form-data
 
 Response:
 {
     "status": "success",
-    "result": {
-        "pest": "褐飞虱",
-        "confidence": 0.95,
-        "description": "常见水稻害虫..."
-    }
+    "results": [
+        {
+            "class": "褐飞虱",
+            "confidence": 0.95,
+            "bbox": {
+                "x1": 120,
+                "y1": 50,
+                "x2": 220,
+                "y2": 130
+            }
+        }
+    ],
+    "annotated_image": "base64编码图像..."
+}
+```
+
+### 视频检测接口
+
+```http
+POST /api/detection/video
+Content-Type: multipart/form-data
+
+Response:
+{
+    "status": "success",
+    "task_id": "abcd1234",
+    "message": "视频处理已开始，请通过任务ID查询进度"
 }
 ```
 
@@ -120,41 +165,52 @@ Response:
 
 1. **代码格式化**：
 
-    - 保存时自动格式化（配置于 `.vscode/settings.json`）
-    - Python：Black 风格（4 空格缩进）
-    - TypeScript：Prettier 规范（2 空格+单引号）
+    - 后端：Black 格式化工具（4 空格缩进）
+    - 前端：ESLint + Prettier（2 空格+单引号）
 
 2. **环境配置**：
 
-    - 后端开发环境使用 `.env.development`
-    - 生产环境通过 Docker 注入环境变量
+    - 开发环境：`.env.development`
+    - 生产环境：Docker 环境变量或`.env.production`
 
 3. **依赖管理**：
-    - Python：requirements.txt 固定版本
+    - Python：固定版本在 requirements.txt
     - Node.js：package-lock.json 锁定版本
 
 ## 常见问题
 
-Q: 前端无法连接后端
+### Q: 模型加载失败
 
-```json
-// frontend/package.json 添加代理
-"proxy": "http://localhost:8000"
-```
-
-Q: Docker 部署时模型文件加载失败
-
-```yaml
-# docker-compose.yml 确保卷映射正确
-volumes:
-    - ./model_weights:/app/model_weights
-```
-
-Q: ESLint 错误提示
+安装 OpenCV 并检查模型路径：
 
 ```bash
-cd frontend
-npm run lint:fix
+pip install opencv-python-headless==4.11.0.86
+```
+
+### Q: 前端代理配置
+
+修改 Vite 配置以连接后端：
+
+```js
+// vite.config.ts
+export default defineConfig({
+    // ...
+    server: {
+        proxy: {
+            '/api': 'http://localhost:8000',
+        },
+    },
+})
+```
+
+### Q: Docker 部署时模型路径问题
+
+确保正确映射卷：
+
+```yaml
+# docker-compose.yml
+volumes:
+    - ./backend/models:/app/models
 ```
 
 ## 许可证
