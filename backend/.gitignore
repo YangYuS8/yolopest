@@ -3,6 +3,7 @@
 /*/__pycache__
 /*/*/__pycache__
 /ultralytics/*/__pycache__
+/ultralytics/*/*/__pycache__
 /app/static/annotated/*
 /app/static/uploads/*
 /app/static/videos/*
