@@ -1,5 +1,2 @@
 # 忽略环境文件
-.env
-.env.*
-!.env.example
 /backend-old
