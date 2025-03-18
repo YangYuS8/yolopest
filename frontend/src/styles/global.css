@@ -1,0 +1,64 @@
+/* 简化的全局样式 - 遵循 Ant Design 官方推荐 */
+
+/* 基础布局样式 */
+.site-layout-content {
+    padding: 24px;
+    background: #fff;
+    min-height: calc(100vh - 134px);
+}
+
+/* 登录表单容器 */
+.auth-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 134px);
+    padding: 24px;
+}
+
+.auth-form-card {
+    max-width: 400px;
+    width: 100%;
+}
+
+/* 工具类 */
+.text-center {
+    text-align: center;
+}
+
+.mb-24 {
+    margin-bottom: 24px;
+}
+
+.mb-16 {
+    margin-bottom: 16px;
+}
+
+.mb-8 {
+    margin-bottom: 8px;
+}
+
+/* MediaCard 样式修复 */
+.ant-card-actions {
+    padding: 12px !important;
+    border-top: none !important;
+}
+
+.ant-card-actions > li {
+    margin: 0 !important;
+}
+
+/* 页面标题 */
+.page-title {
+    margin-bottom: 24px;
+}
+
+/* 特性卡片 */
+.feature-card .ant-card-head {
+    border-bottom: none;
+}
+
+/* 修复头部导航样式 */
+.ant-layout-header .ant-menu {
+    line-height: 64px;
+}

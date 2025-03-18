@@ -1,6 +1,14 @@
 from fastapi import APIRouter
-from app.api import detection, video
+from app.api import detection  # 修正导入路径
+from app.api.api import api_router as user_api_router  # 导入用户API路由
 
 router = APIRouter()
-router.include_router(detection.router, prefix="/detection", tags=["detection"])
-router.include_router(video.router, prefix="/video", tags=["video"])
+
+# 包括现有的API
+router.include_router(detection.router, prefix="/detection", tags=["Detection"])
+# 如果有视频和批处理路由，请确保它们存在
+# router.include_router(video.router, prefix="/video", tags=["Video"])
+# router.include_router(batch.router, prefix="/batch", tags=["Batch"])
+
+# 包括新的用户API
+router.include_router(user_api_router, prefix="")

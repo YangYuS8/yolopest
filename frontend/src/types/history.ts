@@ -1,10 +1,20 @@
-import { PestResult, VideoResult } from './index'
-
 export interface HistoryRecord {
     id: string
-    timestamp: number
-    type: 'image' | 'batch' | 'video'
+    user_id?: number
+    timestamp: number // JS timestamp in milliseconds
+    type: string // 'image', 'video' 或其他类型
     filename: string
-    thumbnail: string
-    result: PestResult | VideoResult
+    thumbnail?: string
+    result: {
+        status: string
+        predictions?: Array<{
+            class: string
+            confidence: number
+            box: [number, number, number, number]
+        }>
+        time_cost?: number
+        video_length?: number
+        fps?: number
+        processed_frames?: number
+    }
 }

@@ -1,17 +1,43 @@
 import React from 'react'
-import { Divider } from 'antd'
+import { Layout, Typography, Breadcrumb, Space } from 'antd'
+import { HomeOutlined } from '@ant-design/icons'
+
+const { Content } = Layout
+const { Title } = Typography
 
 interface PageLayoutProps {
     title: string
     children: React.ReactNode
+    breadcrumb?: { title: string; path?: string }[]
 }
 
-const PageLayout: React.FC<PageLayoutProps> = ({ title, children }) => {
+const PageLayout: React.FC<PageLayoutProps> = ({
+    title,
+    children,
+    breadcrumb = [],
+}) => {
     return (
-        <div style={{ padding: '20px', width: '100%' }}>
-            <h1>{title}</h1>
-            <Divider />
-            {children}
+        <div className="page-container">
+            <Space direction="vertical" style={{ width: '100%' }} size="large">
+                {breadcrumb.length > 0 && (
+                    <Breadcrumb
+                        items={[
+                            {
+                                title: <HomeOutlined />,
+                                href: '/',
+                            },
+                            ...breadcrumb.map((item) => ({
+                                title: item.title,
+                                href: item.path,
+                            })),
+                        ]}
+                    />
+                )}
+
+                <Title level={2}>{title}</Title>
+
+                <Content className="site-content">{children}</Content>
+            </Space>
         </div>
     )
 }

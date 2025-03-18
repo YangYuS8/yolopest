@@ -1,29 +1,19 @@
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
+from typing import AsyncGenerator
 from app.core.config import get_settings
 import logging
 
 settings = get_settings()
-DATABASE_URL = settings.database_url
+# 使用大写变量名以保持一致性
+DATABASE_URL = settings.DATABASE_URL
 
 engine = create_async_engine(DATABASE_URL)
-AsyncSessionLocal = sessionmaker(
-    bind=engine,
-    class_=AsyncSession,
-    expire_on_commit=False
-)
+async_session_maker = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 logger = logging.getLogger(__name__)
+logger.info(f"连接到数据库: {DATABASE_URL}")  # 添加日志以帮助调试
 
-async def get_db():
-    db = AsyncSession(engine)
-    logger.debug("数据库会话创建成功")
-    try:
-        yield db
-    except Exception as e:
-        logger.error(f"数据库会话操作失败: {str(e)}", exc_info=True)
-        await db.rollback()  # 确保在异常时回滚
-        raise
-    finally:
-        await db.close()
-        logger.debug("数据库会话已关闭")
+async def get_db() -> AsyncGenerator[AsyncSession, None]:
+    async with async_session_maker() as session:
+        yield session

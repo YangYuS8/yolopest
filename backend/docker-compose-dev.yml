@@ -1,0 +1,34 @@
+services:
+    db:
+        image: postgres:17.4-alpine
+        env_file:
+            - ./.env.development
+        ports:
+            - '5432:5432' # 添加这一行，将容器的5432端口映射到主机的5432端口
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        networks:
+            - yolopest-network
+        healthcheck:
+            test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER}']
+            interval: 5s
+            timeout: 5s
+            retries: 5
+        restart: unless-stopped
+
+    redis: # 用于缓存和异步任务
+        image: redis:7.4.2
+        ports:
+            - '6379:6379'
+        volumes:
+            - redis_data:/data
+        networks:
+            - yolopest-network
+        restart: unless-stopped
+
+networks:
+    yolopest-network:
+
+volumes:
+    postgres_data:
+    redis_data:

@@ -1,49 +1,76 @@
 import axios, { AxiosProgressEvent } from 'axios'
-import {
-    PestResult,
-    BatchProcessResult,
-    VideoResult,
-    VideoUploadResponse,
-} from '../types'
+import { VideoResult, VideoUploadResponse } from '../types'
 import { HistoryRecord } from '../types/history' // 添加这一行
 
-const API_DETECTION_URL =
-    import.meta.env.VITE_API_DETECTION_URL || '/api/detection/upload'
-const API_BATCH_URL =
-    import.meta.env.VITE_API_BATCH_URL || '/api/detection/upload-multiple'
-const API_VIDEO_URL =
-    import.meta.env.VITE_API_VIDEO_URL || '/api/video/process-async'
+// 获取API基础URL
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
 
-// 图片上传
-export const uploadImage = async (file: File): Promise<PestResult> => {
+// 创建axios实例
+const api = axios.create({
+    baseURL: API_BASE_URL,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
+
+// 请求拦截器
+api.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('accessToken')
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`
+        }
+        return config
+    },
+    (error) => Promise.reject(error)
+)
+
+export default api
+
+// 图片检测API
+export const uploadImage = async (file: File) => {
     const formData = new FormData()
     formData.append('file', file)
 
-    const response = await axios.post(API_DETECTION_URL, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-    })
-
-    return response.data
+    try {
+        // 注意：api 实例已经带有 baseURL，所以这里只需要路径部分
+        const response = await api.post('/detection/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        return response.data
+    } catch (error) {
+        console.error('上传图片失败:', error)
+        throw error
+    }
 }
 
-// 批量图片上传
-export const uploadMultipleImages = async (
-    files: File[]
-): Promise<BatchProcessResult> => {
+// 批量图片检测API
+export const uploadMultipleImages = async (files: File[]) => {
     const formData = new FormData()
     files.forEach((file) => {
         formData.append('files', file)
     })
 
-    const response = await axios.post(API_BATCH_URL, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-        timeout: 60000, // 60秒超时
-    })
-
-    return response.data
+    try {
+        const response = await api.post(
+            '/detection/upload-multiple',
+            formData,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }
+        )
+        return response.data
+    } catch (error) {
+        console.error('批量上传图片失败:', error)
+        throw error
+    }
 }
 
-// 视频上传
+// 修改视频上传方法
 export const uploadVideo = async (
     file: File,
     onProgress?: (progressEvent: AxiosProgressEvent) => void
@@ -51,7 +78,7 @@ export const uploadVideo = async (
     const formData = new FormData()
     formData.append('file', file)
 
-    const response = await axios.post(API_VIDEO_URL, formData, {
+    const response = await api.post('/video/process-async', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         timeout: 300000, // 5分钟超时（视频处理可能需要更长时间）
         onUploadProgress: onProgress,
@@ -66,7 +93,7 @@ export const uploadVideo = async (
  * @returns 任务状态
  */
 export const getVideoStatus = async (taskId: string) => {
-    const response = await axios.get(`/api/video/status/${taskId}`)
+    const response = await api.get(`/video/status/${taskId}`)
     return response.data
 }
 
@@ -76,7 +103,7 @@ export const getVideoStatus = async (taskId: string) => {
  * @returns 视频处理结果
  */
 export const getVideoResult = async (taskId: string): Promise<VideoResult> => {
-    const response = await axios.get(`/api/video/result/${taskId}`)
+    const response = await api.get(`/video/result/${taskId}`)
     return response.data
 }
 
@@ -90,7 +117,7 @@ export const getHistoryRecords = async (params?: {
     limit?: number
     type?: 'image' | 'video'
 }) => {
-    const { data } = await axios.get<HistoryRecord[]>('/api/history', {
+    const { data } = await api.get<HistoryRecord[]>('/history', {
         params,
     })
     return data
@@ -100,7 +127,7 @@ export const getHistoryRecords = async (params?: {
  * 获取单个历史记录
  */
 export const getHistoryRecord = async (id: string) => {
-    const { data } = await axios.get<HistoryRecord>(`/api/history/${id}`)
+    const { data } = await api.get<HistoryRecord>(`/history/${id}`)
     return data
 }
 
@@ -110,7 +137,7 @@ export const getHistoryRecord = async (id: string) => {
 export const createHistoryRecord = async (
     record: Omit<HistoryRecord, 'id'>
 ) => {
-    const { data } = await axios.post<HistoryRecord>('/api/history', record)
+    const { data } = await api.post<HistoryRecord>('/history', record)
     return data
 }
 
@@ -118,12 +145,12 @@ export const createHistoryRecord = async (
  * 删除历史记录
  */
 export const deleteHistoryRecord = async (id: string) => {
-    await axios.delete(`/api/history/${id}`)
+    await api.delete(`/history/${id}`)
 }
 
 /**
  * 清空所有历史记录
  */
 export const clearHistoryRecords = async () => {
-    await axios.delete('/api/history')
+    await api.delete('/history')
 }

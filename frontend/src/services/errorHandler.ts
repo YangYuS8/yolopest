@@ -26,3 +26,30 @@ export const handleApiError = (
         showError(defaultMessage)
     }
 }
+
+export const getFriendlyErrorMessage = (error: unknown): string => {
+    if (axios.isAxiosError(error)) {
+        // HTTP错误
+        const status = error.response?.status
+
+        if (status === 401) return '登录已过期，请重新登录'
+        if (status === 403) return '您没有权限执行此操作'
+        if (status === 404) return '请求的资源不存在'
+        if (status === 500) return '服务器内部错误，请稍后再试'
+
+        // 尝试获取后端的详细错误信息
+        if (error.response?.data?.detail) {
+            const detail = error.response.data.detail
+            return typeof detail === 'string' ? detail : JSON.stringify(detail)
+        }
+
+        return error.message || '请求失败'
+    }
+
+    // 非HTTP错误
+    if (error instanceof Error) {
+        return error.message
+    }
+
+    return '发生未知错误'
+}

@@ -1,113 +1,94 @@
 import React from 'react'
-import { Row, Col, Card, Button, Divider } from 'antd'
-import { Link } from 'react-router-dom'
-import { FileImageOutlined, VideoCameraOutlined } from '@ant-design/icons'
+import { Row, Col, Divider, Typography, Card, Space } from 'antd'
+import {
+    FileImageOutlined,
+    VideoCameraOutlined,
+    RocketOutlined,
+    SafetyCertificateOutlined,
+    AppstoreOutlined,
+} from '@ant-design/icons'
+import MediaCard from '../components/common/MediaCard/MediaCard'
+
+const { Title, Paragraph } = Typography
 
 const Home: React.FC = () => {
     return (
-        <div style={{ padding: '20px' }}>
-            <Row gutter={16} justify="center">
-                <Col
-                    span={24}
-                    style={{ textAlign: 'center', marginBottom: 40 }}
-                >
-                    <h1 style={{ fontSize: '2.5rem' }}>
-                        YoloPest - 智能害虫检测系统
-                    </h1>
-                    <p style={{ fontSize: '1.2rem', color: '#666' }}>
-                        基于YOLOv8深度学习模型的农作物害虫智能识别平台
-                    </p>
+        <div className="home-container">
+            <Row gutter={[0, 48]}>
+                {/* 头部区域 */}
+                <Col span={24} className="text-center">
+                    <Space direction="vertical" size="large">
+                        <Title level={1}>YoloPest - 智能害虫检测系统</Title>
+                        <Paragraph
+                            type="secondary"
+                            style={{ fontSize: '18px' }}
+                        >
+                            基于YOLOv8深度学习模型的农作物害虫智能识别平台
+                        </Paragraph>
+                    </Space>
                     <Divider />
                 </Col>
 
-                <Col xs={24} sm={12} md={12} lg={8}>
-                    <Card
-                        hoverable
-                        style={{ height: '100%' }}
-                        cover={
-                            <div
-                                style={{
-                                    height: 180,
-                                    background: '#f5f5f5',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                }}
+                {/* 功能卡片区域 */}
+                <Col span={24}>
+                    <Row gutter={[24, 24]} justify="center">
+                        <Col xs={24} sm={12} md={12} lg={8}>
+                            <MediaCard
+                                title="图像识别"
+                                icon={<FileImageOutlined />}
+                                description="上传单张或批量图像进行害虫识别，支持高精度目标检测和结果标注"
+                                actionPath="/image-detection"
+                                iconColor="#1890ff"
+                            />
+                        </Col>
+
+                        <Col xs={24} sm={12} md={12} lg={8}>
+                            <MediaCard
+                                title="视频识别"
+                                icon={<VideoCameraOutlined />}
+                                description="上传视频文件进行害虫实时检测，支持逐帧分析和时间线结果展示"
+                                actionPath="/video-detection"
+                                iconColor="#52c41a"
+                            />
+                        </Col>
+                    </Row>
+                </Col>
+
+                {/* 特性介绍区域 */}
+                <Col span={24}>
+                    <Divider orientation="left">系统特点</Divider>
+                    <Row gutter={[24, 24]}>
+                        <Col span={24} md={8}>
+                            <Card
+                                title="高效便捷"
+                                bordered={false}
+                                className="feature-card"
+                                extra={<RocketOutlined />}
                             >
-                                <FileImageOutlined
-                                    style={{ fontSize: 64, color: '#1890ff' }}
-                                />
-                            </div>
-                        }
-                        actions={[
-                            <Link to="/image-detection" key="image-link">
-                                <Button type="primary">开始使用</Button>
-                            </Link>,
-                        ]}
-                    >
-                        <Card.Meta
-                            title="图像识别"
-                            description="上传单张或批量图像进行害虫识别，支持高精度目标检测和结果标注"
-                        />
-                    </Card>
-                </Col>
-
-                <Col xs={24} sm={12} md={12} lg={8}>
-                    <Card
-                        hoverable
-                        style={{ height: '100%' }}
-                        cover={
-                            <div
-                                style={{
-                                    height: 180,
-                                    background: '#f5f5f5',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                }}
+                                快速上传图片或视频文件，系统自动进行害虫识别并返回结果
+                            </Card>
+                        </Col>
+                        <Col span={24} md={8}>
+                            <Card
+                                title="准确可靠"
+                                bordered={false}
+                                className="feature-card"
+                                extra={<SafetyCertificateOutlined />}
                             >
-                                <VideoCameraOutlined
-                                    style={{ fontSize: 64, color: '#52c41a' }}
-                                />
-                            </div>
-                        }
-                        actions={[
-                            <Link to="/video-detection" key="video-link">
-                                <Button type="primary">开始使用</Button>
-                            </Link>,
-                        ]}
-                    >
-                        <Card.Meta
-                            title="视频识别"
-                            description="上传视频文件进行害虫实时检测，支持逐帧分析和时间线结果展示"
-                        />
-                    </Card>
-                </Col>
-            </Row>
-
-            <Divider style={{ margin: '40px 0' }} />
-
-            <Row gutter={[16, 16]}>
-                <Col span={24} md={8}>
-                    <Card title="高效便捷">
-                        <p>
-                            快速上传图片或视频文件，系统自动进行害虫识别并返回结果
-                        </p>
-                    </Card>
-                </Col>
-                <Col span={24} md={8}>
-                    <Card title="准确可靠">
-                        <p>
-                            基于先进的YOLOv8目标检测模型，准确率高，可识别多种常见农作物害虫
-                        </p>
-                    </Card>
-                </Col>
-                <Col span={24} md={8}>
-                    <Card title="功能丰富">
-                        <p>
-                            支持单张识别、批量处理和视频分析，提供详细的检测结果和标注图像
-                        </p>
-                    </Card>
+                                基于先进的YOLOv8目标检测模型，准确率高，可识别多种常见农作物害虫
+                            </Card>
+                        </Col>
+                        <Col span={24} md={8}>
+                            <Card
+                                title="功能丰富"
+                                bordered={false}
+                                className="feature-card"
+                                extra={<AppstoreOutlined />}
+                            >
+                                支持单张识别、批量处理和视频分析，提供详细的检测结果和标注图像
+                            </Card>
+                        </Col>
+                    </Row>
                 </Col>
             </Row>
         </div>
