@@ -2,11 +2,25 @@
 
 fastapi==0.115.11
 fastapi-users==14.0.1
+ipython==8.12.3
+matplotlib==3.10.1
 numpy==2.1.1
 opencv-python-headless==4.11.0.86
+pandas==2.2.3
+pillow==11.1.0
+psutil==7.0.0
+py-cpuinfo==9.0.0
 pydantic==2.10.6
 pydantic-settings==2.8.1
+PyYAML==6.0.2
 redis==5.0.1
+requests==2.32.3
+scipy==1.15.2
+seaborn==0.13.2
+setuptools==75.8.2
 SQLAlchemy==2.0.38
-# ultralytics==8.3.83
+torch==2.6.0
+torchvision==0.21.0
+tqdm==4.67.1
+# ultralytics-thop==2.0.14
 uvicorn==0.34.0

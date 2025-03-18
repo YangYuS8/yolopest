@@ -1,0 +1,10 @@
+Metadata-Version: 2.2
+Name: ultralytics
+Version: 8.3.83
+Requires-Dist: numpy>=1.18.5
+Requires-Dist: opencv-python-headless>=4.1.1
+Requires-Dist: torch>=1.7.0
+Requires-Dist: torchvision>=0.8.1
+Requires-Dist: matplotlib>=3.2.2
+Requires-Dist: scipy>=1.4.1
+Dynamic: requires-dist
