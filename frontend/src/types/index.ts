@@ -3,6 +3,7 @@
 export interface DetectionItem {
     class: string
     confidence: number
+    pest?: string // 添加可选的pest属性
     bbox?: {
         x1: number
         y1: number
@@ -18,6 +19,7 @@ export interface PestResult {
         confidence: number
         description?: string
     }
+    predictions?: DetectionItem[] // 添加此字段
     annotated_image?: string
     time_cost: number
     message?: string
@@ -69,7 +71,9 @@ export interface VideoResult {
     status: string
     video_path?: string
     annotated_video_path?: string
-    results?: DetectionItem[]
+    time_cost?: number
+    annotated_video_url?: string
+    results: VideoDetectionFrame[] // 修改为正确的类型
     timestamp?: string
     error?: string
     video_length?: number
