@@ -22,12 +22,12 @@ const DetectionItemDisplay: React.FC<DetectionItemDisplayProps> = ({
                     {(prediction.confidence * 100).toFixed(1)}%
                 </Tag>
             </p>
-            {prediction.box && (
+            {prediction.bbox && (
                 <p>
-                    位置: X[{Math.round(prediction.box.x1)}-
-                    {Math.round(prediction.box.x2)}] Y[
-                    {Math.round(prediction.box.y1)}-
-                    {Math.round(prediction.box.y2)}]
+                    位置: X[{Math.round(prediction.bbox.x1)}-
+                    {Math.round(prediction.bbox.x2)}] Y[
+                    {Math.round(prediction.bbox.y1)}-
+                    {Math.round(prediction.bbox.y2)}]
                 </p>
             )}
         </div>

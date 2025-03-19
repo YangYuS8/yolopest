@@ -3,7 +3,12 @@
 export interface DetectionItem {
     class: string
     confidence: number
-    bbox?: [number, number, number, number]
+    bbox?: {
+        x1: number
+        y1: number
+        x2: number
+        y2: number
+    }
 }
 
 export interface PestResult {
@@ -26,11 +31,21 @@ export interface BatchFileResult {
     error?: string
 }
 
+// 添加或更新批处理结果类型
 export interface BatchProcessResult {
-    status: string
-    time_cost: number
     processed_count: number
-    results: BatchFileResult[]
+    error_count?: number
+    results: Array<{
+        filename: string
+        status: 'success' | 'error' | 'no_detection'
+        message?: string
+        predictions?: Array<{
+            class: string
+            confidence: number
+            bbox?: [number, number, number, number] // 后端返回的是bbox
+        }>
+        annotated_image?: string
+    }>
 }
 
 // 视频检测结果帧（正确定义）
@@ -57,6 +72,9 @@ export interface VideoResult {
     results?: DetectionItem[]
     timestamp?: string
     error?: string
+    video_length?: number
+    processed_frames?: number
+    fps?: number
 }
 
 // 添加以下导出

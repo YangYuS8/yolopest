@@ -23,7 +23,9 @@ async def process_video_async(file: UploadFile = File(...)):
             "message": "视频已提交处理，请使用任务ID查询结果"
         }
     except Exception as e:
-        print(f"视频处理错误: {str(e)}")
+        import traceback
+        error_details = traceback.format_exc()
+        print(f"视频处理错误: {str(e)}\n{error_details}")
         raise HTTPException(status_code=500, detail=f"处理视频时出错: {str(e)}")
 
 @router.get("/status/{task_id}")

@@ -30,7 +30,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                         boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
                     },
                     Layout: {
-                        colorBgHeader: '#001529',
+                        headerBg: '#001529',
                     },
                 },
             }}

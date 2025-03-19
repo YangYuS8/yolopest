@@ -61,7 +61,7 @@ const Home: React.FC = () => {
                         <Col span={24} md={8}>
                             <Card
                                 title="高效便捷"
-                                bordered={false}
+                                variant="borderless"
                                 className="feature-card"
                                 extra={<RocketOutlined />}
                             >
@@ -71,7 +71,7 @@ const Home: React.FC = () => {
                         <Col span={24} md={8}>
                             <Card
                                 title="准确可靠"
-                                bordered={false}
+                                variant="borderless"
                                 className="feature-card"
                                 extra={<SafetyCertificateOutlined />}
                             >
@@ -81,7 +81,7 @@ const Home: React.FC = () => {
                         <Col span={24} md={8}>
                             <Card
                                 title="功能丰富"
-                                bordered={false}
+                                variant="borderless"
                                 className="feature-card"
                                 extra={<AppstoreOutlined />}
                             >

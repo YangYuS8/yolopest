@@ -34,17 +34,22 @@ export const useImageUpload = () => {
                 thumbnail: data.annotated_image || previewImage,
                 // 精简结果，确保与类型定义匹配 - 避免使用 PestResult 中不存在的属性
                 result: {
-                    time_cost: data.time_cost,
-                    // 移除不存在的 message 属性，根据类型定义重构
                     status: 'success', // 假设这是需要的属性
-                    results: data.results.map((item) => ({
-                        class: item.class,
-                        confidence: item.confidence,
-                        // 确保 bbox 属性存在且格式正确
-                        bbox: item.bbox || [0, 0, 0, 0],
-                    })),
-                    // 我们可以添加一个合法的属性来存储消息
-                    annotated_image: data.annotated_image,
+                    time_cost: data.time_cost,
+                    // 修改这里，将results映射为predictions
+                    // 添加类型注解，解决隐式any问题
+                    predictions: data.results.map(
+                        (item: {
+                            class: string
+                            confidence: number
+                            bbox?: [number, number, number, number]
+                        }) => ({
+                            class: item.class,
+                            confidence: item.confidence,
+                            box: item.bbox || [0, 0, 0, 0], // 使用box而不是bbox
+                        })
+                    ),
+                    // 移除非法属性 annotated_image
                 },
             })
         } catch (error: unknown) {

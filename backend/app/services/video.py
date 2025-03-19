@@ -33,32 +33,61 @@ class VideoProcessor:
     
     async def create_task(self, video_bytes: bytes) -> str:
         """创建视频处理任务，返回任务ID"""
-        task_id = str(uuid.uuid4())
-        redis = await self.get_redis()
-        
-        # 保存视频到临时文件
-        with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as tmp:
-            tmp.write(video_bytes)
-            video_path = tmp.name
-        
-        # 创建任务信息
-        task_info = {
-            "id": task_id,
-            "status": VideoTaskStatus.PENDING,
-            "video_path": video_path,
-            "created_at": time.time(),
-            "progress": 0
-        }
-        
-        # 保存到Redis
-        await redis.set(f"video_task:{task_id}", repr(task_info))
-        # 将任务添加到队列
-        await redis.lpush("video_tasks_queue", task_id)
-        
-        # 启动后台任务处理
-        asyncio.create_task(self._process_video(task_id))
-        
-        return task_id
+        try:
+            task_id = str(uuid.uuid4())
+            
+            # 确保可以连接Redis
+            try:
+                redis = await self.get_redis()
+                # 测试连接是否有效
+                await redis.ping()
+            except Exception as redis_error:
+                print(f"Redis连接错误: {str(redis_error)}")
+                raise Exception(f"无法连接到Redis服务: {str(redis_error)}")
+            
+            # 确保临时目录存在且可写
+            temp_dir = tempfile.gettempdir()
+            os.makedirs(os.path.join(temp_dir, "yolopest_videos"), exist_ok=True)
+            
+            # 保存视频到临时文件
+            with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4', dir=os.path.join(temp_dir, "yolopest_videos")) as tmp:
+                tmp.write(video_bytes)
+                video_path = tmp.name
+            
+            # 验证视频文件
+            try:
+                cap = cv2.VideoCapture(video_path)
+                if not cap.isOpened():
+                    raise Exception(f"无法打开视频文件: {video_path}")
+                cap.release()
+            except Exception as video_error:
+                os.unlink(video_path)
+                print(f"视频验证失败: {str(video_error)}")
+                raise Exception(f"视频格式无效或不受支持: {str(video_error)}")
+            
+            # 创建任务信息
+            task_info = {
+                "id": task_id,
+                "status": VideoTaskStatus.PENDING,
+                "video_path": video_path,
+                "created_at": time.time(),
+                "progress": 0
+            }
+            
+            # 保存到Redis
+            await redis.set(f"video_task:{task_id}", repr(task_info))
+            # 将任务添加到队列
+            await redis.lpush("video_tasks_queue", task_id)
+            
+            # 启动后台任务处理
+            asyncio.create_task(self._process_video(task_id))
+            
+            return task_id
+        except Exception as e:
+            import traceback
+            stack_trace = traceback.format_exc()
+            print(f"创建视频处理任务失败: {str(e)}\n{stack_trace}")
+            raise
     
     async def get_task_status(self, task_id: str) -> Dict[str, Any]:
         """获取任务状态"""
@@ -135,7 +164,7 @@ class VideoProcessor:
             start_time = time.time()
             
             # 每隔几帧处理一次（根据视频长度调整）
-            frame_interval = max(1, int(fps / 2))  # 每秒处理2帧
+            frame_interval = max(1, int(fps / 30))  # 每秒处理30帧
             
             frame_idx = 0
             while cap.isOpened():
@@ -198,7 +227,7 @@ class VideoProcessor:
             processing_time = end_time - start_time
             
             # 确保静态目录存在
-            static_dir = os.path.join(settings.static_dir, "videos")
+            static_dir = os.path.join("app", "static", "videos")
             os.makedirs(static_dir, exist_ok=True)
             
             # 创建静态文件URL

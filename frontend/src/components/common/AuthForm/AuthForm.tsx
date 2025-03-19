@@ -32,7 +32,7 @@ const AuthForm = <T extends Record<string, unknown>>({
 }: AuthFormProps<T>): React.ReactElement => {
     return (
         <div className="auth-form-container">
-            <Card bordered={false} className="auth-form-card">
+            <Card variant="borderless" className="auth-form-card">
                 <Space
                     direction="vertical"
                     size="large"

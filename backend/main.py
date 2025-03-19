@@ -4,6 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from app.core.config import get_settings
 from app.api.router import router  # 使用新的路由聚合
 from app.routers import history  # 保留原有路由
+from app.api import video  # 添加这一行导入视频模块
 import uvicorn
 import logging
 import sys
@@ -39,6 +40,13 @@ app.mount("/api/static", StaticFiles(directory=os.path.join("app", "static")), n
 # 挂载API路由
 app.include_router(router, prefix="/api")
 app.include_router(history.router, prefix="/api")  # 保留原有路由
+
+# 添加视频处理路由 - 添加这部分代码
+app.include_router(
+    video.router,
+    prefix="/api/video",
+    tags=["video"]
+)
 
 @app.get("/")
 async def health_check():

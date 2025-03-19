@@ -1,24 +1,25 @@
 import axios from 'axios'
 import { handleApiError } from './errorHandler'
 
-// 创建 axios 实例
+// 检查并确保baseURL配置正确
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api',
+    baseURL: 'http://localhost:8000/api', // 确保这与后端路由匹配
+    timeout: 10000,
+    headers: {
+        'Content-Type': 'application/json',
+    },
 })
 
-// 请求拦截器
+// 添加请求拦截器，自动附加token
 api.interceptors.request.use(
     (config) => {
-        // 从本地存储获取 token
         const token = localStorage.getItem('accessToken')
         if (token) {
             config.headers.Authorization = `Bearer ${token}`
         }
         return config
     },
-    (error) => {
-        return Promise.reject(error)
-    }
+    (error) => Promise.reject(error)
 )
 
 // 响应拦截器

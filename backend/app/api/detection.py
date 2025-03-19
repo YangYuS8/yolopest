@@ -9,6 +9,7 @@ from app.models.user import User
 from app.core.users import current_active_user
 from typing import List
 import time
+import base64
 
 # 确保目录存在
 os.makedirs(os.path.join("app", "static", "uploads"), exist_ok=True)
@@ -39,10 +40,19 @@ async def upload_image(
         annotated_image = None
         annotated_path = None
         if predictions:
-            annotated_image = detector.annotate_image(image_bytes, predictions)
+            # 获取base64图像
+            annotated_base64 = detector.annotate_image(image_bytes, predictions)
+            # 删除data:image/jpeg;base64,前缀
+            base64_data = annotated_base64.replace("data:image/jpeg;base64,", "")
+            # 解码base64为二进制
+            annotated_image_bytes = base64.b64decode(base64_data)
+            # 保存标注图像
             annotated_path = os.path.join("app", "static", "annotated", file.filename)
             with open(annotated_path, "wb") as f:
-                f.write(annotated_image)
+                f.write(annotated_image_bytes)
+            
+            # 用于返回的图像URL
+            annotated_image = f"/api/static/annotated/{file.filename}"
         
         # 保存到数据库 (无论是否检测到都保存记录)
         new_detection = Detection(
@@ -98,10 +108,19 @@ async def upload_multiple_images(
             annotated_image = None
             annotated_path = None
             if predictions:
-                annotated_image = detector.annotate_image(image_bytes, predictions)
+                # 获取base64图像
+                annotated_base64 = detector.annotate_image(image_bytes, predictions)
+                # 删除data:image/jpeg;base64,前缀
+                base64_data = annotated_base64.replace("data:image/jpeg;base64,", "")
+                # 解码base64为二进制
+                annotated_image_bytes = base64.b64decode(base64_data)
+                
+                # 保存标注图像
                 annotated_path = os.path.join("app", "static", "annotated", file.filename)
                 with open(annotated_path, "wb") as f:
-                    f.write(annotated_image)
+                    f.write(annotated_image_bytes)
+                
+                annotated_image = f"/api/static/annotated/{file.filename}"
             
             # 保存到数据库
             new_detection = Detection(

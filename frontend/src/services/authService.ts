@@ -1,4 +1,5 @@
 import api from '../utils/axiosConfig'
+import { isAxiosError } from 'axios'
 import type { TokenResponse, UserResponse } from '../types/user'
 
 // 登录 - 不再使用完整 URL 拼接
@@ -6,22 +7,28 @@ export const login = async (
     email: string,
     password: string
 ): Promise<TokenResponse> => {
-    const formData = new URLSearchParams()
-    formData.append('username', email) // FastAPI Users 使用 username 作为参数名
-    formData.append('password', password)
+    try {
+        // 创建表单数据
+        const formData = new URLSearchParams()
+        formData.append('username', email)
+        formData.append('password', password)
 
-    const response = await api.post('/auth/login', formData, {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    })
+        const response = await api.post('/auth/login', formData, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        })
 
-    // 保存token到localStorage
-    if (response.data.access_token) {
-        localStorage.setItem('accessToken', response.data.access_token)
-        api.defaults.headers.common['Authorization'] =
-            `Bearer ${response.data.access_token}`
+        // 处理响应...
+        const { access_token } = response.data
+        localStorage.setItem('accessToken', access_token)
+        api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
+
+        return response.data
+    } catch (error) {
+        console.error('登录失败', error)
+        throw error
     }
-
-    return response.data
 }
 
 // 注册 - 不再使用完整 URL 拼接
@@ -45,11 +52,15 @@ export const getCurrentUser = async (): Promise<UserResponse | null> => {
     if (!token) return null
 
     try {
-        // 使用正确的用户端点
         const response = await api.get<UserResponse>('/users/me')
         return response.data
     } catch (error) {
         console.error('获取用户信息失败', error)
+        // 如果是401错误，清除无效token
+        if (isAxiosError(error) && error.response?.status === 401) {
+            console.log('Token无效或已过期，正在清除...')
+            logout() // 自动登出，清除无效token
+        }
         return null
     }
 }

@@ -1,12 +1,16 @@
-import api from '../utils/axiosConfig' // 使用统一的 api 实例
+import api from '../utils/axiosConfig'
 import { useState, useCallback, useEffect } from 'react'
-import { HistoryRecord } from '../types/history'
+import { HistoryRecord } from '../types/history' // 使用导入的类型，删除本地定义
 
 // 缓存设置
 const CACHE_TTL = 60000 // 1分钟缓存
 let cachedRecords: HistoryRecord[] | null = null
 let lastFetchTime = 0
 
+/**
+ * 获取历史记录
+ * 支持可选的类型过滤和强制刷新缓存
+ */
 export const getHistoryRecords = async (
     type?: string,
     forceRefresh = false
@@ -25,9 +29,10 @@ export const getHistoryRecords = async (
             return cachedRecords
         }
 
-        // 构建URL参数对象，而不是拼接字符串
+        // 根据是否有type参数决定API路径
+        const endpoint = '/history/'
         const params = type ? { type } : undefined
-        const response = await api.get('/history', { params })
+        const response = await api.get(endpoint, { params })
 
         cachedRecords = response.data
         lastFetchTime = Date.now()
@@ -38,6 +43,7 @@ export const getHistoryRecords = async (
     }
 }
 
+// 其他单个记录操作函数
 export const getHistoryRecord = async (
     id: string
 ): Promise<HistoryRecord | null> => {
@@ -75,6 +81,7 @@ export const clearAllHistory = async (): Promise<boolean> => {
 export const createHistoryRecord = async (
     data: Omit<HistoryRecord, 'id' | 'timestamp'>
 ): Promise<HistoryRecord | null> => {
+    // 现有实现...
     try {
         const response = await api.post('/history', data)
         cachedRecords = null
@@ -89,30 +96,11 @@ export const createHistoryRecord = async (
  * 添加历史记录的简化函数
  */
 export const addHistoryRecord = async (
-    record: Partial<HistoryRecord>
+    record: HistoryRecord
 ): Promise<void> => {
-    try {
-        // 确保时间戳始终是数字类型
-        const serializedRecord = {
-            ...record,
-            timestamp:
-                typeof record.timestamp === 'number'
-                    ? record.timestamp
-                    : Date.now(),
-            // 确保结果是有效的JSON
-            result: record.result
-                ? JSON.parse(JSON.stringify(record.result))
-                : {},
-        }
-
-        await createHistoryRecord(
-            serializedRecord as Omit<HistoryRecord, 'id' | 'timestamp'>
-        )
-        // 清除缓存
-        cachedRecords = null
-    } catch (error) {
-        console.error('保存历史记录失败:', error)
-    }
+    await api.post('/history/', record)
+    // 清除缓存，确保下次获取记录时能获取最新数据
+    cachedRecords = null
 }
 
 /**
@@ -128,6 +116,7 @@ export const useHistory = (type?: 'image' | 'video') => {
             setLoading(true)
             setError(null)
             try {
+                // 确保传递正确的参数
                 const data = await getHistoryRecords(type, forceRefresh)
                 setRecords(data)
             } catch (error) {
@@ -148,11 +137,13 @@ export const useHistory = (type?: 'image' | 'video') => {
         try {
             const success = await deleteHistoryRecord(id)
             if (success) {
+                // 如果删除成功，更新本地记录列表
                 setRecords((prev) => prev.filter((record) => record.id !== id))
             }
             return success
         } catch (error) {
-            console.error('删除历史记录失败:', error)
+            console.error(`删除历史记录 ${id} 失败:`, error)
+            setError('删除历史记录失败')
             return false
         }
     }, [])
@@ -166,6 +157,7 @@ export const useHistory = (type?: 'image' | 'video') => {
             return success
         } catch (error) {
             console.error('清除所有历史记录失败:', error)
+            setError('清除历史记录失败')
             return false
         }
     }, [])

@@ -30,7 +30,7 @@ const { confirm } = Modal
 
 const History: React.FC = () => {
     const [activeTab, setActiveTab] = useState<string>('all')
-    const { records, loading, refreshRecords, deleteRecord, clearRecords } =
+    const { records, loading, refreshRecords, deleteRecord, clearAllRecords } =
         useHistory(
             activeTab === 'all' ? undefined : (activeTab as 'image' | 'video')
         )
@@ -52,7 +52,7 @@ const History: React.FC = () => {
             icon: <ExclamationCircleOutlined />,
             content: '清空后将无法恢复',
             onOk() {
-                clearRecords()
+                clearAllRecords()
             },
         })
     }
@@ -74,7 +74,20 @@ const History: React.FC = () => {
                         />
                         <Divider orientation="left">检测结果</Divider>
                         <p>检测耗时: {imgResult.time_cost}s</p>
-                        <p>检测到 {imgResult.results.length} 个目标</p>
+                        {imgResult.result ? (
+                            <p>
+                                检测结果: {imgResult.result.pest}
+                                (置信度:{' '}
+                                {imgResult.result.confidence.toFixed(2)})
+                                {imgResult.result.description && (
+                                    <div>
+                                        描述: {imgResult.result.description}
+                                    </div>
+                                )}
+                            </p>
+                        ) : (
+                            <p>未检测到目标</p>
+                        )}
                     </>
                 )
             }

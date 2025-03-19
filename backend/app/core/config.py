@@ -18,6 +18,9 @@ class Settings(BaseSettings):
         "DATABASE_URL", 
         f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@localhost:5432/{POSTGRES_DB}"
     )
+
+    # Redis配置
+    redis_url: str = os.getenv("REDIS_URL", "redis://localhost:6379/0")    
     
     # 为了向后兼容，保留小写版本
     @property
