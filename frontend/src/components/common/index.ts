@@ -22,3 +22,4 @@ export {
 export { default as LoadingDisplay } from './LoadingDisplay/LoadingDisplay'
 export { default as CardContainer } from './CardContainer/CardContainer'
 export { default as ErrorDisplay } from './ErrorDisplay/ErrorDisplay'
+export { default as PageHeader } from './PageHeader/PageHeader'

@@ -11,9 +11,11 @@ import {
     SwapOutlined,
 } from '@ant-design/icons'
 import type { RangePickerProps } from 'antd/es/date-picker'
-import { TrendChart } from '../components/charts/TrendChart/TrendChart'
-import { DistributionChart } from '../components/charts/DistributionChart/DistributionChart'
-import { ConfidenceChart } from '../components/charts/ConfidenceChart/ConfidenceChart'
+import {
+    DistributionChart,
+    TrendChart,
+    ConfidenceChart,
+} from '../components/charts'
 import { AccuracyAnalysis } from '../components/analysis/AccuracyAnalysis/AccuracyAnalysis'
 import { SpatialDistribution } from '../components/analysis/SpatialDistribution/SpatialDistribution'
 import { ComparisonAnalysis } from '../components/analysis/ComparisonAnalysis/ComparisonAnalysis'

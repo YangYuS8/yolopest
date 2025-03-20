@@ -14,6 +14,7 @@ import { VideoUploader, VideoPlayer } from '../components/media'
 import { useVideoUpload } from '../hooks/useVideoUpload'
 import { useVideoPlayer } from '../hooks/useVideoPlayer'
 import { getPestStatistics } from '../services/mediaService'
+import { PageLayout } from '../components/layout'
 
 const VideoDetection: React.FC = () => {
     const {
@@ -46,10 +47,7 @@ const VideoDetection: React.FC = () => {
     }, [result])
 
     return (
-        <div style={{ padding: '20px', width: '100%' }}>
-            <h1>视频害虫检测</h1>
-            <Divider />
-
+        <PageLayout title="视频害虫检测">
             <Row gutter={[16, 16]}>
                 <Col span={24} md={12}>
                     <VideoUploader onVideoSelect={handleVideoSelect} />
@@ -190,7 +188,7 @@ const VideoDetection: React.FC = () => {
                     )}
                 </Col>
             </Row>
-        </div>
+        </PageLayout>
     )
 }
 

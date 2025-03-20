@@ -7,9 +7,9 @@ import {
     Legend,
     ResponsiveContainer,
 } from 'recharts'
-import { Space, Tooltip, Card } from 'antd'
-import { InfoCircleOutlined } from '@ant-design/icons'
-import { ChartDownloadButton } from '../../common/ChartDownloadButton/ChartDownloadButton'
+import { Card } from 'antd'
+import { BaseChartContainer } from '../BaseChartContainer/BaseChartContainer'
+import { ChartTheme } from '../../../utils/chartTheme'
 
 interface DistributionChartProps {
     data: {
@@ -17,18 +17,6 @@ interface DistributionChartProps {
         value: number
     }[]
 }
-
-// 颜色配置
-const COLORS = [
-    '#0088FE',
-    '#00C49F',
-    '#FFBB28',
-    '#FF8042',
-    '#8884d8',
-    '#82ca9d',
-    '#ffc658',
-    '#8dd1e1',
-]
 
 export const DistributionChart: React.FC<DistributionChartProps> = ({
     data,
@@ -45,29 +33,11 @@ export const DistributionChart: React.FC<DistributionChartProps> = ({
 
     return (
         <Card>
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginBottom: 20,
-                }}
-            >
-                <h3 style={{ margin: 0 }}>害虫类型分布</h3>
-                <Space>
-                    <Tooltip title="查看各类型害虫的分布情况">
-                        <InfoCircleOutlined />
-                    </Tooltip>
-                    <ChartDownloadButton
-                        containerSelector=".distribution-chart-container"
-                        fileNamePrefix="害虫类型分布"
-                    />
-                </Space>
-            </div>
-
-            <div
-                className="distribution-chart-container"
-                style={{ width: '100%', height: 400 }}
+            <BaseChartContainer
+                title="害虫类型分布"
+                tooltip="查看各类型害虫的分布情况"
+                containerSelector=".distribution-chart-container"
+                fileNamePrefix="害虫类型分布"
             >
                 <ResponsiveContainer>
                     <PieChart>
@@ -84,11 +54,20 @@ export const DistributionChart: React.FC<DistributionChartProps> = ({
                                 `${name}: ${(percent * 100).toFixed(1)}%`
                             }
                             labelLine={true}
+                            isAnimationActive={true}
+                            animationBegin={0}
+                            animationDuration={1200}
+                            animationEasing="ease-out"
                         >
                             {chartData.map((_, index) => (
                                 <Cell
                                     key={`cell-${index}`}
-                                    fill={COLORS[index % COLORS.length]}
+                                    fill={
+                                        ChartTheme.colors.primary[
+                                            index %
+                                                ChartTheme.colors.primary.length
+                                        ]
+                                    }
                                 />
                             ))}
                         </Pie>
@@ -104,10 +83,11 @@ export const DistributionChart: React.FC<DistributionChartProps> = ({
                                 ).toFixed(1)
                                 return [`${value} (${percent}%)`, name]
                             }}
+                            contentStyle={ChartTheme.tooltipStyle}
                         />
                     </PieChart>
                 </ResponsiveContainer>
-            </div>
+            </BaseChartContainer>
 
             <div style={{ textAlign: 'center', marginTop: 10 }}>
                 <div style={{ fontSize: '16px' }}>害虫种类</div>

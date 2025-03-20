@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Row, Col, Tabs, Button } from 'antd' // 移除 Divider
+import { Row, Col, Tabs, Button } from 'antd'
 import type { TabsProps } from 'antd'
 import { ImageUploader } from '../components/media'
 import { ResultDisplay, BatchResultDisplay } from '../components/display'

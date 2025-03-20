@@ -45,7 +45,7 @@ const PageLayout = ({ children }: PageLayoutProps): React.ReactElement => {
                         key: item.key,
                         label: <Link to={item.key}>{item.label}</Link>,
                     }))}
-                    style={{ flex: 1, minWidth: 0 }}
+                    style={{ flex: 1, minWidth: 0, outline: 'none' }}
                 />
             </Header>
             <Content style={{ padding: '0 50px', marginTop: 16 }}>

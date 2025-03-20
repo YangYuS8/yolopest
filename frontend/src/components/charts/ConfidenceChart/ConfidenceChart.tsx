@@ -18,6 +18,12 @@ interface ConfidenceChartProps {
     data: number[]
 }
 
+interface ConfidenceInterval {
+    range: string
+    count: number
+    confidence: number
+}
+
 export const ConfidenceChart: React.FC<ConfidenceChartProps> = ({ data }) => {
     // 处理数据为区间分布
     const chartData = useMemo(() => {
@@ -51,7 +57,19 @@ export const ConfidenceChart: React.FC<ConfidenceChartProps> = ({ data }) => {
     const optimizedChartData = useMemo(() => {
         // 如果数据量过大，将多个区间合并
         if (chartData.length > 20) {
-            // 合并处理逻辑...
+            // 这里实现合并逻辑，例如每2个区间合并为1个
+            const mergedData: ConfidenceInterval[] = []
+            for (let i = 0; i < chartData.length; i += 2) {
+                if (i + 1 < chartData.length) {
+                    mergedData.push({
+                        range: `${chartData[i].range.split('-')[0]}-${chartData[i + 1].range.split('-')[1]}`,
+                        count: chartData[i].count + chartData[i + 1].count,
+                        confidence: chartData[i].confidence,
+                    })
+                } else {
+                    mergedData.push(chartData[i])
+                }
+            }
             return mergedData
         }
         return chartData
@@ -124,12 +142,14 @@ export const ConfidenceChart: React.FC<ConfidenceChartProps> = ({ data }) => {
                             name="检测数量"
                             radius={[8, 8, 0, 0]}
                         >
-                            {optimizedChartData.map((entry, index) => (
-                                <Cell
-                                    key={`cell-${index}`}
-                                    fill={getBarColor(entry.confidence)}
-                                />
-                            ))}
+                            {optimizedChartData.map(
+                                (entry: ConfidenceInterval, index: number) => (
+                                    <Cell
+                                        key={`cell-${index}`}
+                                        fill={getBarColor(entry.confidence)}
+                                    />
+                                )
+                            )}
                         </Bar>
                     </BarChart>
                 </ResponsiveContainer>

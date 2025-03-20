@@ -5,7 +5,6 @@ import {
     Empty,
     Modal,
     Tag,
-    Divider,
     Space,
     Image,
     Typography,
@@ -28,8 +27,9 @@ import { HistoryRecord } from '../types/history'
 import { PestResult, VideoResult } from '../types'
 import type { TabsProps } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
+import { PageHeader } from '../components/common/PageHeader/PageHeader'
 
-const { Title, Text } = Typography
+const { Text } = Typography
 const { confirm } = Modal
 
 const History: React.FC = () => {
@@ -339,43 +339,36 @@ const History: React.FC = () => {
         },
     ]
 
+    const headerActions = (
+        <>
+            <Button
+                icon={<ReloadOutlined />}
+                onClick={() => refreshRecords(true)}
+                loading={loading}
+            >
+                刷新
+            </Button>
+
+            {records.length > 0 && (
+                <Button
+                    danger
+                    onClick={handleClearAll}
+                    icon={<DeleteOutlined />}
+                >
+                    清空历史
+                </Button>
+            )}
+        </>
+    )
+
     return (
         <div style={{ padding: '20px' }}>
-            <Space
-                style={{
-                    marginBottom: 16,
-                    width: '100%',
-                    justifyContent: 'space-between',
-                }}
-            >
-                <Title level={2}>历史记录</Title>
-                <Space>
-                    <Button
-                        icon={<ReloadOutlined />}
-                        onClick={() => refreshRecords(true)}
-                        loading={loading}
-                    >
-                        刷新
-                    </Button>
-
-                    {records.length > 0 && (
-                        <Button
-                            danger
-                            onClick={handleClearAll}
-                            icon={<DeleteOutlined />}
-                        >
-                            清空历史
-                        </Button>
-                    )}
-                </Space>
-            </Space>
-
-            <Divider />
+            <PageHeader title="历史记录" actions={headerActions} />
 
             <Tabs
                 activeKey={activeTab}
-                items={tabs}
                 onChange={setActiveTab}
+                items={tabs}
                 style={{ marginBottom: 16 }}
             />
 
