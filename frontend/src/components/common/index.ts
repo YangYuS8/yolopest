@@ -2,7 +2,6 @@ import { ClearButton, SubmitButton } from './ActionButton/ActionButton'
 
 // 正确导出组件，根据项目实际结构
 import MediaCard from './MediaCard/MediaCard'
-import PageLayout from './PageLayout/PageLayout'
 import AuthForm from './AuthForm/AuthForm'
 
 // 根据README.md中的组件列表
@@ -14,7 +13,6 @@ export {
     ClearButton,
     SubmitButton,
     MediaCard,
-    PageLayout,
     AuthForm,
     ImagePreview,
     MediaPreview,
