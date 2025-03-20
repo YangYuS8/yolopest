@@ -10,6 +10,7 @@ export interface DetectionItem {
         x2: number
         y2: number
     }
+    box?: [number, number, number, number]
 }
 
 export interface PestResult {

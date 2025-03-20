@@ -14,6 +14,7 @@ import {
     HistoryOutlined,
     UserOutlined,
     LogoutOutlined,
+    AreaChartOutlined,
 } from '@ant-design/icons'
 import Home from './pages/Home'
 import Login from './pages/Login'
@@ -21,6 +22,7 @@ import Register from './pages/Register'
 import Profile from './pages/Profile'
 import ImageDetection from './pages/ImageDetection'
 import VideoDetection from './pages/VideoDetection'
+import Statistics from './pages/Statistics'
 import History from './pages/History'
 import { getCurrentUser, logout } from './services/authService'
 import { UserResponse } from './types/user'
@@ -103,6 +105,12 @@ const App: React.FC = () => {
                                         icon: <VideoCameraOutlined />,
                                         label: '视频识别',
                                         path: '/video-detection',
+                                    },
+                                    {
+                                        key: 'statistics',
+                                        icon: <AreaChartOutlined />,
+                                        label: '统计分析',
+                                        path: '/statistics',
                                     },
                                     {
                                         key: 'history',
@@ -199,6 +207,14 @@ const App: React.FC = () => {
                                     element={
                                         <ProtectedRoute>
                                             <VideoDetection />
+                                        </ProtectedRoute>
+                                    }
+                                />
+                                <Route
+                                    path="/statistics"
+                                    element={
+                                        <ProtectedRoute>
+                                            <Statistics />
                                         </ProtectedRoute>
                                     }
                                 />

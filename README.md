@@ -1,15 +1,15 @@
 # YoloPest 智能害虫检测系统
 
-全栈病虫害检测系统，基于 YOLOv8 实现害虫检测功能，包含 FastAPI 后端服务和 React 前端界面，提供图像上传与害虫识别功能。
+全栈病虫害检测系统，基于 YOLOv12 实现害虫检测功能，包含 FastAPI 后端服务和 React 前端界面，提供图像上传与害虫识别功能。
 
-![Tech Stack](https://img.shields.io/badge/stack-FastAPI%20%2B%20React%20%2B%20YOLOv8-blue)
+![Tech Stack](https://img.shields.io/badge/stack-FastAPI%20%2B%20React%20%2B%20YOLOv12-blue)
 
 ## 技术栈
 
 ### 后端
 
 -   **FastAPI** - Python 高性能 API 框架
--   **YOLOv8** - 目标检测模型（本地定制版）
+-   **YOLOv12** - 目标检测模型（本地定制版）
 -   **SQLAlchemy** - ORM 数据库映射
 -   **Redis** - 缓存与会话管理
 -   **Uvicorn** - ASGI 服务器
@@ -33,7 +33,7 @@
 -   ✅ 视频害虫识别分析
 -   ✅ 历史记录管理
 -   ✅ 个人信息管理
--   ✅ 自定义 YOLOv8 模型集成
+-   ✅ 自定义 YOLOv12 模型集成
 -   ✅ 实时检测结果可视化
 
 ## 快速开始
@@ -61,7 +61,7 @@ source .venv/bin/activate  # Linux/Mac
 # 安装依赖
 pip install -r requirements.txt
 
-# 安装本地修改的YOLOv8
+# 安装本地修改的YOLOv12
 pip install -e ./ultralytics
 
 # 初始化数据库表结构
@@ -103,7 +103,7 @@ docker-compose up --build
 │   │   ├── schemas/        # Pydantic模型
 │   │   ├── services/       # 业务逻辑
 │   │   └── static/         # 静态资源
-│   ├── ultralytics/        # 自定义修改的YOLOv8代码
+│   ├── ultralytics/        # 自定义修改的YOLOv12代码
 │   ├── main.py             # 应用入口
 │   ├── requirements.txt    # 依赖库
 │   └── create_tables.py    # 数据库初始化

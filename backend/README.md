@@ -1,11 +1,11 @@
 # YoloPest 后端
 
-基于 FastAPI + YOLOv8 构建的智能害虫检测系统后端，提供图像识别、视频分析和用户管理等核心功能。
+基于 FastAPI + YOLOv12 构建的智能害虫检测系统后端，提供图像识别、视频分析和用户管理等核心功能。
 
 ## 技术栈
 
 -   **FastAPI** - 高性能 Python API 框架
--   **YOLOv8** - 目标检测模型（本地定制版）
+-   **YOLOv12** - 目标检测模型（本地定制版）
 -   **SQLAlchemy** - ORM 数据库映射
 -   **Redis** - 缓存与会话管理
 -   **Uvicorn** - ASGI 服务器
@@ -20,7 +20,7 @@
 -   ✅ 图像害虫检测分析
 -   ✅ 视频处理与分析
 -   ✅ 检测历史记录管理
--   ✅ 自定义 YOLOv8 模型集成
+-   ✅ 自定义 YOLOv12 模型集成
 -   ✅ 静态资源管理
 
 ## 快速开始
@@ -42,7 +42,7 @@ source .venv/bin/activate  # Linux/Mac
 # 安装依赖
 pip install -r requirements.txt
 
-# 安装本地修改的YOLOv8
+# 安装本地修改的YOLOv12
 pip install -e ./ultralytics
 
 # 初始化数据库表结构
@@ -65,7 +65,7 @@ backend/
 │   ├── schemas/        # Pydantic模型
 │   ├── services/       # 业务逻辑
 │   └── static/         # 静态资源
-├── ultralytics/        # 自定义修改的YOLOv8代码
+├── ultralytics/        # 自定义修改的YOLOv12代码
 ├── main.py             # 应用入口
 ├── requirements.txt    # 依赖库
 └── create_tables.py    # 数据库初始化
@@ -98,7 +98,7 @@ Response:
 }
 ```
 
-## YOLOv8 集成
+## YOLOv12 集成
 
 PestDetector 类负责模型加载和推理：
 
@@ -128,7 +128,7 @@ class PestDetector:
 pip install opencv-python-headless==4.11.0.86
 ```
 
-### Q: 本地修改的 YOLOv8 如何应用
+### Q: 本地修改的 YOLOv12 如何应用
 
 安装为开发模式：
 

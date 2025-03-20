@@ -105,7 +105,7 @@ class PestDetector:
             # 解析结果
             predictions = self.parse_results(results)
             
-            # 使用结果的标注图像 - 使用YOLOv8原生plot方法
+            # 使用结果的标注图像 - 使用YOLOv12原生plot方法
             annotated_img = results[0].plot()
             annotated_img_bgr = cv2.cvtColor(annotated_img, cv2.COLOR_RGB2BGR)
             

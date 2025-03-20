@@ -23,7 +23,7 @@ const Home: React.FC = () => {
                             type="secondary"
                             style={{ fontSize: '18px' }}
                         >
-                            基于YOLOv8深度学习模型的农作物害虫智能识别平台
+                            基于YOLOv12深度学习模型的农作物害虫智能识别平台
                         </Paragraph>
                     </Space>
                     <Divider />
@@ -75,7 +75,7 @@ const Home: React.FC = () => {
                                 className="feature-card"
                                 extra={<SafetyCertificateOutlined />}
                             >
-                                基于先进的YOLOv8目标检测模型，准确率高，可识别多种常见农作物害虫
+                                基于先进的YOLOv12目标检测模型，准确率高，可识别多种常见农作物害虫
                             </Card>
                         </Col>
                         <Col span={24} md={8}>

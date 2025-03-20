@@ -56,7 +56,7 @@ const PageLayout = ({ children }: PageLayoutProps): React.ReactElement => {
                 </div>
             </Content>
             <Footer style={{ textAlign: 'center' }}>
-                YoloPest ©{currentYear} - 基于YOLOv8的智能害虫检测系统
+                YoloPest ©{currentYear} - 基于YOLOv12的智能害虫检测系统
             </Footer>
         </Layout>
     )
