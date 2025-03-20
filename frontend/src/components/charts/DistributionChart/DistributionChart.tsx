@@ -1,5 +1,15 @@
 import React from 'react'
-import { Pie } from '@ant-design/charts'
+import {
+    PieChart,
+    Pie,
+    Cell,
+    Tooltip as RechartsTooltip,
+    Legend,
+    ResponsiveContainer,
+} from 'recharts'
+import { Space, Tooltip, Card } from 'antd'
+import { InfoCircleOutlined } from '@ant-design/icons'
+import { ChartDownloadButton } from '../../common/ChartDownloadButton/ChartDownloadButton'
 
 interface DistributionChartProps {
     data: {
@@ -8,75 +18,103 @@ interface DistributionChartProps {
     }[]
 }
 
-// 改进类型定义，避免使用any
-interface PieItem {
-    type: string
-    value: number
-    // 可能包含的其他字段
-    percent?: number
-    _origin?: unknown
-}
+// 颜色配置
+const COLORS = [
+    '#0088FE',
+    '#00C49F',
+    '#FFBB28',
+    '#FF8042',
+    '#8884d8',
+    '#82ca9d',
+    '#ffc658',
+    '#8dd1e1',
+]
 
 export const DistributionChart: React.FC<DistributionChartProps> = ({
     data,
 }) => {
-    // 格式化数据以匹配Pie组件要求
+    // 计算总数以便获取百分比
+    const total = data.reduce((sum, item) => sum + item.value, 0)
+
+    // 格式化数据，预计算百分比
     const chartData = data.map((item) => ({
-        type: item.name,
+        name: item.name,
         value: item.value,
+        percent: total > 0 ? item.value / total : 0,
     }))
 
-    const config = {
-        data: chartData,
-        angleField: 'value',
-        colorField: 'type',
-        radius: 0.8,
-        innerRadius: 0.5,
-        label: {
-            // 添加安全检查防止undefined引发错误
-            formatter: (item: PieItem | undefined) => {
-                // 安全检查
-                if (!item || item.value === undefined) return ''
-
-                // 计算百分比
-                const sum = chartData.reduce((acc, curr) => acc + curr.value, 0)
-                const percent = sum > 0 ? (item.value / sum) * 100 : 0
-                return `${item.type || ''}: ${percent.toFixed(1)}%`
-            },
-            style: {
-                fontSize: 12,
-                textAlign: 'center',
-                fill: '#000000',
-                fontWeight: 500,
-            },
-            offset: 15,
-        },
-        legend: {
-            layout: 'horizontal',
-            position: 'bottom',
-        },
-        tooltip: {
-            formatter: (datum: PieItem | undefined) => {
-                if (!datum || datum.value === undefined)
-                    return { name: '未知', value: 0 }
-
-                const sum = chartData.reduce((acc, curr) => acc + curr.value, 0)
-                const percent = sum > 0 ? (datum.value / sum) * 100 : 0
-                return {
-                    name: datum.type || '',
-                    value: `${datum.value} (${percent.toFixed(1)}%)`,
-                }
-            },
-        },
-        interactions: [{ type: 'element-active' }],
-    }
-
     return (
-        <div>
-            <h3 style={{ textAlign: 'center', marginBottom: 20 }}>
-                害虫类型分布
-            </h3>
-            <Pie {...config} height={400} />
-        </div>
+        <Card>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: 20,
+                }}
+            >
+                <h3 style={{ margin: 0 }}>害虫类型分布</h3>
+                <Space>
+                    <Tooltip title="查看各类型害虫的分布情况">
+                        <InfoCircleOutlined />
+                    </Tooltip>
+                    <ChartDownloadButton
+                        containerSelector=".distribution-chart-container"
+                        fileNamePrefix="害虫类型分布"
+                    />
+                </Space>
+            </div>
+
+            <div
+                className="distribution-chart-container"
+                style={{ width: '100%', height: 400 }}
+            >
+                <ResponsiveContainer>
+                    <PieChart>
+                        <Pie
+                            data={chartData}
+                            cx="50%"
+                            cy="50%"
+                            innerRadius={60}
+                            outerRadius={80}
+                            paddingAngle={5}
+                            dataKey="value"
+                            nameKey="name"
+                            label={({ name, percent }) =>
+                                `${name}: ${(percent * 100).toFixed(1)}%`
+                            }
+                            labelLine={true}
+                        >
+                            {chartData.map((_, index) => (
+                                <Cell
+                                    key={`cell-${index}`}
+                                    fill={COLORS[index % COLORS.length]}
+                                />
+                            ))}
+                        </Pie>
+                        <Legend
+                            layout="horizontal"
+                            verticalAlign="bottom"
+                            align="center"
+                        />
+                        <RechartsTooltip
+                            formatter={(value, name, props) => {
+                                const percent = (
+                                    props.payload.percent * 100
+                                ).toFixed(1)
+                                return [`${value} (${percent}%)`, name]
+                            }}
+                        />
+                    </PieChart>
+                </ResponsiveContainer>
+            </div>
+
+            <div style={{ textAlign: 'center', marginTop: 10 }}>
+                <div style={{ fontSize: '16px' }}>害虫种类</div>
+                <div style={{ fontSize: '24px', fontWeight: 'bold' }}>
+                    {chartData.length}
+                </div>
+            </div>
+        </Card>
     )
 }

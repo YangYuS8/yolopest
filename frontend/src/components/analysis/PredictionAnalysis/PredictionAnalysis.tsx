@@ -1,6 +1,14 @@
-// 预测分析组件
 import React from 'react'
-import { Line } from '@ant-design/charts'
+import {
+    LineChart,
+    Line,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip as RechartsTooltip,
+    Legend,
+    ResponsiveContainer,
+} from 'recharts'
 import { Card, Switch, Tooltip, Button, Space } from 'antd'
 import { InfoCircleOutlined, DownloadOutlined } from '@ant-design/icons'
 
@@ -27,25 +35,27 @@ export const PredictionAnalysis: React.FC<PredictionAnalysisProps> = ({
             sumY = 0,
             sumXY = 0,
             sumX2 = 0
-        recentData.forEach((item, index) => {
-            sumX += index
-            sumY += item.count
-            sumXY += index * item.count
-            sumX2 += index * index
-        })
-
         const n = recentData.length
+
+        for (let i = 0; i < n; i++) {
+            sumX += i
+            sumY += recentData[i].count
+            sumXY += i * recentData[i].count
+            sumX2 += i * i
+        }
+
         const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX)
         const intercept = (sumY - slope * sumX) / n
 
-        // 预测未来days天
-        const lastDate = new Date(recentData[recentData.length - 1].date)
         const predictions = []
+        const lastDate = new Date(recentData[n - 1].date)
 
+        // 生成未来days天的预测
         for (let i = 1; i <= days; i++) {
-            const nextDate = new Date(lastDate)
-            nextDate.setDate(lastDate.getDate() + i)
-            const dateStr = nextDate.toISOString().split('T')[0]
+            const predictionDate = new Date(lastDate)
+            predictionDate.setDate(predictionDate.getDate() + i)
+            const dateStr = predictionDate.toISOString().split('T')[0]
+
             const predictedCount = Math.max(
                 0,
                 Math.round(intercept + slope * (n + i - 1))
@@ -70,46 +80,6 @@ export const PredictionAnalysis: React.FC<PredictionAnalysisProps> = ({
 
         return showPrediction ? [...historical, ...predictedData] : historical
     }, [historicalData, predictedData, showPrediction])
-
-    const config = {
-        data: chartData,
-        xField: 'date',
-        yField: 'count',
-        seriesField: 'type',
-        smooth: true,
-        animation: {
-            appear: {
-                animation: 'path-in',
-                duration: 1000,
-            },
-        },
-        // 添加正确的tooltip配置
-        tooltip: {
-            formatter: (datum: {
-                date: string
-                count: number
-                type: string
-            }) => {
-                return `日期: ${datum.date}<br>${datum.type}: ${datum.count}`
-            },
-        },
-        lineStyle: ({ type }: { type: string }) => {
-            if (type === '预测值') {
-                return {
-                    lineDash: [4, 4],
-                    opacity: 0.7,
-                }
-            }
-            return {
-                opacity: 0.7,
-            }
-        },
-        color: ['#1979C9', '#D62A0D'],
-        point: {
-            size: 5,
-            shape: 'circle',
-        },
-    }
 
     return (
         <Card
@@ -156,7 +126,60 @@ export const PredictionAnalysis: React.FC<PredictionAnalysisProps> = ({
             }
         >
             <div style={{ height: 400 }}>
-                <Line {...config} />
+                <ResponsiveContainer>
+                    <LineChart
+                        data={chartData}
+                        margin={{
+                            top: 20,
+                            right: 30,
+                            left: 20,
+                            bottom: 30,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis
+                            dataKey="date"
+                            label={{
+                                value: '日期',
+                                position: 'insideBottomRight',
+                                offset: -10,
+                            }}
+                        />
+                        <YAxis
+                            label={{
+                                value: '检测数量',
+                                angle: -90,
+                                position: 'insideLeft',
+                            }}
+                        />
+                        <RechartsTooltip
+                            formatter={(value, name) => [
+                                `${value} 个`,
+                                name === '实际值' ? '实际检测数' : '预测检测数',
+                            ]}
+                            labelFormatter={(label) => `日期: ${label}`}
+                        />
+                        <Legend />
+                        <Line
+                            type="monotone"
+                            dataKey="count"
+                            name="实际值"
+                            stroke="#1979C9"
+                            strokeWidth={2}
+                            dot={{ r: 4 }}
+                            activeDot={{ r: 6 }}
+                        />
+                        <Line
+                            type="monotone"
+                            dataKey="count"
+                            name="预测值"
+                            stroke="#D62A0D"
+                            strokeWidth={2}
+                            strokeDasharray="5 5"
+                            dot={{ r: 4 }}
+                        />
+                    </LineChart>
+                </ResponsiveContainer>
             </div>
         </Card>
     )

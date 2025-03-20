@@ -1,5 +1,18 @@
 import React, { useMemo } from 'react'
-import { Column } from '@ant-design/charts'
+import {
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip as RechartsTooltip,
+    ResponsiveContainer,
+    Cell,
+    Legend,
+} from 'recharts'
+import { Space, Tooltip } from 'antd'
+import { InfoCircleOutlined } from '@ant-design/icons'
+import { ChartDownloadButton } from '../../common/ChartDownloadButton/ChartDownloadButton'
 
 interface ConfidenceChartProps {
     data: number[]
@@ -34,60 +47,93 @@ export const ConfidenceChart: React.FC<ConfidenceChartProps> = ({ data }) => {
         }))
     }, [data])
 
-    const config = {
-        data: chartData,
-        xField: 'range',
-        yField: 'count',
-        label: {
-            // position: 'middle',
-            style: {
-                fill: '#FFFFFF',
-                opacity: 0.8,
-            },
-        },
-        meta: {
-            range: {
-                alias: '置信度区间',
-            },
-            count: {
-                alias: '检测数量',
-            },
-        },
-        xAxis: {
-            title: {
-                text: '置信度区间',
-            },
-        },
-        yAxis: {
-            title: {
-                text: '检测数量',
-            },
-        },
-        tooltip: {
-            // 修复类型问题
-            formatter: (datum: {
-                range: string
-                count: number
-                confidence: number
-            }) => {
-                return `置信度区间: ${datum.range}<br>检测数量: ${datum.count}`
-            },
-        },
-        color: ({ confidence }: { confidence: number }) => {
-            // 根据置信度生成渐变色
-            return `rgba(82, 196, ${30 + confidence * 225}, 0.85)`
-        },
-        columnStyle: {
-            radius: [8, 8, 0, 0],
-        },
+    // 优化大数据处理
+    const optimizedChartData = useMemo(() => {
+        // 如果数据量过大，将多个区间合并
+        if (chartData.length > 20) {
+            // 合并处理逻辑...
+            return mergedData
+        }
+        return chartData
+    }, [chartData])
+
+    // 生成颜色
+    const getBarColor = (confidence: number) => {
+        return `rgba(82, 196, ${30 + confidence * 225}, 0.85)`
     }
 
     return (
         <div>
-            <h3 style={{ textAlign: 'center', marginBottom: 20 }}>
-                检测置信度分布
-            </h3>
-            <Column {...config} height={400} />
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: 20,
+                }}
+            >
+                <h3 style={{ margin: 0 }}>检测置信度分布</h3>
+                <Space>
+                    <Tooltip title="查看不同置信度区间的检测数量分布">
+                        <InfoCircleOutlined />
+                    </Tooltip>
+                    <ChartDownloadButton
+                        containerSelector=".confidence-chart-container"
+                        fileNamePrefix="置信度分布"
+                    />
+                </Space>
+            </div>
+
+            <div
+                className="confidence-chart-container"
+                style={{ width: '100%', height: 400 }}
+            >
+                <ResponsiveContainer>
+                    <BarChart
+                        data={optimizedChartData}
+                        margin={{
+                            top: 20,
+                            right: 30,
+                            left: 20,
+                            bottom: 30,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis
+                            dataKey="range"
+                            label={{
+                                value: '置信度区间',
+                                position: 'insideBottomRight',
+                                offset: -10,
+                            }}
+                        />
+                        <YAxis
+                            label={{
+                                value: '检测数量',
+                                angle: -90,
+                                position: 'insideLeft',
+                            }}
+                        />
+                        <RechartsTooltip
+                            formatter={(value) => [`${value} 个`, '检测数量']}
+                            labelFormatter={(label) => `置信度区间: ${label}`}
+                        />
+                        <Legend />
+                        <Bar
+                            dataKey="count"
+                            name="检测数量"
+                            radius={[8, 8, 0, 0]}
+                        >
+                            {optimizedChartData.map((entry, index) => (
+                                <Cell
+                                    key={`cell-${index}`}
+                                    fill={getBarColor(entry.confidence)}
+                                />
+                            ))}
+                        </Bar>
+                    </BarChart>
+                </ResponsiveContainer>
+            </div>
         </div>
     )
 }

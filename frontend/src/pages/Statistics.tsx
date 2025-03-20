@@ -235,15 +235,27 @@ const Statistics: React.FC = () => {
         })
     }
 
+    // 添加自定义样式，确保即使选中的选项也不会覆盖导航栏
+    const radioGroupStyle: React.CSSProperties = {
+        position: 'relative',
+        zIndex: 0, // 确保低于导航栏的z-index
+    }
+
+    const cardStyle: React.CSSProperties = {
+        overflow: 'hidden', // 确保内容不会溢出
+        marginBottom: 16,
+    }
+
     return (
         <PageLayout title="统计分析">
-            <Card>
+            <Card style={cardStyle}>
                 <Row gutter={[16, 16]} justify="space-between" align="middle">
                     <Col>
                         <Radio.Group
                             value={chartType}
                             onChange={(e) => setChartType(e.target.value)}
                             buttonStyle="solid"
+                            style={radioGroupStyle}
                         >
                             <Radio.Button value="trend">
                                 <AreaChartOutlined /> 趋势分析
