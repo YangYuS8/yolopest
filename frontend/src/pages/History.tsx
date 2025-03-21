@@ -3,7 +3,7 @@ import { Modal } from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { useHistory } from '../services/historyService'
 import { HistoryRecord } from '../types/history'
-import { PageHeader } from '../components/common/PageHeader/PageHeader'
+import { PageLayout } from '../components/layout'
 import {
     HistoryList,
     HistoryActions,
@@ -56,17 +56,12 @@ const History: React.FC = () => {
     }
 
     return (
-        <div style={{ padding: '20px' }}>
-            <PageHeader
-                title="历史记录"
-                actions={
-                    <HistoryActions
-                        hasRecords={records.length > 0}
-                        loading={loading}
-                        onRefresh={() => refreshRecords(true)}
-                        onClearAll={handleClearAll}
-                    />
-                }
+        <PageLayout title="历史记录">
+            <HistoryActions
+                hasRecords={records.length > 0}
+                loading={loading}
+                onRefresh={() => refreshRecords(true)}
+                onClearAll={handleClearAll}
             />
 
             <HistoryTabs activeTab={activeTab} onChange={setActiveTab} />
@@ -85,7 +80,7 @@ const History: React.FC = () => {
                 onClose={() => setPreviewVisible(false)}
                 formatDate={formatDate}
             />
-        </div>
+        </PageLayout>
     )
 }
 

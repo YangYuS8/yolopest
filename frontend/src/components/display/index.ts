@@ -3,3 +3,6 @@ export { default as BatchResultDisplay } from './BatchResultDisplay/BatchResultD
 export { default as DetectionItemDisplay } from './DetectionItemDisplay/DetectionItemDisplay'
 export { default as DetectionSummary } from './DetectionSummary/DetectionSummary'
 export { default as DetectionList } from './DetectionList/DetectionList'
+export * from './VideoUploadSection'
+export * from './VideoAnalysisResults'
+export * from './FrameDetectionView'
