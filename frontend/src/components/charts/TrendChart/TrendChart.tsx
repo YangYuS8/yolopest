@@ -118,7 +118,13 @@ export const TrendChart: React.FC<TrendChartProps> = ({ data }) => {
 
     // 峰值信息
     const peakInfo = statistics.max && statistics.max.count > 0 && (
-        <div style={{ fontSize: '14px', color: 'rgba(0, 0, 0, 0.65)' }}>
+        <div
+            style={{
+                fontSize: '14px',
+                color: 'rgba(0, 0, 0, 0.65)',
+                marginTop: '50px', // 添加顶部边距，避免与图表重叠
+            }}
+        >
             <p>
                 峰值出现在 <strong>{statistics.max.date}</strong>
                 ，检测数量为 <strong>{statistics.max.count}</strong> 个
