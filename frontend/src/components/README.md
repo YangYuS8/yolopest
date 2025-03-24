@@ -24,6 +24,43 @@
 - **VideoUploader** - 视频上传组件
 - **VideoPlayer** - 视频播放组件
 
+### 分析组件 (analysis)
+
+- **PestDistribution** - 害虫分布统计分析
+- **DetectionTrends** - 检测趋势图表
+- **RegionComparison** - 区域间害虫对比分析
+
+### 图表组件 (charts)
+
+- **LineChart** - 趋势线图表
+- **BarChart** - 分类柱状图
+- **PieChart** - 占比饼图
+- **HeatMap** - 热力分布图
+
+### 历史记录组件 (history)
+
+- **HistoryList** - 检测历史列表
+- **HistoryDetail** - 历史记录详情
+- **HistoryFilter** - 历史筛选控件
+
+### 个人信息组件 (profile)
+
+- **UserInfo** - 用户信息展示
+- **AccountSettings** - 账户设置表单
+- **PreferenceSettings** - 用户偏好设置
+
+### 统计组件 (statistics)
+
+- **StatsSummary** - 检测统计摘要
+- **PestCounter** - 害虫计数器
+- **AreaStats** - 区域统计信息
+
+### 助手组件 (assistant)
+
+- **DetectionGuide** - 检测引导助手
+- **TipsCard** - 使用提示卡片
+- **HelpCenter** - 帮助中心组件
+
 ## 使用示例
 
 ```tsx
@@ -34,3 +71,41 @@ import { ResultDisplay } from '../components/display'
 // 或通过主索引文件导入
 import { ImageUploader, ResultDisplay } from '../components'
 ```
+
+## 组件状态管理
+
+组件内部状态使用React hooks管理，全局状态通过Context API共享：
+
+```tsx
+// 在组件中使用全局检测状态
+import { useDetectionContext } from '../contexts/DetectionContext'
+
+function MyComponent() {
+    const { results, isProcessing, resetResults } = useDetectionContext()
+    // ...
+}
+```
+
+## API交互模式
+
+组件与后端API交互统一通过services目录下的服务函数：
+
+```tsx
+// 在组件中调用API
+import { detectImage } from '../services/detectionService'
+
+async function handleUpload(file) {
+    const formData = new FormData()
+    formData.append('file', file)
+    const result = await detectImage(formData)
+    // 处理结果...
+}
+```
+
+## 组件设计原则
+
+1. **单一职责** - 每个组件只负责一个功能点
+2. **可组合性** - 小组件可以组合成更复杂的组件
+3. **可重用性** - 抽象通用逻辑，避免重复代码
+4. **可测试性** - 组件设计便于单元测试
+5. **响应式设计** - 所有组件适配多种屏幕尺寸

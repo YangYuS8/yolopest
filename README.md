@@ -35,6 +35,26 @@
 -   ✅ 个人信息管理
 -   ✅ 自定义 YOLOv12 模型集成
 -   ✅ 实时检测结果可视化
+-   ✅ 检测结果统计分析
+-   ✅ 响应式界面设计
+
+## 系统架构
+
+### 核心组件
+
+-   **前端应用** - React 单页应用，处理用户交互与结果展示
+-   **后端 API 服务** - FastAPI 提供 RESTful 接口
+-   **检测引擎** - 封装 YOLOv12 模型的图像识别服务
+-   **数据管理** - 用户和检测历史的存储与检索
+-   **任务队列** - 处理视频等长时间任务
+
+### 数据流程
+
+1. 用户上传图像/视频 → 前端预处理
+2. API 请求 → 后端服务器
+3. 后端处理 → 模型推理
+4. 结果返回 → 前端展示
+5. 数据存储 → 历史记录
 
 ## 快速开始
 
@@ -110,14 +130,49 @@ docker-compose up --build
 ├── frontend
 │   ├── src/                # 前端源码
 │   │   ├── components/     # React组件
+│   │   │   ├── common/     # 通用组件
+│   │   │   ├── layout/     # 布局组件
+│   │   │   ├── display/    # 展示组件
+│   │   │   ├── media/      # 媒体组件
+│   │   │   ├── analysis/   # 分析组件
+│   │   │   ├── charts/     # 图表组件
+│   │   │   ├── history/    # 历史记录组件
+│   │   │   ├── profile/    # 个人信息组件
+│   │   │   ├── statistics/ # 统计组件
+│   │   │   └── assistant/  # 助手组件
 │   │   ├── pages/          # 页面组件
 │   │   ├── services/       # API服务
+│   │   ├── hooks/          # 自定义Hooks
+│   │   ├── contexts/       # React Context
+│   │   ├── styles/         # 全局样式
+│   │   ├── types/          # TypeScript类型定义
 │   │   └── utils/          # 工具函数
 │   ├── public/             # 静态资源
 │   ├── index.html          # HTML入口
 │   ├── package.json        # Node.js配置
 │   └── vite.config.ts      # Vite配置
 └── docker-compose.yml      # Docker编排配置
+```
+
+## 前端组件结构
+
+### 主要组件分类
+
+-   **媒体组件** - 负责处理图像和视频上传、预览和播放
+-   **展示组件** - 呈现检测结果和标注图像
+-   **分析组件** - 提供数据可视化和统计分析功能
+-   **历史组件** - 管理和展示历史检测记录
+
+### 组件状态管理
+
+```tsx
+// 在组件中使用全局检测状态
+import { useDetectionContext } from '../contexts/DetectionContext'
+
+function MyComponent() {
+    const { results, isProcessing, resetResults } = useDetectionContext()
+    // ...
+}
 ```
 
 ## API 接口
@@ -127,6 +182,9 @@ docker-compose up --build
 ```http
 POST /api/detection/image
 Content-Type: multipart/form-data
+
+Request:
+- file: 图像文件(jpg, png, jpeg)
 
 Response:
 {
@@ -153,6 +211,9 @@ Response:
 POST /api/detection/video
 Content-Type: multipart/form-data
 
+Request:
+- file: 视频文件(mp4, avi)
+
 Response:
 {
     "status": "success",
@@ -160,6 +221,83 @@ Response:
     "message": "视频处理已开始，请通过任务ID查询进度"
 }
 ```
+
+### 视频处理状态查询
+
+```http
+GET /api/detection/video/status/{task_id}
+
+Response:
+{
+    "status": "processing",  // processing, completed, failed
+    "progress": 45.5,        // 百分比
+    "results": null,         // 完成后返回结果
+    "error": null           // 失败时返回错误信息
+}
+```
+
+### 历史记录查询
+
+```http
+GET /api/history
+Authorization: Bearer {token}
+
+Response:
+{
+    "records": [
+        {
+            "id": "uuid",
+            "type": "image",
+            "filename": "example.jpg",
+            "timestamp": 1648454400000,
+            "result": {...}
+        }
+    ]
+}
+```
+
+## YOLOv12 集成
+
+后端通过 PestDetector 类实现模型集成：
+
+```python
+class PestDetector:
+    def __init__(self):
+        self.model = YOLO(settings.model_path, task="detect")
+        self.img_size = settings.img_size
+        self.conf_thresh = settings.conf_thresh
+
+    def process_image(self, image_bytes: bytes):
+        # 预处理图像
+        img_rgb = self.preprocess(image_bytes)
+
+        # 模型推理
+        results = self.model(img_rgb, imgsz=self.img_size, conf=self.conf_thresh)
+
+        # 解析结果并返回
+        predictions = self.parse_results(results)
+        return {
+            "status": "success",
+            "results": predictions,
+            "annotated_image": "..."  # base64编码图像
+        }
+```
+
+## 性能优化
+
+### 后端优化
+
+-   **全局单例模型** - 避免重复加载模型
+-   **批处理推理** - 视频处理中使用批处理提升性能
+-   **缓存机制** - 使用 Redis 缓存部分计算结果
+-   **异步任务处理** - 长时间运行的任务使用后台队列
+
+### 前端优化
+
+-   **懒加载组件** - 按需加载页面组件
+-   **图像压缩** - 上传前压缩大图像
+-   **结果缓存** - 缓存检测结果避免重复请求
+-   **虚拟列表** - 历史记录中使用虚拟滚动
 
 ## 开发规范
 
@@ -174,8 +312,16 @@ Response:
     - 生产环境：Docker 环境变量或`.env.production`
 
 3. **依赖管理**：
+
     - Python：固定版本在 requirements.txt
     - Node.js：package-lock.json 锁定版本
+
+4. **组件设计原则**：
+    - 单一职责 - 每个组件只负责一个功能点
+    - 可组合性 - 小组件可以组合成更复杂的组件
+    - 可重用性 - 抽象通用逻辑，避免重复代码
+    - 可测试性 - 组件设计便于单元测试
+    - 响应式设计 - 所有组件适配多种屏幕尺寸
 
 ## 常见问题
 
@@ -185,6 +331,14 @@ Response:
 
 ```bash
 pip install opencv-python-headless==4.11.0.86
+```
+
+确保模型文件位于正确路径:
+
+```python
+# 检查模型路径设置
+print(settings.model_path)
+# 应指向 model_weights/best.pt
 ```
 
 ### Q: 前端代理配置
@@ -211,6 +365,38 @@ export default defineConfig({
 # docker-compose.yml
 volumes:
     - ./backend/models:/app/models
+```
+
+### Q: 图像上传后无法显示检测结果
+
+检查后端连接配置：
+
+```js
+// 检查.env文件中的API地址配置
+console.log(import.meta.env.VITE_API_BASE_URL)
+```
+
+### Q: 如何处理检测结果中的坐标问题
+
+前端与后端坐标系统可能不一致，请确保转换：
+
+```tsx
+// 将后端返回的bbox转换为前端可用格式
+const box = result.bbox
+    ? [result.bbox.x1, result.bbox.y1, result.bbox.x2, result.bbox.y2]
+    : result.box
+```
+
+### Q: 视频处理进度无法更新
+
+确保正确设置了轮询间隔：
+
+```tsx
+// 建议使用自定义Hook管理视频处理进度
+useEffect(() => {
+    const interval = setInterval(checkProgress, 2000) // 每2秒检查一次
+    return () => clearInterval(interval)
+}, [taskId])
 ```
 
 ## 许可证
