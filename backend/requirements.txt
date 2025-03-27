@@ -25,5 +25,5 @@ SQLAlchemy==2.0.38
 torch==2.6.0
 torchvision==0.21.0
 tqdm==4.67.1
--e ./ultralytics
+# -e ./ultralytics
 uvicorn==0.34.0
