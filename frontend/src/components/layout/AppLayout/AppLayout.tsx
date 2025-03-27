@@ -17,8 +17,10 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
 
     // 确保在组件挂载时刷新用户状态
     useEffect(() => {
+        // 只在初始渲染时调用一次
         refreshUser()
-    }, [refreshUser])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []) // 移除refreshUser依赖
 
     // 菜单配置
     const menuItems = [
