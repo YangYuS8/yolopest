@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Card, Empty, Spin } from 'antd'
+import { Card, Spin } from 'antd'
 import { PageLayout } from '../components/layout'
 import { useHistory } from '../services/historyService'
 import dayjs from 'dayjs'
@@ -11,6 +11,7 @@ import {
     useComparisonData,
     useSpatialData,
 } from '../components/statistics'
+import { AIAnalysisReport } from '../components/analysis/AIAnalysisReport/AIAnalysisReport'
 import type { Dayjs } from 'dayjs'
 import type { RangePickerProps } from 'antd/es/date-picker'
 
@@ -69,33 +70,41 @@ const Statistics: React.FC = () => {
                     </Card>
                 ) : (
                     <>
-                        <StatisticsSummary statisticsData={statisticsData} />
+                        {statisticsData && (
+                            <>
+                                <StatisticsSummary
+                                    statisticsData={statisticsData}
+                                />
 
-                        <StatisticsChartArea
-                            chartType={chartType}
-                            statisticsData={statisticsData}
-                            comparisonData={comparisonData}
-                            locationData={generateSpatialData(statisticsData)}
-                            pestTypes={
-                                statisticsData?.pestDistribution.map(
-                                    (item) => item.name
-                                ) || []
-                            }
-                            calculateAvgConfidence={calculateAvgConfidence}
-                        />
+                                <StatisticsChartArea
+                                    chartType={chartType}
+                                    statisticsData={statisticsData}
+                                    comparisonData={comparisonData}
+                                    locationData={generateSpatialData(
+                                        statisticsData
+                                    )}
+                                    pestTypes={
+                                        statisticsData.pestDistribution.map(
+                                            (item) => item.name
+                                        ) || []
+                                    }
+                                    calculateAvgConfidence={
+                                        calculateAvgConfidence
+                                    }
+                                />
 
-                        {/* 大模型分析区域 */}
-                        <Card title="智能分析报告" style={{ marginTop: 16 }}>
-                            <Empty
-                                description={
-                                    <span>
-                                        大模型分析功能正在开发中，敬请期待！
-                                        <br />
-                                        未来将提供基于检测结果的害虫发生趋势分析、防治建议等内容。
-                                    </span>
-                                }
-                            />
-                        </Card>
+                                <AIAnalysisReport
+                                    statisticsData={statisticsData}
+                                    dateRange={dateRange}
+                                    comparisonData={comparisonData}
+                                    disabled={
+                                        !statisticsData ||
+                                        statisticsData.pestDistribution
+                                            ?.length === 0
+                                    }
+                                />
+                            </>
+                        )}
                     </>
                 )}
             </div>
