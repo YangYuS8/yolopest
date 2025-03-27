@@ -1,4 +1,5 @@
 import os
+import asyncio
 from openai import OpenAI
 from fastapi import HTTPException
 from pydantic import BaseModel
@@ -22,21 +23,23 @@ class AIAnalysisService:
             base_url="https://api.deepseek.com"
         )
     
-    def generate_analysis(self, data: AnalysisRequest) -> Dict[str, Any]:
+    async def generate_analysis(self, data: AnalysisRequest) -> Dict[str, Any]:
         """根据统计数据生成智能分析报告"""
         try:
             # 检查API密钥是否可用
             if not self.api_key or self.api_key == "demo_key":
                 return {
-                    "status": "error",
+                    "status": "error", 
                     "message": "DeepSeek API密钥未配置，请联系管理员设置有效的API密钥"
                 }
             
             # 构建提示信息
             prompt = self._build_prompt(data)
             
-            # 调用DeepSeek API
-            response = self.client.chat.completions.create(
+            # 使用asyncio.to_thread将同步API调用转换为异步操作
+            # 这样API调用会在单独的线程中执行，不会阻塞主事件循环
+            response = await asyncio.to_thread(
+                self.client.chat.completions.create,
                 model="deepseek-reasoner",
                 messages=[
                     {
@@ -57,7 +60,6 @@ class AIAnalysisService:
                 "analysis": analysis_text,
                 "summary": self._extract_summary(analysis_text)
             }
-        
         except Exception as e:
             print(f"调用DeepSeek API出错: {str(e)}")
             raise HTTPException(

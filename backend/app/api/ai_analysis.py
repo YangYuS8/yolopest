@@ -11,7 +11,7 @@ router = APIRouter()
 async def analyze_statistics(request: AnalysisRequest):
     """根据统计数据生成AI分析报告"""
     try:
-        result = ai_analysis_service.generate_analysis(request)
+        result = await ai_analysis_service.generate_analysis(request)  # 添加await关键字
         return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
