@@ -96,8 +96,19 @@ export const AIAnalysisReport: React.FC<AIAnalysisReportProps> = ({
             console.log('API响应数据:', response)
 
             // 修正这里：直接检查response.analysis而不是response.data.analysis
-            if (response.status === 'success' && response.analysis) {
-                setAnalysis(response.analysis)
+            if (
+                response.status === 'success' &&
+                response.data &&
+                response.data.analysis
+            ) {
+                const analysisData = response.data.analysis
+                setAnalysis(analysisData)
+                // 保存到localStorage
+                localStorage.setItem('aiAnalysisReport', analysisData)
+                localStorage.setItem(
+                    'aiAnalysisTimestamp',
+                    new Date().toISOString()
+                )
                 setLastUpdateTime(new Date().toLocaleTimeString())
                 message.success('分析报告生成成功')
             } else {
@@ -116,8 +127,14 @@ export const AIAnalysisReport: React.FC<AIAnalysisReportProps> = ({
 
     // 将自动触发分析的useEffect修改为：
     useEffect(() => {
-        // 不再自动调用API，让用户主动点击按钮生成分析
-        // 如需保留自动分析功能，可添加开关控制
+        // 检查是否有已保存的报告
+        const savedReport = localStorage.getItem('aiAnalysisReport')
+        const timestamp = localStorage.getItem('aiAnalysisTimestamp')
+
+        if (savedReport && timestamp) {
+            setAnalysis(savedReport)
+            setLastUpdateTime(new Date(timestamp).toLocaleTimeString())
+        }
     }, [])
 
     // 导出分析报告为文本文件
