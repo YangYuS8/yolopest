@@ -107,6 +107,7 @@ class AIAnalysisService:
 5. 风险预警（如果有必要）
 
 使用markdown格式输出，并确保内容专业、实用且易于理解。
+注意：请直接使用markdown语法，不要将整个回复包装在markdown代码块(```)中。
 """
         return prompt
     
