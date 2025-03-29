@@ -8,15 +8,14 @@ from app.schemas.history import HistoryCreate, HistoryResponse
 from sqlalchemy import select, delete
 import uuid
 from datetime import datetime, timezone
+from app.core.users import current_active_user, current_superuser
+from app.models.user import User
 
 # 设置日志
 logger = logging.getLogger(__name__)
 
-# 修改前缀路径，移除 /api，因为在 main.py 中会添加
-router = APIRouter(
-    prefix="/history",  # 只使用 /history 作为前缀
-    tags=["history"],
-)
+# 修改前缀为一致格式
+router = APIRouter()
 
 @router.post("/", response_model=HistoryResponse)
 async def create_history(

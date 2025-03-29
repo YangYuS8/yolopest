@@ -3,22 +3,21 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from app.core.config import get_settings
 from app.api.router import router  # 使用新的路由聚合
-from app.routers import history  # 保留原有路由
 from app.api import video  # 添加这一行导入视频模块
+from app.api import history  # 保留原有路由
+from app.core.middleware import ErrorHandlingMiddleware
 import uvicorn
 import logging
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'ultralytics'))
 
-# 配置日志
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-)
+# 设置日志
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 settings = get_settings()
-app = FastAPI(debug=settings.debug)
+app = FastAPI(title="YoloPest API", debug=settings.debug)
 
 # 解决跨域问题
 app.add_middleware(
@@ -29,6 +28,9 @@ app.add_middleware(
     allow_credentials=True,
     expose_headers=["Content-Disposition"],
 )
+
+# 添加全局错误处理中间件
+app.add_middleware(ErrorHandlingMiddleware)
 
 # 确保静态文件目录存在
 os.makedirs(os.path.join("app", "static"), exist_ok=True)
