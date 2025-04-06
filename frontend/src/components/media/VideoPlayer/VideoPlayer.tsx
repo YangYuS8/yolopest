@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Card, Slider, Button, Space, Tabs } from 'antd'
+import { Card, Slider, Button, Space, Tabs, message } from 'antd'
 import {
     PlayCircleOutlined,
     PauseCircleOutlined,
@@ -188,8 +188,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     const handleDownloadVideo = () => {
         if (!result?.task_id) return
 
-        // 构建视频下载链接
-        const videoUrl = `${import.meta.env.VITE_API_URL || ''}/api/static/videos/${result.task_id}_annotated.mp4`
+        // 构建视频下载链接 - 修改为正确路径
+        const videoUrl = `${import.meta.env.VITE_API_URL || ''}/static/videos/${result.task_id}_annotated.mp4`
 
         // 创建一个隐藏的a标签来触发下载
         const a = document.createElement('a')
@@ -204,21 +204,21 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         <Card
             title="视频播放"
             className="video-player-card"
-            extra={
-                <Space>
-                    {result?.task_id &&
-                        (result.status === 'completed' ||
-                            result.status === 'success') && (
-                            <Button
-                                type="primary"
-                                icon={<DownloadOutlined />}
-                                onClick={handleDownloadVideo}
-                            >
-                                下载标注视频
-                            </Button>
-                        )}
-                </Space>
-            }
+            // extra={
+            //     <Space>
+            //         {result?.task_id &&
+            //             (result.status === 'completed' ||
+            //                 result.status === 'success') && (
+            //                 <Button
+            //                     type="primary"
+            //                     icon={<DownloadOutlined />}
+            //                     onClick={handleDownloadVideo}
+            //                 >
+            //                     下载标注视频
+            //                 </Button>
+            //             )}
+            //     </Space>
+            // }
         >
             <Tabs
                 activeKey={activeKey}
@@ -252,7 +252,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                                 {result?.task_id ? (
                                     <video
                                         ref={annotatedVideoRef}
-                                        src={`${import.meta.env.VITE_API_URL || ''}/api/static/videos/${result.task_id}_annotated.mp4`}
                                         style={{ width: '100%' }}
                                         onTimeUpdate={() =>
                                             activeKey === 'annotated' &&
@@ -280,6 +279,11 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                                                     : 'No error',
                                             })
 
+                                            // 添加用户可见的错误提示
+                                            message.error(
+                                                '标注视频加载失败，请使用下载按钮下载后查看'
+                                            )
+
                                             // 记录当前result对象状态以便调试
                                             console.log(
                                                 '当前result对象:',
@@ -287,10 +291,21 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                                             )
                                             console.log(
                                                 '尝试加载的URL:',
-                                                `${import.meta.env.VITE_API_URL || ''}/api/static/videos/${result.task_id}_annotated.mp4`
+                                                `${import.meta.env.VITE_API_URL || ''}/static/videos/${result.task_id}_annotated.mp4`
                                             )
                                         }}
-                                    />
+                                    >
+                                        {/* 提供多种格式源 */}
+                                        <source
+                                            src={`${import.meta.env.VITE_API_URL || ''}/static/videos/${result.task_id}_annotated.mp4`}
+                                            type="video/mp4"
+                                        />
+                                        <source
+                                            src={`${import.meta.env.VITE_API_URL || ''}/static/videos/${result.task_id}_annotated.avi`}
+                                            type="video/avi"
+                                        />
+                                        您的浏览器不支持视频播放，请使用下载按钮下载后查看
+                                    </video>
                                 ) : (
                                     <div
                                         style={{

@@ -11,15 +11,10 @@ import {
     Tag,
     Empty,
     message,
-    Divider,
     Progress,
 } from 'antd'
 import { VideoPlayer } from '../components/media'
-import {
-    VideoUploadSection,
-    VideoAnalysisResults,
-    FrameDetectionView,
-} from '../components/display'
+import { VideoAnalysisResults, FrameDetectionView } from '../components/display'
 import { useVideoUpload } from '../hooks/useVideoUpload'
 import { useVideoPlayer } from '../hooks/useVideoPlayer'
 import { getPestStatistics } from '../services/mediaService'
@@ -84,23 +79,18 @@ const VideoDetection: React.FC = () => {
         }
     }, [result])
 
-    // 下载标注视频功能
+    // 修改handleDownloadVideo函数
+
     const handleDownloadVideo = () => {
         if (!result?.task_id) {
             message.error('无法下载：未找到有效的视频任务')
             return
         }
 
-        // 构建视频下载链接
-        const videoUrl = `${import.meta.env.VITE_API_URL || ''}/api/static/videos/${result.task_id}_annotated.mp4`
-
-        // 创建一个隐藏的a标签来触发下载
-        const a = document.createElement('a')
-        a.href = videoUrl
-        a.download = `标注视频_${result.task_id}.mp4`
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
+        // 直接通过新的API下载，而不是构建URL
+        window.open(
+            `${import.meta.env.VITE_API_URL}/video/download/${result.task_id}`
+        )
 
         message.success('开始下载标注视频')
     }
@@ -512,7 +502,11 @@ const VideoDetection: React.FC = () => {
                         {result?.task_id && (
                             <Card
                                 className="download-card"
-                                style={{ marginBottom: '16px' }}
+                                style={{
+                                    marginBottom: '16px',
+                                    background: '#f6ffed',
+                                    border: '1px solid #b7eb8f',
+                                }}
                             >
                                 <Row align="middle" gutter={16}>
                                     <Col xs={24} sm={16}>
@@ -524,23 +518,9 @@ const VideoDetection: React.FC = () => {
                                                 标注视频已生成
                                             </Title>
                                             <Text type="secondary">
-                                                即使标注视频无法播放，您也可以下载视频文件进行查看
+                                                由于浏览器兼容性问题，标注视频可能无法直接播放。请点击下载按钮保存后查看。
                                             </Text>
                                         </div>
-                                    </Col>
-                                    <Col
-                                        xs={24}
-                                        sm={8}
-                                        style={{ textAlign: 'right' }}
-                                    >
-                                        <Button
-                                            type="primary"
-                                            icon={<DownloadOutlined />}
-                                            onClick={handleDownloadVideo}
-                                            size="large"
-                                        >
-                                            下载标注视频
-                                        </Button>
                                     </Col>
                                 </Row>
                             </Card>
@@ -556,16 +536,6 @@ const VideoDetection: React.FC = () => {
                                         </>
                                     }
                                     className="video-player-wrapper"
-                                    extra={
-                                        <Button
-                                            type="primary"
-                                            icon={<DownloadOutlined />}
-                                            onClick={handleDownloadVideo}
-                                            disabled={!result?.task_id}
-                                        >
-                                            下载标注视频
-                                        </Button>
-                                    }
                                 >
                                     {videoUrl && (
                                         <VideoPlayer

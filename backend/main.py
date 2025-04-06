@@ -36,8 +36,13 @@ app.add_middleware(ErrorHandlingMiddleware)
 os.makedirs(os.path.join("app", "static"), exist_ok=True)
 os.makedirs(os.path.join("app", "static", "videos"), exist_ok=True)
 
-# 挂载静态文件服务
-app.mount("/api/static", StaticFiles(directory=os.path.join("app", "static")), name="static")
+# 确保静态文件路由设置正确
+
+# 保留原有的静态文件挂载
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
+# 添加一个额外的挂载点，匹配前端当前的URL构建方式
+app.mount("/api/static", StaticFiles(directory="app/static"), name="api_static")
 
 # 挂载API路由
 app.include_router(router, prefix="/api")

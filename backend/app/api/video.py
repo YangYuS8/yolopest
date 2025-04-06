@@ -1,5 +1,7 @@
 from fastapi import APIRouter, File, UploadFile, HTTPException
 from app.services.video import video_processor
+from fastapi.responses import FileResponse
+import os
 
 router = APIRouter()
 
@@ -45,3 +47,22 @@ async def get_video_result(task_id: str):
     if result.get("status") in ["pending", "processing"]:
         return {"status": result["status"], "progress": result.get("progress", 0)}
     return result
+
+@router.get("/download/{task_id}")
+async def download_video(task_id: str):
+    """直接下载视频文件"""
+    video_file = os.path.join("app", "static", "videos", f"{task_id}_annotated.avi")
+    
+    # 检查MP4格式如果AVI不存在
+    if not os.path.exists(video_file):
+        video_file = os.path.join("app", "static", "videos", f"{task_id}_annotated.mp4")
+    
+    if os.path.exists(video_file):
+        filename = f"标注视频_{task_id}" + (".avi" if video_file.endswith(".avi") else ".mp4")
+        return FileResponse(
+            video_file, 
+            media_type="video/avi" if video_file.endswith(".avi") else "video/mp4",
+            filename=filename
+        )
+    else:
+        raise HTTPException(status_code=404, detail="视频文件不存在")

@@ -10,7 +10,6 @@ from app.services.detector import detector
 import base64
 import time
 import uuid
-from redis.asyncio import Redis
 import shutil
 import json
 
@@ -25,19 +24,19 @@ class VideoTaskStatus:
 
 class VideoProcessor:
     def __init__(self):
-        self.redis: Optional[Redis] = None
-        
-    # 修改get_redis方法增加重试和错误处理
-    async def get_redis(self) -> Redis:
-        """获取Redis连接"""
-        try:
-            if self.redis is None:
-                self.redis = Redis.from_url(settings.redis_url, encoding="utf-8", decode_responses=True)
-            return self.redis
-        except Exception as e:
-            print(f"Redis连接失败: {str(e)}")
-            # 返回None，调用者需要处理None的情况
-            return None
+        # 确保任务存储目录存在
+        self.tasks_dir = os.path.join("app", "static", "tasks")
+        self.videos_dir = os.path.join("app", "static", "videos")
+        os.makedirs(self.tasks_dir, exist_ok=True)
+        os.makedirs(self.videos_dir, exist_ok=True)
+    
+    def _get_task_path(self, task_id: str) -> str:
+        """获取任务状态文件路径"""
+        return os.path.join(self.tasks_dir, f"{task_id}.json")
+    
+    def _get_result_path(self, task_id: str) -> str:
+        """获取任务结果文件路径"""
+        return os.path.join(self.videos_dir, f"{task_id}_result.json")
     
     def get_platform_video_settings(self) -> Tuple[str, str, str]:
         """根据平台返回最佳视频设置: (文件扩展名, 编码器代码, MIME类型)"""
@@ -73,15 +72,6 @@ class VideoProcessor:
         try:
             task_id = str(uuid.uuid4())
             
-            # 确保可以连接Redis
-            try:
-                redis = await self.get_redis()
-                # 测试连接是否有效
-                await redis.ping()
-            except Exception as redis_error:
-                print(f"Redis连接错误: {str(redis_error)}")
-                raise Exception(f"无法连接到Redis服务: {str(redis_error)}")
-            
             # 确保临时目录存在且可写
             temp_dir = tempfile.gettempdir()
             os.makedirs(os.path.join(temp_dir, "yolopest_videos"), exist_ok=True)
@@ -98,7 +88,8 @@ class VideoProcessor:
                     raise Exception(f"无法打开视频文件: {video_path}")
                 cap.release()
             except Exception as video_error:
-                os.unlink(video_path)
+                if os.path.exists(video_path):
+                    os.unlink(video_path)
                 print(f"视频验证失败: {str(video_error)}")
                 raise Exception(f"视频格式无效或不受支持: {str(video_error)}")
             
@@ -111,10 +102,9 @@ class VideoProcessor:
                 "progress": 0
             }
             
-            # 保存到Redis
-            await redis.set(f"video_task:{task_id}", json.dumps(task_info))
-            # 将任务添加到队列
-            await redis.lpush("video_tasks_queue", task_id)
+            # 保存到文件系统
+            with open(self._get_task_path(task_id), 'w') as f:
+                json.dump(task_info, f)
             
             # 启动后台任务处理
             asyncio.create_task(self._process_video(task_id))
@@ -129,23 +119,25 @@ class VideoProcessor:
     async def get_task_status(self, task_id: str) -> Dict[str, Any]:
         """获取任务状态"""
         try:
-            # 先检查是否有结果文件
-            result_file = os.path.join("app", "static", "videos", f"{task_id}_result.json")
+            # 首先检查结果文件
+            result_file = self._get_result_path(task_id)
             if os.path.exists(result_file):
-                # 文件存在，表示任务已完成
-                return {
-                    "status": "completed",
-                    "progress": 100,
-                    "message": "处理完成",
-                    "task_id": task_id
-                }
+                # 从结果文件读取基本信息
+                with open(result_file, 'r') as f:
+                    result = json.load(f)
+                    return {
+                        "status": "completed",
+                        "progress": 100,
+                        "message": "处理完成",
+                        "task_id": task_id,
+                        **{k: v for k, v in result.items() if k in ['video_length', 'processed_frames', 'time_cost', 'fps']}
+                    }
             
-            # 结果文件不存在，检查Redis中的状态
-            redis = await self.get_redis()
-            task_info = await redis.get(f"video_task:{task_id}")
-            
-            if task_info:
-                return json.loads(task_info)
+            # 然后检查任务状态文件
+            task_file = self._get_task_path(task_id)
+            if os.path.exists(task_file):
+                with open(task_file, 'r') as f:
+                    return json.load(f)
             
             # 都没有找到，返回未知状态
             return {"status": "unknown", "message": "任务状态未知"}
@@ -154,12 +146,11 @@ class VideoProcessor:
             print(f"获取任务状态时出错: {str(e)}")
             return {"status": "error", "message": f"获取任务状态时出错: {str(e)}"}
     
-    # 修改get_task_result方法，优先从文件读取
     async def get_task_result(self, task_id: str) -> Dict[str, Any]:
         """获取任务结果"""
         try:
-            # 优先从文件系统获取结果
-            result_file = os.path.join("app", "static", "videos", f"{task_id}_result.json")
+            # 从文件系统获取结果
+            result_file = self._get_result_path(task_id)
             if os.path.exists(result_file):
                 with open(result_file, 'r') as f:
                     result = json.load(f)
@@ -167,20 +158,18 @@ class VideoProcessor:
                     result["task_id"] = task_id
                     result["annotated_video_url"] = f"/api/static/videos/{task_id}_annotated.mp4"
                     return result
-            
-            # 文件不存在，尝试从Redis获取
-            redis = await self.get_redis()
-            if redis:
-                task_info = await redis.get(f"video_task:{task_id}")
-                if task_info:
-                    task_info = json.loads(task_info)
-                    # 如果Redis只存了元数据，尝试加载结果文件
-                    if "result_file_path" in task_info and os.path.exists(task_info["result_file_path"]):
-                        with open(task_info["result_file_path"], 'r') as f:
-                            full_result = json.load(f)
-                            # 合并元数据和完整结果
-                            return {**task_info, **full_result}
-                    return task_info
+                        
+            # 结果文件不存在，检查任务状态
+            task_file = self._get_task_path(task_id)
+            if os.path.exists(task_file):
+                with open(task_file, 'r') as f:
+                    task_info = json.load(f)
+                    if task_info["status"] == VideoTaskStatus.FAILED:
+                        return {"status": "error", "message": task_info.get("message", "处理失败")}
+                    elif task_info["status"] == VideoTaskStatus.PROCESSING:
+                        return {"status": "processing", "progress": task_info.get("progress", 0)}
+                    else:
+                        return {"status": "pending", "message": "任务等待处理"}
             
             # 都没找到，返回错误状态
             return {"status": "error", "message": "任务结果不存在"}
@@ -190,19 +179,19 @@ class VideoProcessor:
     
     async def _process_video(self, task_id: str):
         """处理视频的后台任务"""
-        redis = None
+        task_file = self._get_task_path(task_id)
+        video_path = ""
+        
         try:
-            redis = await self.get_redis()
-            task_info_str = await redis.get(f"video_task:{task_id}")
-            if not task_info_str:
-                return
-                
-            task_info = json.loads(task_info_str)
-            video_path = task_info["video_path"]
+            # 读取任务信息
+            with open(task_file, 'r') as f:
+                task_info = json.load(f)
+                video_path = task_info["video_path"]
             
             # 更新状态为处理中
             task_info["status"] = VideoTaskStatus.PROCESSING
-            await redis.set(f"video_task:{task_id}", json.dumps(task_info))
+            with open(task_file, 'w') as f:
+                json.dump(task_info, f)
             
             # 打开视频
             cap = cv2.VideoCapture(video_path)
@@ -270,7 +259,6 @@ class VideoProcessor:
                         "timestamp": int(frame_idx / fps * 1000),  # 毫秒
                         "frame_index": frame_idx,
                         "detections": predictions,
-                        "annotated_frame": annotated_frame
                     })
                     
                     processed_frames += 1
@@ -281,7 +269,11 @@ class VideoProcessor:
                 # 更新进度
                 progress = int((frame_idx / frame_count) * 100) if frame_count > 0 else 0
                 task_info["progress"] = progress
-                await redis.set(f"video_task:{task_id}", json.dumps(task_info))
+                
+                # 定期更新进度文件 (每5%更新一次)
+                if frame_idx == 0 or progress % 5 == 0 or frame_idx == frame_count - 1:
+                    with open(task_file, 'w') as f:
+                        json.dump(task_info, f)
                 
                 frame_idx += 1
             
@@ -293,25 +285,46 @@ class VideoProcessor:
             end_time = time.time()
             processing_time = end_time - start_time
             
-            # 确保静态目录存在
-            static_dir = os.path.join("app", "static", "videos")
-            os.makedirs(static_dir, exist_ok=True)
-            
             # 创建静态文件URL
             annotated_video_url = f"/api/static/videos/{task_id}_annotated{ext}" 
             
             # 将处理后的视频移动到静态文件目录
-            final_path = os.path.join(static_dir, f"{task_id}_annotated{ext}")
+            final_path = os.path.join(self.videos_dir, f"{task_id}_annotated{ext}")
             
-            # 在_process_video方法中替换os.rename
+            # 复制文件到静态目录
             try:
-                shutil.move(output_path, final_path)
-            except Exception as e:
-                # 如果移动失败，可能是权限问题，尝试复制然后删除
-                print(f"移动文件失败，尝试复制: {str(e)}")
+                # 验证临时视频是否真的生成了
+                if not os.path.exists(output_path):
+                    print(f"错误：临时视频文件未生成: {output_path}")
+                else:
+                    file_size = os.path.getsize(output_path)
+                    print(f"临时视频文件生成成功: {output_path}, 大小: {file_size} 字节")
+
+                # 验证静态目录是否可写
+                if not os.access(os.path.dirname(final_path), os.W_OK):
+                    print(f"错误：静态目录无写入权限: {os.path.dirname(final_path)}")
+                    
+                # 复制文件到静态目录
                 shutil.copy(output_path, final_path)
-                os.remove(output_path)
+                os.remove(output_path)  # 删除临时文件
+                
+                # 验证最终文件是否成功生成
+                if os.path.exists(final_path):
+                    file_size = os.path.getsize(final_path)
+                    print(f"标注视频文件成功保存: {final_path}, 大小: {file_size} 字节")
+                else:
+                    print(f"错误：标注视频文件未能成功保存: {final_path}")
+                    
+            except Exception as e:
+                print(f"复制视频文件失败: {str(e)}")
+                # 如果复制失败，尝试直接移动
+                try:
+                    shutil.move(output_path, final_path)
+                    print(f"通过移动成功保存视频: {final_path}")
+                except Exception as move_err:
+                    print(f"移动视频文件也失败: {str(move_err)}")
             
+            # 创建完整结果
             result = {
                 "status": "success",
                 "video_length": video_length,
@@ -319,72 +332,47 @@ class VideoProcessor:
                 "time_cost": processing_time,
                 "fps": processed_frames / processing_time if processing_time > 0 else 0,
                 "results": results,
-                "annotated_video_url": annotated_video_url
+                "annotated_video_url": annotated_video_url,
+                "task_id": task_id
             }
             
-            # 修改任务状态更新和结果保存部分，增加错误处理
-            try:
-                # 更新任务状态为完成
-                task_info["status"] = VideoTaskStatus.COMPLETED
-                task_info["progress"] = 100
-                task_info["completed_at"] = time.time()
-                task_info["annotated_video_path"] = final_path
-                
-                if redis is None:
-                    redis = await self.get_redis()
-                
-                # 使用JSON序列化而不是repr
-                await redis.set(f"video_task:{task_id}", json.dumps(task_info))
-                
-                # 保存结果（7天过期），尝试JSON序列化
-                await redis.set(f"video_result:{task_id}", json.dumps(result), ex=60*60*24*7)
-                
-                # 首先将完整结果保存到文件（这部分你已经实现了）
-                result_file = os.path.join(static_dir, f"{task_id}_result.json")
-                with open(result_file, 'w') as f:
-                    json.dump(result, f)
-                
-                # 仅在Redis中存储轻量级元数据
-                meta_result = {
-                    "status": result["status"],
-                    "task_id": task_id,
-                    "video_length": result.get("video_length", 0),
-                    "processed_frames": result.get("processed_frames", 0),
-                    "time_cost": result.get("time_cost", 0),
-                    "fps": result.get("fps", 0),
-                    "result_file_path": result_file,
-                    "annotated_video_url": f"/api/static/videos/{task_id}_annotated.mp4"
-                }
-                
-                # 这个元数据很小，不会超过Redis限制
-                await redis.set(f"video_task:{task_id}", json.dumps(meta_result))
-                
-            except Exception as redis_err:
-                print(f"保存结果到Redis失败: {str(redis_err)}")
-                # 保存到文件作为备份
-                result_file = os.path.join(static_dir, f"{task_id}_result.json")
-                with open(result_file, 'w') as f:
-                    json.dump(result, f)
+            # 将结果保存到文件
+            with open(self._get_result_path(task_id), 'w') as f:
+                json.dump(result, f)
+            
+            # 更新任务状态为完成
+            task_info["status"] = VideoTaskStatus.COMPLETED
+            task_info["progress"] = 100
+            task_info["completed_at"] = time.time()
+            with open(task_file, 'w') as f:
+                json.dump(task_info, f)
                     
         except Exception as e:
             # 处理失败
             print(f"视频处理失败: {str(e)}")
             try:
+                # 读取当前任务信息
+                with open(task_file, 'r') as f:
+                    task_info = json.load(f)
+                
+                # 更新失败状态
                 task_info["status"] = VideoTaskStatus.FAILED
                 task_info["error"] = str(e)
-                task_info["message"] = "视频处理失败，可能是编码器不兼容或Redis连接问题"
-                if redis is not None:
-                    await redis.set(f"video_task:{task_id}", json.dumps(task_info))
+                task_info["message"] = "视频处理失败，可能是编码器不兼容或文件格式问题"
+                
+                # 保存更新后的状态
+                with open(task_file, 'w') as f:
+                    json.dump(task_info, f)
             except Exception as inner_error:
                 print(f"更新失败状态出错: {str(inner_error)}")
             
         finally:
             # 删除临时文件
             try:
-                if os.path.exists(video_path):
+                if video_path and os.path.exists(video_path):
                     os.unlink(video_path)
-            except:
-                pass
+            except Exception as e:
+                print(f"删除临时文件失败: {str(e)}")
 
 # 全局单例实例
 video_processor = VideoProcessor()

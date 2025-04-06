@@ -42,13 +42,36 @@ async def create_history(
         
         logger.debug(f"创建历史记录，结果大小: {len(str(history.result)) if history.result else 0} 字符")
         
+        # 在创建历史记录的地方添加数据瘦身处理
+        record_type = history.type
+        result = history.result
+
+        # 如果是视频结果，只保存关键统计信息而不是完整结果
+        if record_type == "video" and isinstance(result, dict) and "results" in result:
+            # 提取统计数据
+            stats = {
+                "status": result.get("status", ""),
+                "processed_frames": result.get("processed_frames", 0),
+                "time_cost": result.get("time_cost", 0),
+                "fps": result.get("fps", 0),
+                "video_length": result.get("video_length", 0),
+                "task_id": result.get("task_id", ""),
+                "annotated_video_url": result.get("annotated_video_url", "")
+            }
+            # 只存储少量检测结果样本（最多5个）
+            if result.get("results") and isinstance(result["results"], list) and len(result["results"]) > 0:
+                stats["result_samples"] = result["results"][:min(5, len(result["results"]))]
+            
+            # 替换完整结果
+            result = stats
+        
         db_history = History(
             id=history.id,
             timestamp=history.timestamp,
             type=history.type,
             filename=history.filename,
             thumbnail=history.thumbnail,
-            result=history.result
+            result=result
         )
         
         db.add(db_history)
