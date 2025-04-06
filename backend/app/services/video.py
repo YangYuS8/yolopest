@@ -2,7 +2,8 @@ import cv2
 import numpy as np
 import tempfile
 import os
-from typing import List, Dict, Any, Optional
+import platform
+from typing import List, Dict, Any, Optional, Tuple
 import asyncio
 from app.core.config import get_settings
 from app.services.detector import detector
@@ -11,6 +12,7 @@ import time
 import uuid
 from redis.asyncio import Redis
 import shutil
+import json
 
 settings = get_settings()
 
@@ -30,6 +32,35 @@ class VideoProcessor:
         if self.redis is None:
             self.redis = Redis.from_url(settings.redis_url)
         return self.redis
+    
+    def get_platform_video_settings(self) -> Tuple[str, str, str]:
+        """根据平台返回最佳视频设置: (文件扩展名, 编码器代码, MIME类型)"""
+        system = platform.system()
+        
+        # 默认为最通用的MP4/H.264格式
+        default = ('.mp4', 'mp4v', 'video/mp4')
+        
+        if system == "Windows":
+            # Windows通常支持H.264
+            return default
+        elif system == "Linux":
+            # 尝试几种Linux常用编码器
+            try:
+                # 尝试H.264
+                temp_out = cv2.VideoWriter_fourcc(*'mp4v')
+                return default
+            except:
+                try:
+                    # XVID作为备选
+                    temp_out = cv2.VideoWriter_fourcc(*'XVID')
+                    return ('.avi', 'XVID', 'video/avi')
+                except:
+                    # MJPG作为最后选择
+                    return ('.avi', 'MJPG', 'video/avi')
+        elif system == "Darwin":  # macOS
+            return default
+            
+        return default  # 其他系统使用默认设置
     
     async def create_task(self, video_bytes: bytes) -> str:
         """创建视频处理任务，返回任务ID"""
@@ -127,23 +158,27 @@ class VideoProcessor:
     
     async def _process_video(self, task_id: str):
         """处理视频的后台任务"""
-        redis = await self.get_redis()
-        task_info_str = await redis.get(f"video_task:{task_id}")
-        if not task_info_str:
-            return
-            
-        task_info = eval(task_info_str)
-        video_path = task_info["video_path"]
-        
-        # 更新状态为处理中
-        task_info["status"] = VideoTaskStatus.PROCESSING
-        await redis.set(f"video_task:{task_id}", repr(task_info))
-        
+        redis = None
         try:
+            redis = await self.get_redis()
+            task_info_str = await redis.get(f"video_task:{task_id}")
+            if not task_info_str:
+                return
+                
+            task_info = eval(task_info_str)
+            video_path = task_info["video_path"]
+            
+            # 更新状态为处理中
+            task_info["status"] = VideoTaskStatus.PROCESSING
+            await redis.set(f"video_task:{task_id}", repr(task_info))
+            
             # 打开视频
             cap = cv2.VideoCapture(video_path)
             if not cap.isOpened():
                 raise Exception("无法打开视频文件")
+            
+            # 获取平台相关视频设置
+            ext, fourcc_code, mime_type = self.get_platform_video_settings()
             
             # 获取视频信息
             fps = cap.get(cv2.CAP_PROP_FPS)
@@ -152,9 +187,9 @@ class VideoProcessor:
             width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
             height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
             
-            # 创建临时输出视频文件
-            output_path = f"{tempfile.gettempdir()}/{task_id}_annotated.webm"
-            fourcc = cv2.VideoWriter_fourcc(*'VP80')  # WebM格式
+            # 创建临时输出视频文件 - 使用检测到的编码器
+            output_path = f"{tempfile.gettempdir()}/{task_id}_annotated{ext}"
+            fourcc = cv2.VideoWriter_fourcc(*fourcc_code)
             out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
             
             # 初始化结果
@@ -231,10 +266,10 @@ class VideoProcessor:
             os.makedirs(static_dir, exist_ok=True)
             
             # 创建静态文件URL
-            annotated_video_url = f"/api/static/videos/{task_id}_annotated.webm" 
+            annotated_video_url = f"/api/static/videos/{task_id}_annotated{ext}" 
             
             # 将处理后的视频移动到静态文件目录
-            final_path = os.path.join(static_dir, f"{task_id}_annotated.webm")
+            final_path = os.path.join(static_dir, f"{task_id}_annotated{ext}")
             
             # 在_process_video方法中替换os.rename
             try:
@@ -255,22 +290,40 @@ class VideoProcessor:
                 "annotated_video_url": annotated_video_url
             }
             
-            # 更新任务状态为完成
-            task_info["status"] = VideoTaskStatus.COMPLETED
-            task_info["progress"] = 100
-            task_info["completed_at"] = time.time()
-            task_info["annotated_video_path"] = final_path
-            
-            await redis.set(f"video_task:{task_id}", repr(task_info))
-            # 保存结果（7天过期）
-            await redis.set(f"video_result:{task_id}", repr(result), ex=60*60*24*7)
-            
+            # 修改任务状态更新和结果保存部分，增加错误处理
+            try:
+                # 更新任务状态为完成
+                task_info["status"] = VideoTaskStatus.COMPLETED
+                task_info["progress"] = 100
+                task_info["completed_at"] = time.time()
+                task_info["annotated_video_path"] = final_path
+                
+                if redis is None:
+                    redis = await self.get_redis()
+                
+                # 使用JSON序列化而不是repr
+                await redis.set(f"video_task:{task_id}", json.dumps(task_info))
+                
+                # 保存结果（7天过期），尝试JSON序列化
+                await redis.set(f"video_result:{task_id}", json.dumps(result), ex=60*60*24*7)
+            except Exception as redis_err:
+                print(f"保存结果到Redis失败: {str(redis_err)}")
+                # 保存到文件作为备份
+                result_file = os.path.join(static_dir, f"{task_id}_result.json")
+                with open(result_file, 'w') as f:
+                    json.dump(result, f)
+                    
         except Exception as e:
             # 处理失败
             print(f"视频处理失败: {str(e)}")
-            task_info["status"] = VideoTaskStatus.FAILED
-            task_info["error"] = str(e)
-            await redis.set(f"video_task:{task_id}", repr(task_info))
+            try:
+                task_info["status"] = VideoTaskStatus.FAILED
+                task_info["error"] = str(e)
+                task_info["message"] = "视频处理失败，可能是编码器不兼容或Redis连接问题"
+                if redis is not None:
+                    await redis.set(f"video_task:{task_id}", json.dumps(task_info))
+            except Exception as inner_error:
+                print(f"更新失败状态出错: {str(inner_error)}")
             
         finally:
             # 删除临时文件

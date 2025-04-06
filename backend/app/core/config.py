@@ -1,4 +1,5 @@
 from pydantic_settings import BaseSettings
+from pydantic import Field
 from functools import lru_cache
 import os
 from typing import Optional
@@ -33,9 +34,18 @@ class Settings(BaseSettings):
     access_token_expire_minutes: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
     
     class Config:
-        env_file = ".env"
+        # 根据.env中的ENV变量选择配置文件
+        env = os.getenv("ENV", "development")
+        env_file = f".env.{env}"
         case_sensitive = True  # 区分大小写的变量名
+        extra = "allow"  # 添加此行，允许额外字段
+
+# 单例模式，确保只创建一次配置
+_settings = None
 
 @lru_cache()
-def get_settings():
-    return Settings()
+def get_settings() -> Settings:
+    global _settings
+    if _settings is None:
+        _settings = Settings()
+    return _settings

@@ -126,6 +126,46 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
     }
 
+    const renderStats = () => {
+        if (!result) {
+            return <p>暂无结果</p>
+        }
+
+        const totalDetections = (() => {
+            try {
+                if (!result.results) return 0
+
+                if (Array.isArray(result.results)) {
+                    return result.results.reduce(
+                        (total, frame) =>
+                            total + (frame.detections?.length || 0),
+                        0
+                    )
+                } else if (typeof result.results === 'object') {
+                    return Object.values(result.results).reduce(
+                        (total, detections) =>
+                            total +
+                            (Array.isArray(detections) ? detections.length : 0),
+                        0
+                    )
+                }
+                return 0
+            } catch (err) {
+                console.error('统计检测结果时出错:', err)
+                return 0
+            }
+        })()
+
+        return (
+            <div className="detection-stats">
+                <p>
+                    检测结果：共处理 {result.processed_frames || 0} 帧， 发现{' '}
+                    {totalDetections} 个目标
+                </p>
+            </div>
+        )
+    }
+
     return (
         <Card title="视频播放" className="video-player-card">
             <Tabs
@@ -225,19 +265,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     />
                 </Space>
 
-                {result && (
-                    <div className="detection-stats">
-                        <p>
-                            检测结果：共处理 {result.processed_frames} 帧，发现
-                            {result.results.reduce(
-                                (total, frame) =>
-                                    total + frame.detections.length,
-                                0
-                            )}{' '}
-                            个目标
-                        </p>
-                    </div>
-                )}
+                {renderStats()}
             </div>
         </Card>
     )

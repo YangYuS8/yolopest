@@ -1,2 +1,2 @@
 # 忽略环境文件
-/backend-old
+.env.dev
