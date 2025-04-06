@@ -1,0 +1,199 @@
+.video-header-card {
+    background-color: #fafafa;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.statistics-card {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    height: 100%;
+}
+
+.frame-detection-card {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 整体容器 */
+.video-detection-container {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+/* 页面头部 */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+    color: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+    display: flex;
+    align-items: center;
+}
+
+.page-title h2 {
+    color: white !important;
+    margin: 0 !important;
+}
+
+.title-icon {
+    font-size: 32px;
+    margin-right: 12px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.download-button {
+    background: #52c41a;
+    border-color: #52c41a;
+}
+
+.download-button:hover {
+    background: #73d13d;
+    border-color: #73d13d;
+}
+
+/* 主标签页 */
+.main-tabs {
+    background: white;
+    padding: 0 16px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.main-tabs .ant-tabs-nav {
+    margin-bottom: 24px;
+}
+
+/* 上传区域 */
+.upload-container {
+    padding: 16px 0;
+}
+
+.upload-card,
+.progress-card {
+    height: 100%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.processing-status {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.status-tag {
+    margin: 16px 0;
+}
+
+.upload-instruction {
+    padding: 30px 0;
+    text-align: center;
+}
+
+/* 添加新的上传区域样式 */
+.upload-dropzone {
+    transition: all 0.3s;
+}
+
+.upload-dropzone:hover {
+    border-color: #1890ff !important;
+    background: #e6f7ff !important;
+}
+
+.video-preview-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.video-container {
+    background-color: #000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.upload-progress-details {
+    text-align: left;
+    margin-top: 16px;
+    color: #666;
+}
+
+.upload-progress-details p {
+    margin-bottom: 8px;
+}
+
+.result-summary {
+    margin: 16px 0;
+    line-height: 1.8;
+}
+
+/* 分析结果区域 */
+.video-player-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.statistics-card {
+    height: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.frame-detection-card {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+/* 添加以下新样式 */
+.preview-container {
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.download-card {
+    background-color: #f6ffed;
+    border: 1px solid #b7eb8f;
+    border-radius: 8px;
+}
+
+.processing-complete {
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .action-buttons {
+        margin-top: 16px;
+        width: 100%;
+    }
+
+    .download-button {
+        flex: 1;
+    }
+
+    .video-header-card .ant-space {
+        margin-top: 12px;
+        display: flex;
+        justify-content: flex-start;
+    }
+}

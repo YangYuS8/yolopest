@@ -1,6 +1,10 @@
 import React, { useRef, useState } from 'react'
 import { Card, Slider, Button, Space, Tabs } from 'antd'
-import { PlayCircleOutlined, PauseCircleOutlined } from '@ant-design/icons'
+import {
+    PlayCircleOutlined,
+    PauseCircleOutlined,
+    DownloadOutlined,
+} from '@ant-design/icons'
 import { VideoResult } from '../../../types'
 import './VideoPlayer.css'
 
@@ -126,6 +130,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
     }
 
+    // 修改renderStats函数，使其更健壮
     const renderStats = () => {
         if (!result) {
             return <p>暂无结果</p>
@@ -133,25 +138,36 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
         const totalDetections = (() => {
             try {
-                if (!result.results) return 0
+                // 处理数组形式的results
+                if (result.results && Array.isArray(result.results)) {
+                    return result.results.reduce((total, frame) => {
+                        if (
+                            !frame.detections ||
+                            !Array.isArray(frame.detections)
+                        )
+                            return total
+                        return total + frame.detections.length
+                    }, 0)
+                }
 
-                if (Array.isArray(result.results)) {
-                    return result.results.reduce(
-                        (total, frame) =>
-                            total + (frame.detections?.length || 0),
-                        0
-                    )
-                } else if (typeof result.results === 'object') {
+                // 处理对象形式的results（如果存在）
+                if (
+                    result.results &&
+                    typeof result.results === 'object' &&
+                    !Array.isArray(result.results)
+                ) {
                     return Object.values(result.results).reduce(
-                        (total, detections) =>
-                            total +
-                            (Array.isArray(detections) ? detections.length : 0),
+                        (total, detections) => {
+                            if (!Array.isArray(detections)) return total
+                            return total + detections.length
+                        },
                         0
                     )
                 }
+
                 return 0
             } catch (err) {
-                console.error('统计检测结果时出错:', err)
+                console.error('统计检测结果时出错:', err, result)
                 return 0
             }
         })()
@@ -162,12 +178,48 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     检测结果：共处理 {result.processed_frames || 0} 帧， 发现{' '}
                     {totalDetections} 个目标
                 </p>
+                {/* 添加更详细的状态显示 */}
+                <p>状态: {result.status || '未知'}</p>
             </div>
         )
     }
 
+    // 在renderStats函数后添加新的下载函数
+    const handleDownloadVideo = () => {
+        if (!result?.task_id) return
+
+        // 构建视频下载链接
+        const videoUrl = `${import.meta.env.VITE_API_URL || ''}/api/static/videos/${result.task_id}_annotated.mp4`
+
+        // 创建一个隐藏的a标签来触发下载
+        const a = document.createElement('a')
+        a.href = videoUrl
+        a.download = `标注视频_${result.task_id}.mp4`
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+    }
+
     return (
-        <Card title="视频播放" className="video-player-card">
+        <Card
+            title="视频播放"
+            className="video-player-card"
+            extra={
+                <Space>
+                    {result?.task_id &&
+                        (result.status === 'completed' ||
+                            result.status === 'success') && (
+                            <Button
+                                type="primary"
+                                icon={<DownloadOutlined />}
+                                onClick={handleDownloadVideo}
+                            >
+                                下载标注视频
+                            </Button>
+                        )}
+                </Space>
+            }
+        >
             <Tabs
                 activeKey={activeKey}
                 onChange={handleTabChange}
@@ -197,10 +249,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                         label: '标注视频',
                         children: (
                             <div className="video-container">
-                                {result?.annotated_video_url ? (
+                                {result?.task_id ? (
                                     <video
                                         ref={annotatedVideoRef}
-                                        src={result.annotated_video_url}
+                                        src={`${import.meta.env.VITE_API_URL || ''}/api/static/videos/${result.task_id}_annotated.mp4`}
                                         style={{ width: '100%' }}
                                         onTimeUpdate={() =>
                                             activeKey === 'annotated' &&
@@ -208,6 +260,36 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                                         }
                                         onPlay={() => setIsPlaying(true)}
                                         onPause={() => setIsPlaying(false)}
+                                        onError={(e) => {
+                                            console.error('视频加载错误:', e)
+                                            const videoElement =
+                                                e.target as HTMLVideoElement
+                                            console.error('视频元素状态:', {
+                                                networkState:
+                                                    videoElement.networkState,
+                                                readyState:
+                                                    videoElement.readyState,
+                                                error: videoElement.error
+                                                    ? {
+                                                          code: videoElement
+                                                              .error.code,
+                                                          message:
+                                                              videoElement.error
+                                                                  .message,
+                                                      }
+                                                    : 'No error',
+                                            })
+
+                                            // 记录当前result对象状态以便调试
+                                            console.log(
+                                                '当前result对象:',
+                                                result
+                                            )
+                                            console.log(
+                                                '尝试加载的URL:',
+                                                `${import.meta.env.VITE_API_URL || ''}/api/static/videos/${result.task_id}_annotated.mp4`
+                                            )
+                                        }}
                                     />
                                 ) : (
                                     <div
@@ -222,11 +304,21 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                                         }}
                                     >
                                         标注视频未生成或处理中...
+                                        {result ? (
+                                            <div>
+                                                视频处理状态: {result.status}
+                                            </div>
+                                        ) : null}
                                     </div>
                                 )}
                             </div>
                         ),
-                        disabled: !result?.annotated_video_url,
+                        // 根据task_id判断是否启用，而非annotated_video_url
+                        disabled:
+                            !result ||
+                            !result.task_id ||
+                            (result.status !== 'completed' &&
+                                result.status !== 'success'), // 同时接受'completed'和'success'状态
                     },
                 ]}
             />

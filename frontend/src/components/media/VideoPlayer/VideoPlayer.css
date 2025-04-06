@@ -1,12 +1,23 @@
 .video-player-card {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .video-container {
     width: 100%;
     position: relative;
-    background: #000;
+    background-color: #000;
     margin-bottom: 16px;
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.video-container video {
+    max-height: 100%;
+    object-fit: contain;
 }
 
 .video-element {
@@ -24,15 +35,20 @@
     display: flex;
     align-items: center;
     margin-bottom: 8px;
+    padding: 8px 0;
 }
 
 .time-display {
     margin-left: 16px;
     color: rgba(0, 0, 0, 0.65);
+    font-family: monospace;
 }
 
 .detection-stats {
     margin-top: 12px;
+    padding: 12px;
+    background-color: #f8f8f8;
+    border-radius: 4px;
     padding-top: 12px;
     border-top: 1px solid #eee;
     font-size: 13px;
