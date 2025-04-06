@@ -16,7 +16,7 @@ from app.models.detection import Detection  # 显式导入Detection模型
 from app.core.database import engine, DATABASE_URL
 
 # 覆盖数据库连接
-DATABASE_URL = "postgresql+asyncpg://yolopest:yolopest@localhost:5432/yolopest"
+DATABASE_URL = "postgresql+asyncpg://yolopest:yolopest@10.10.0.6:5432/yolopest"
 engine = create_async_engine(DATABASE_URL)
 
 async def create_tables():
