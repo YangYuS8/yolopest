@@ -76,14 +76,9 @@ const VideoDetection: React.FC = () => {
                 )
             }
 
-            // 放宽状态判断条件，只要不是正在处理或错误状态就切换
-            if (
-                result.status &&
-                result.status !== 'processing' &&
-                result.status !== 'failed' &&
-                result.status !== 'error'
-            ) {
-                console.log('切换到分析页面')
+            // 修改判断逻辑：只要result存在且有task_id，就启用分析页面
+            if (result.task_id) {
+                console.log('视频处理已完成，切换到分析页面')
                 setActiveTab('analysis')
             }
         }
@@ -511,7 +506,7 @@ const VideoDetection: React.FC = () => {
                             </>
                         }
                         key="analysis"
-                        disabled={!result}
+                        disabled={!result || !result.task_id} // 只要有task_id就可以启用
                     >
                         {/* 添加独立下载按钮区域 */}
                         {result?.task_id && (

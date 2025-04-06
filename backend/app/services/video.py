@@ -27,11 +27,17 @@ class VideoProcessor:
     def __init__(self):
         self.redis: Optional[Redis] = None
         
+    # 修改get_redis方法增加重试和错误处理
     async def get_redis(self) -> Redis:
         """获取Redis连接"""
-        if self.redis is None:
-            self.redis = Redis.from_url(settings.redis_url)
-        return self.redis
+        try:
+            if self.redis is None:
+                self.redis = Redis.from_url(settings.redis_url, encoding="utf-8", decode_responses=True)
+            return self.redis
+        except Exception as e:
+            print(f"Redis连接失败: {str(e)}")
+            # 返回None，调用者需要处理None的情况
+            return None
     
     def get_platform_video_settings(self) -> Tuple[str, str, str]:
         """根据平台返回最佳视频设置: (文件扩展名, 编码器代码, MIME类型)"""
@@ -148,32 +154,38 @@ class VideoProcessor:
             print(f"获取任务状态时出错: {str(e)}")
             return {"status": "error", "message": f"获取任务状态时出错: {str(e)}"}
     
+    # 修改get_task_result方法，优先从文件读取
     async def get_task_result(self, task_id: str) -> Dict[str, Any]:
         """获取任务结果"""
         try:
-            # 优先尝试从文件系统获取结果
+            # 优先从文件系统获取结果
             result_file = os.path.join("app", "static", "videos", f"{task_id}_result.json")
             if os.path.exists(result_file):
                 with open(result_file, 'r') as f:
                     result = json.load(f)
-                    # 添加标准视频URL路径
-                    result["annotated_video_url"] = f"/api/static/videos/{task_id}_annotated.mp4"
-                    # 添加任务ID以便前端构建URL
+                    # 确保包含task_id和视频URL
                     result["task_id"] = task_id
+                    result["annotated_video_url"] = f"/api/static/videos/{task_id}_annotated.mp4"
                     return result
             
-            # 如果文件不存在，再尝试从Redis获取
+            # 文件不存在，尝试从Redis获取
             redis = await self.get_redis()
-            task_info = await redis.get(f"video_task:{task_id}")
+            if redis:
+                task_info = await redis.get(f"video_task:{task_id}")
+                if task_info:
+                    task_info = json.loads(task_info)
+                    # 如果Redis只存了元数据，尝试加载结果文件
+                    if "result_file_path" in task_info and os.path.exists(task_info["result_file_path"]):
+                        with open(task_info["result_file_path"], 'r') as f:
+                            full_result = json.load(f)
+                            # 合并元数据和完整结果
+                            return {**task_info, **full_result}
+                    return task_info
             
-            if task_info:
-                return json.loads(task_info)
-            
-            # 都没有找到，返回错误状态
-            return {"status": "not_found", "message": "未找到任务结果"}
-            
+            # 都没找到，返回错误状态
+            return {"status": "error", "message": "任务结果不存在"}
         except Exception as e:
-            print(f"获取结果时出错: {str(e)}")
+            print(f"获取任务结果失败: {str(e)}")
             return {"status": "error", "message": f"获取结果时出错: {str(e)}"}
     
     async def _process_video(self, task_id: str):
