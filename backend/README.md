@@ -49,7 +49,7 @@ pip install -e ./ultralytics
 python create_tables.py
 
 # 启动服务
-uvicorn main:app --reload
+python start.py
 ```
 
 访问 API 文档：http://localhost:8000/docs
