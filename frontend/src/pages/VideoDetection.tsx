@@ -357,8 +357,7 @@ const VideoDetection: React.FC = () => {
                                             <div className="processing-status">
                                                 <Statistic
                                                     title="视频处理进度"
-                                                    value={progress}
-                                                    suffix="%"
+                                                    value="处理中"
                                                 />
                                                 <div className="status-tag">
                                                     <Tag color="processing">
@@ -366,7 +365,6 @@ const VideoDetection: React.FC = () => {
                                                     </Tag>
                                                 </div>
                                                 <Progress
-                                                    percent={progress}
                                                     status="active"
                                                     strokeColor={{
                                                         from: '#108ee9',
@@ -376,6 +374,8 @@ const VideoDetection: React.FC = () => {
                                                         marginTop: 16,
                                                         marginBottom: 16,
                                                     }}
+                                                    percent={100} // 始终保持100%以显示整个进度条的动画
+                                                    showInfo={false} // 不显示百分比数字
                                                 />
                                                 <div className="upload-progress-details">
                                                     <p>
