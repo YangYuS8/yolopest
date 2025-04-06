@@ -14,13 +14,14 @@ class AIAnalysisService:
     def __init__(self):
         #TODO： 从环境变量获取API密钥，确保安全性
         self.api_key = os.getenv("DEEPSEEK_API_KEY")
+        self.base_url = os.getenv("DEEPSEEK_API_URL", "https://api.deepseek.com/v1")
+        # 检查API密钥是否设置
         if not self.api_key:
             print("警告: 未设置DEEPSEEK_API_KEY环境变量")
-            self.api_key = "demo_key"  # 仅用于开发，生产环境需要设置真实密钥
-        
+            raise ValueError("请设置DEEPSEEK_API_KEY环境变量")
         self.client = OpenAI(
             api_key=self.api_key,
-            base_url="https://api.deepseek.com"
+            base_url=self.base_url,
         )
     
     async def generate_analysis(self, data: AnalysisRequest) -> Dict[str, Any]:
