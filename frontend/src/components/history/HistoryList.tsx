@@ -7,7 +7,10 @@ import {
     DeleteOutlined,
 } from '@ant-design/icons'
 import { HistoryRecord } from '../../types/history'
+<<<<<<< HEAD
+=======
 import { PestResult, VideoResult } from '../../types'
+>>>>>>> origin_main
 import type { ColumnsType } from 'antd/es/table'
 
 const { Text } = Typography
@@ -73,6 +76,33 @@ export const HistoryList: React.FC<HistoryListProps> = ({
             key: 'result',
             render: (_, record) => {
                 if (record.type === 'image') {
+<<<<<<< HEAD
+                    const predictions = record.result.predictions || []
+
+                    if (predictions.length > 0) {
+                        const firstPred = predictions[0]
+                        return (
+                            <Tag color="green">
+                                {firstPred.class}
+                                {predictions.length > 1
+                                    ? ` (+${predictions.length - 1}项)`
+                                    : ''}
+                            </Tag>
+                        )
+                    }
+
+                    return <Tag color="orange">未检测到目标</Tag>
+                }
+
+                if (record.type === 'video') {
+                    return (
+                        <Tag color="green">
+                            {record.result.processed_frames ?? 0}帧
+                        </Tag>
+                    )
+                }
+
+=======
                     const imgResult = record.result as PestResult
 
                     // 处理标准结果格式
@@ -113,6 +143,7 @@ export const HistoryList: React.FC<HistoryListProps> = ({
                         </Tag>
                     )
                 }
+>>>>>>> origin_main
                 return null
             },
         },

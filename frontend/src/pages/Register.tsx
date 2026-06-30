@@ -44,7 +44,14 @@ const Register = (): React.ReactElement => {
                 name="email"
                 rules={[
                     { required: true, message: '请输入邮箱' },
+<<<<<<< HEAD
+                    { 
+                        pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 
+                        message: '请输入有效的邮箱地址' 
+                    },
+=======
                     { type: 'email', message: '请输入有效的邮箱地址' },
+>>>>>>> origin_main
                 ]}
             >
                 <Input

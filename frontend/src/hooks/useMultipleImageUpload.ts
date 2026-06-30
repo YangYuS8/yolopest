@@ -44,7 +44,18 @@ export const useMultipleImageUpload = () => {
                                 result.predictions?.map((p) => ({
                                     class: p.class,
                                     confidence: p.confidence,
+<<<<<<< HEAD
+                                    box: p.bbox
+                                        ? [
+                                              p.bbox.x1,
+                                              p.bbox.y1,
+                                              p.bbox.x2,
+                                              p.bbox.y2,
+                                          ]
+                                        : [0, 0, 0, 0],
+=======
                                     box: p.bbox || [0, 0, 0, 0], // 将bbox转为box
+>>>>>>> origin_main
                                 })) || [],
                         },
                     })

@@ -1,14 +1,38 @@
+<<<<<<< HEAD
+from fastapi import APIRouter, File, UploadFile, HTTPException, Depends
+from app.services.video import video_processor
+from app.models.user import User
+from app.core.users import current_active_user
+=======
 from fastapi import APIRouter, File, UploadFile, HTTPException
 from app.services.video import video_processor
+>>>>>>> origin_main
 
 router = APIRouter()
 
 @router.post("/process-async")
+<<<<<<< HEAD
+async def process_video_async(
+    file: UploadFile = File(...),
+    current_user: User = Depends(current_active_user)
+):
+=======
 async def process_video_async(file: UploadFile = File(...)):
+>>>>>>> origin_main
     """异步处理视频文件"""
     try:
         # 读取视频文件
         video_bytes = await file.read()
+<<<<<<< HEAD
+
+        # 文件大小检查 (可选，限制为100MB)
+        if len(video_bytes) > 100 * 1024 * 1024:
+            raise HTTPException(status_code=400, detail="视频文件过大，请限制在100MB以内")
+
+        # 创建异步处理任务
+        task_id = await video_processor.create_task(video_bytes)
+
+=======
         
         # 文件大小检查 (可选，限制为100MB)
         if len(video_bytes) > 100 * 1024 * 1024:
@@ -17,6 +41,7 @@ async def process_video_async(file: UploadFile = File(...)):
         # 创建异步处理任务
         task_id = await video_processor.create_task(video_bytes)
         
+>>>>>>> origin_main
         return {
             "status": "success",
             "task_id": task_id,
@@ -29,7 +54,14 @@ async def process_video_async(file: UploadFile = File(...)):
         raise HTTPException(status_code=500, detail=f"处理视频时出错: {str(e)}")
 
 @router.get("/status/{task_id}")
+<<<<<<< HEAD
+async def get_video_status(
+    task_id: str,
+    current_user: User = Depends(current_active_user)
+):
+=======
 async def get_video_status(task_id: str):
+>>>>>>> origin_main
     """获取视频处理任务状态"""
     status = await video_processor.get_task_status(task_id)
     if status.get("status") == "not_found":
@@ -37,7 +69,14 @@ async def get_video_status(task_id: str):
     return status
 
 @router.get("/result/{task_id}")
+<<<<<<< HEAD
+async def get_video_result(
+    task_id: str,
+    current_user: User = Depends(current_active_user)
+):
+=======
 async def get_video_result(task_id: str):
+>>>>>>> origin_main
     """获取视频处理结果"""
     result = await video_processor.get_task_result(task_id)
     if result.get("status") == "not_found":

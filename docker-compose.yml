@@ -29,7 +29,11 @@ services:
             - PYTHONUNBUFFERED=1
         volumes:
             # 如果需要持久化模型文件
+<<<<<<< HEAD
+            - ./backend/model_weights:/app/model_weights # 模型文件映射
+=======
             - ./model_weights:/app/model_weights # 模型文件映射
+>>>>>>> origin_main
         networks:
             - yolopest-network
         restart: unless-stopped

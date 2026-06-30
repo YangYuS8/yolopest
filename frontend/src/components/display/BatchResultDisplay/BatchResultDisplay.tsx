@@ -1,7 +1,11 @@
 import React from 'react'
 import { Card, Spin, Empty, List, Tag, Collapse, Image, Typography } from 'antd'
 import { LoadingOutlined } from '@ant-design/icons'
+<<<<<<< HEAD
+import { BatchProcessResult, BatchFileResult, DetectionItem } from '../../../types'
+=======
 import { BatchProcessResult, BatchFileResult } from '../../types'
+>>>>>>> origin_main
 import type { CollapseProps } from 'antd'
 
 const { Text } = Typography
@@ -94,7 +98,17 @@ const BatchResultDisplay: React.FC<BatchResultDisplayProps> = ({
 
                                     {item.predictions &&
                                     item.predictions.length > 0 ? (
+<<<<<<< HEAD
+                                        item.predictions.map(
+                                            (
+                                                pred: DetectionItem,
+                                                pidx: number
+                                            ) => {
+                                                const bbox = pred.bbox
+                                                return (
+=======
                                         item.predictions.map((pred, pidx) => (
+>>>>>>> origin_main
                                             <div
                                                 key={pidx}
                                                 style={{
@@ -111,6 +125,17 @@ const BatchResultDisplay: React.FC<BatchResultDisplayProps> = ({
                                                 </p>
                                                 <p>
                                                     位置: X[
+<<<<<<< HEAD
+                                                    {bbox?.x1 ?? 0}-
+                                                    {bbox?.x2 ?? 0}] Y[
+                                                    {bbox?.y1 ?? 0}-
+                                                    {bbox?.y2 ?? 0}]
+                                                </p>
+                                            </div>
+                                                )
+                                            }
+                                        )
+=======
                                                     {pred.bbox.x1}-
                                                     {pred.bbox.x2}] Y[
                                                     {pred.bbox.y1}-
@@ -118,6 +143,7 @@ const BatchResultDisplay: React.FC<BatchResultDisplayProps> = ({
                                                 </p>
                                             </div>
                                         ))
+>>>>>>> origin_main
                                     ) : (
                                         <Empty description="未检测到害虫" />
                                     )}

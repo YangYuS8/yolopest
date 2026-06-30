@@ -4,7 +4,11 @@ services:
         env_file:
             - ./.env.development
         ports:
+<<<<<<< HEAD
+            - '5433:5432' # 宿主机 5432 已被本机 PostgreSQL 占用，改用 5433
+=======
             - '5432:5432' # 添加这一行，将容器的5432端口映射到主机的5432端口
+>>>>>>> origin_main
         volumes:
             - postgres_data:/var/lib/postgresql/data
         networks:

@@ -46,7 +46,11 @@ export const useVideoUpload = () => {
                     setLoading(false)
 
                     // 添加到历史记录
+<<<<<<< HEAD
+                    await addHistoryRecord({
+=======
                     addHistoryRecord({
+>>>>>>> origin_main
                         id: uuidv4(),
                         timestamp: Date.now(),
                         type: 'video',

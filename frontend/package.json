@@ -19,6 +19,11 @@
         "react-markdown": "^10.1.0",
         "react-router-dom": "^7.3.0",
         "recharts": "^2.15.1",
+<<<<<<< HEAD
+        "rehype-raw": "^7.0.0",
+        "remark-gfm": "^4.0.1",
+=======
+>>>>>>> origin_main
         "uuid": "^11.1.0"
     },
     "devDependencies": {

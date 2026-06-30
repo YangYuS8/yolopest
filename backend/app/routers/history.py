@@ -3,6 +3,11 @@ import logging
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List, Optional
 from app.core.database import get_db
+<<<<<<< HEAD
+from app.core.users import current_active_user
+from app.models.user import User
+=======
+>>>>>>> origin_main
 from app.models.history import History
 from app.schemas.history import HistoryCreate, HistoryResponse
 from sqlalchemy import select, delete
@@ -21,16 +26,29 @@ router = APIRouter(
 @router.post("/", response_model=HistoryResponse)
 async def create_history(
     history: HistoryCreate,
+<<<<<<< HEAD
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(current_active_user)
+=======
     db: AsyncSession = Depends(get_db)
+>>>>>>> origin_main
 ):
     """创建历史记录"""
     try:
         logger.info(f"尝试创建历史记录: {history.filename}, 类型: {history.type}")
+<<<<<<< HEAD
+
+        # 如果未提供 ID，则生成一个
+        if not history.id:
+            history.id = str(uuid.uuid4())
+
+=======
         
         # 如果未提供 ID，则生成一个
         if not history.id:
             history.id = str(uuid.uuid4())
         
+>>>>>>> origin_main
         # 确保有时间戳并处理时区问题
         current_time = datetime.now()
         if history.timestamp:
@@ -40,15 +58,31 @@ async def create_history(
                 history.timestamp = history.timestamp.astimezone().replace(tzinfo=None)
         else:
             history.timestamp = current_time
+<<<<<<< HEAD
+
+        logger.debug(f"创建历史记录，结果大小: {len(str(history.result)) if history.result else 0} 字符")
+
+=======
         
         logger.debug(f"创建历史记录，结果大小: {len(str(history.result)) if history.result else 0} 字符")
         
+>>>>>>> origin_main
         db_history = History(
             id=history.id,
             timestamp=history.timestamp,
             type=history.type,
             filename=history.filename,
             thumbnail=history.thumbnail,
+<<<<<<< HEAD
+            result=history.result,
+            user_id=current_user.id
+        )
+
+        db.add(db_history)
+        await db.commit()
+        await db.refresh(db_history)
+
+=======
             result=history.result
         )
         
@@ -56,6 +90,7 @@ async def create_history(
         await db.commit()
         await db.refresh(db_history)
         
+>>>>>>> origin_main
         logger.info(f"历史记录创建成功: {db_history.id}")
         return db_history.to_dict()
     except Exception as e:
@@ -66,16 +101,29 @@ async def create_history(
 @router.get("/", response_model=List[HistoryResponse])
 async def get_history_records(
     db: AsyncSession = Depends(get_db),
+<<<<<<< HEAD
+    current_user: User = Depends(current_active_user),
+=======
+>>>>>>> origin_main
     skip: int = 0,
     limit: int = 100,
     type: Optional[str] = None
 ):
+<<<<<<< HEAD
+    """获取当前用户的历史记录列表"""
+    query = select(History).where(History.user_id == current_user.id).order_by(History.timestamp.desc()).offset(skip).limit(limit)
+
+    if type:
+        query = query.where(History.type == type)
+
+=======
     """获取历史记录列表"""
     query = select(History).order_by(History.timestamp.desc()).offset(skip).limit(limit)
     
     if type:
         query = query.where(History.type == type)
         
+>>>>>>> origin_main
     result = await db.execute(query)
     records = result.scalars().all()
     return [record.to_dict() for record in records]
@@ -83,6 +131,20 @@ async def get_history_records(
 @router.get("/{history_id}", response_model=HistoryResponse)
 async def get_history_record(
     history_id: str,
+<<<<<<< HEAD
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(current_active_user)
+):
+    """获取当前用户的单个历史记录"""
+    result = await db.execute(
+        select(History).where(History.id == history_id, History.user_id == current_user.id)
+    )
+    record = result.scalars().first()
+
+    if not record:
+        raise HTTPException(status_code=404, detail="历史记录不存在")
+
+=======
     db: AsyncSession = Depends(get_db)
 ):
     """获取单个历史记录"""
@@ -92,11 +154,29 @@ async def get_history_record(
     if not record:
         raise HTTPException(status_code=404, detail="历史记录不存在")
         
+>>>>>>> origin_main
     return record.to_dict()
 
 @router.delete("/{history_id}", status_code=204)
 async def delete_history_record(
     history_id: str,
+<<<<<<< HEAD
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(current_active_user)
+):
+    """删除当前用户的历史记录"""
+    result = await db.execute(
+        select(History).where(History.id == history_id, History.user_id == current_user.id)
+    )
+    record = result.scalars().first()
+
+    if not record:
+        raise HTTPException(status_code=404, detail="历史记录不存在")
+
+    await db.execute(delete(History).where(History.id == history_id))
+    await db.commit()
+
+=======
     db: AsyncSession = Depends(get_db)
 ):
     """删除历史记录"""
@@ -109,14 +189,27 @@ async def delete_history_record(
     await db.execute(delete(History).where(History.id == history_id))
     await db.commit()
     
+>>>>>>> origin_main
     return None
 
 @router.delete("/", status_code=204)
 async def delete_all_history_records(
+<<<<<<< HEAD
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(current_active_user)
+):
+    """清空当前用户的所有历史记录"""
+    await db.execute(
+        delete(History).where(History.user_id == current_user.id)
+    )
+    await db.commit()
+
+=======
     db: AsyncSession = Depends(get_db)
 ):
     """清空所有历史记录"""
     await db.execute(delete(History))
     await db.commit()
     
+>>>>>>> origin_main
     return None

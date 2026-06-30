@@ -1,5 +1,9 @@
 import os
+<<<<<<< HEAD
+from fastapi import APIRouter, File, UploadFile, HTTPException, Depends, Query
+=======
 from fastapi import APIRouter, File, UploadFile, HTTPException, Depends
+>>>>>>> origin_main
 from sqlalchemy.ext.asyncio import AsyncSession
 from datetime import datetime
 from app.core.database import get_db
@@ -7,7 +11,11 @@ from app.services.detector import detector
 from app.models.detection import Detection
 from app.models.user import User
 from app.core.users import current_active_user
+<<<<<<< HEAD
+from typing import List, Optional
+=======
 from typing import List
+>>>>>>> origin_main
 import time
 import base64
 
@@ -21,20 +29,38 @@ router = APIRouter()
 async def upload_image(
     file: UploadFile = File(...),
     db: AsyncSession = Depends(get_db),
+<<<<<<< HEAD
+    current_user: User = Depends(current_active_user),
+    conf_threshold: Optional[float] = Query(None, ge=0.0, le=1.0, description="可选的置信度阈值（0~1）"),
+=======
     current_user: User = Depends(current_active_user)
+>>>>>>> origin_main
 ):
     try:
         # 读取图片字节流
         start_time = time.time()
         image_bytes = await file.read()
+<<<<<<< HEAD
+
+=======
         
+>>>>>>> origin_main
         # 保存上传的文件
         file_path = os.path.join("app", "static", "uploads", file.filename)
         with open(file_path, "wb") as f:
             f.write(image_bytes)
+<<<<<<< HEAD
+
+        # 执行预测（支持自定义阈值）
+        if conf_threshold is not None:
+            predictions = detector.predict(image_bytes, conf_threshold=conf_threshold)
+        else:
+            predictions = detector.predict(image_bytes)
+=======
         
         # 执行预测
         predictions = detector.predict(image_bytes)
+>>>>>>> origin_main
         
         # 生成标注图像 (只有在有检测结果时才生成)
         annotated_image = None

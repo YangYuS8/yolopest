@@ -114,7 +114,11 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
             </Content>
 
             <Footer style={{ textAlign: 'center' }}>
+<<<<<<< HEAD
+                YoloPest ©{currentYear} - 基于YOLOv12的智能害虫检测系统
+=======
                 YoloPest ©{currentYear} - 基于YOLOv8的智能害虫检测系统
+>>>>>>> origin_main
             </Footer>
         </Layout>
     )

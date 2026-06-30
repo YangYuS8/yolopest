@@ -15,8 +15,13 @@ class Settings(BaseSettings):
     POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD", "yolopest")
     POSTGRES_DB: str = os.getenv("POSTGRES_DB", "yolopest")
     DATABASE_URL: str = os.getenv(
+<<<<<<< HEAD
+        "DATABASE_URL",
+        f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@localhost:5433/{POSTGRES_DB}"
+=======
         "DATABASE_URL", 
         f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@localhost:5432/{POSTGRES_DB}"
+>>>>>>> origin_main
     )
 
     # Redis配置

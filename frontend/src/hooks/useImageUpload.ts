@@ -38,6 +38,20 @@ export const useImageUpload = () => {
                     time_cost: data.time_cost,
                     // 修改这里，将results映射为predictions
                     // 添加类型注解，解决隐式any问题
+<<<<<<< HEAD
+                    predictions: data.results.map((item: { class: string; confidence: number; bbox?: { x1: number; y1: number; x2: number; y2: number } }) => ({
+                        class: item.class,
+                        confidence: item.confidence,
+                        box: item.bbox
+                            ? [
+                                  item.bbox.x1,
+                                  item.bbox.y1,
+                                  item.bbox.x2,
+                                  item.bbox.y2,
+                              ]
+                            : [0, 0, 0, 0],
+                    })),
+=======
                     predictions: data.results.map(
                         (item: {
                             class: string
@@ -49,6 +63,7 @@ export const useImageUpload = () => {
                             box: item.bbox || [0, 0, 0, 0], // 使用box而不是bbox
                         })
                     ),
+>>>>>>> origin_main
                     // 移除非法属性 annotated_image
                 },
             })

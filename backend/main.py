@@ -23,7 +23,19 @@ app = FastAPI(debug=settings.debug)
 # 解决跨域问题
 app.add_middleware(
     CORSMiddleware,
+<<<<<<< HEAD
+    allow_origins=[
+        "http://localhost",
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://127.0.0.1",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:5173",
+        "http://localhost:8000",
+    ],
+=======
     allow_origins=["http://localhost:3000", "http://localhost:8000"],  # 或者其他实际的前端URL
+>>>>>>> origin_main
     allow_methods=["*"],
     allow_headers=["*"],
     allow_credentials=True,

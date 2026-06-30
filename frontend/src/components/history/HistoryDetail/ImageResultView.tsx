@@ -1,6 +1,10 @@
 import React from 'react'
+<<<<<<< HEAD
+import { Row, Col, Image, Descriptions, Tag } from 'antd'
+=======
 import { Row, Col, Image, Descriptions } from 'antd'
 import { PestResult } from '../../../types'
+>>>>>>> origin_main
 import { HistoryRecord } from '../../../types/history'
 
 interface ImageResultViewProps {
@@ -12,7 +16,11 @@ export const ImageResultView: React.FC<ImageResultViewProps> = ({
     record,
     formatDate,
 }) => {
+<<<<<<< HEAD
+    const predictions = record.result.predictions || []
+=======
     const imgResult = record.result as PestResult
+>>>>>>> origin_main
 
     return (
         <Row gutter={[16, 16]}>
@@ -31,6 +39,41 @@ export const ImageResultView: React.FC<ImageResultViewProps> = ({
                     <Descriptions.Item label="检测时间">
                         {formatDate(record.timestamp)}
                     </Descriptions.Item>
+<<<<<<< HEAD
+                    <Descriptions.Item label="检测状态">
+                        <Tag
+                            color={
+                                record.result.status === 'success'
+                                    ? 'green'
+                                    : record.result.status === 'no_detection'
+                                      ? 'orange'
+                                      : 'red'
+                            }
+                        >
+                            {record.result.status}
+                        </Tag>
+                    </Descriptions.Item>
+                    <Descriptions.Item label="检测耗时">
+                        {record.result.time_cost ?? 0}秒
+                    </Descriptions.Item>
+                    <Descriptions.Item label="检测数量">
+                        {predictions.length}个目标
+                    </Descriptions.Item>
+                    {predictions.map((pred, idx) => (
+                        <React.Fragment key={idx}>
+                            <Descriptions.Item label={`目标 ${idx + 1} 类型`}>
+                                {pred.class}
+                            </Descriptions.Item>
+                            <Descriptions.Item label={`目标 ${idx + 1} 置信度`}>
+                                {(pred.confidence * 100).toFixed(2)}%
+                            </Descriptions.Item>
+                            <Descriptions.Item label={`目标 ${idx + 1} 坐标`}>
+                                X[{pred.box[0]}-{pred.box[2]}] Y[{pred.box[1]}-
+                                {pred.box[3]}]
+                            </Descriptions.Item>
+                        </React.Fragment>
+                    ))}
+=======
                     <Descriptions.Item label="检测耗时">
                         {imgResult.time_cost}秒
                     </Descriptions.Item>
@@ -80,6 +123,7 @@ export const ImageResultView: React.FC<ImageResultViewProps> = ({
                                 ))}
                             </>
                         )}
+>>>>>>> origin_main
                 </Descriptions>
             </Col>
         </Row>

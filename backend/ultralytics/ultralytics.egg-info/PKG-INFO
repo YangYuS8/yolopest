@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+Metadata-Version: 2.4
+=======
 Metadata-Version: 2.2
+>>>>>>> origin_main
 Name: ultralytics
 Version: 8.3.83
 Requires-Dist: numpy>=1.18.5
